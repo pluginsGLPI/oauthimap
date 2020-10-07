@@ -1,0 +1,137 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2020-10-07 13:24+0000\n"
+"PO-Revision-Date: 2020-10-07 13:24+0000\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: \n"
+"Language: fr_FR\n"
+
+#: front/authorization.callback.php:39
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "L'autorisation a échouée avec l'erreur: %s"
+
+#: front/authorization.callback.php:47
+msgid "Unable to verify authorization code"
+msgstr "Impossible de vérifier le code d'autorisation"
+
+#: front/authorization.callback.php:49
+msgid "Unable to get authorization code"
+msgstr "Impossible d'obtenir le code d'autorisation"
+
+#: front/authorization.callback.php:51
+msgid "Unable to save authorization code"
+msgstr "Impossible de sauvegarder le code d'autorisation"
+
+#: inc/authorization.class.php:51
+msgid "Oauth authorization"
+msgid_plural "Oauth authorizations"
+msgstr[0] "Autorisation Oauth"
+msgstr[1] "Autorisations Oauth"
+
+#: inc/authorization.class.php:92
+msgid "Create an authorization"
+msgstr "Créer une autorisation"
+
+#: inc/authorization.class.php:100
+msgid "No authorizations."
+msgstr "Aucune autorisation."
+
+#: inc/authorization.class.php:104
+msgid "Expires at"
+msgstr "Date d'expiration"
+
+#: inc/authorization.class.php:135
+msgid "Delete"
+msgstr "Supprimer"
+
+#: inc/mailcollectorfeature.class.php:360
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr "Le collecteur mail \"%s\" a été désactivé."
+
+#: inc/mailcollectorfeature.class.php:423
+msgid "No associated receivers."
+msgstr "Aucun collecteur associé."
+
+#: inc/mailcollectorfeature.class.php:426
+msgid "Name"
+msgstr "Nom"
+
+#: inc/mailcollectorfeature.class.php:427
+msgid "Connection string"
+msgstr "Chaîne de connexion"
+
+#: inc/mailcollectorfeature.class.php:428
+msgid "Login"
+msgstr "Identifiant"
+
+#: inc/mailcollectorfeature.class.php:429
+msgid "Is active ?"
+msgstr "Est actif ?"
+
+#: inc/application.class.php:48
+msgid "Oauth application"
+msgid_plural "Oauth applications"
+msgstr[0] "Application Oauth"
+msgstr[1] "Applications Oauth"
+
+#: inc/application.class.php:86 inc/application.class.php:119
+msgid "Oauth provider"
+msgstr "Fournisseur Oauth"
+
+#: inc/application.class.php:92 inc/application.class.php:128
+msgid "Client ID"
+msgstr "ID d'application (client)"
+
+#: inc/application.class.php:98
+msgid "Client secret"
+msgstr "Secret client"
+
+#: inc/application.class.php:104 inc/application.class.php:136
+msgid "Tenant ID"
+msgstr "ID de l'annuaire (locataire)"
+
+#: inc/application.class.php:177
+msgid "Developer help for this provider"
+msgstr "Aide développeur pour ce fournisseur"
+
+#: inc/application.class.php:316
+msgid "Callback url"
+msgstr "Url de retour"
+
+#: inc/application.class.php:317
+msgid "copy it in the management console of provider"
+msgstr "copiez cette valeur dans la console de gestion du fournisseur"
+
+#: inc/application.class.php:371
+msgid "Name cannot be empty"
+msgstr "Le nom ne peut être vide"
+
+#: inc/application.class.php:377
+msgid "Invalid provider"
+msgstr "Fournisseur invalide"
+
+#: setup.php:81
+msgid "Oauth IMAP"
+msgstr "Oauth IMAP"
+
+#: setup.php:97
+msgid "Run \"composer install --no-dev\" in the plugin directory."
+msgstr "Lancez \"composer install --no-dev\" dans le dossier du plugin."
+
+#: ajax/dropdownAuthorization.php:44
+msgid "Create authorization for another user"
+msgstr "Créer une autorisation pour un autre utilisateur"
