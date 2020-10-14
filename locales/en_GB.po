@@ -82,10 +82,10 @@ msgid "Is active ?"
 msgstr "Is active ?"
 
 #: inc/application.class.php:48
-msgid "Oauth application"
-msgid_plural "Oauth applications"
-msgstr[0] "Oauth application"
-msgstr[1] "Oauth applications"
+msgid "Oauth IMAP application"
+msgid_plural "Oauth IMAP applications"
+msgstr[0] "Oauth IMAP application"
+msgstr[1] "Oauth IMAP applications"
 
 #: inc/application.class.php:86 inc/application.class.php:119
 msgid "Oauth provider"
