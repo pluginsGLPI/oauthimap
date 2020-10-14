@@ -83,8 +83,8 @@ msgid "Is active ?"
 msgstr ""
 
 #: inc/application.class.php:48
-msgid "Oauth application"
-msgid_plural "Oauth applications"
+msgid "Oauth IMAP application"
+msgid_plural "Oauth IMAP applications"
 msgstr[0] ""
 msgstr[1] ""
 
