@@ -4,8 +4,8 @@ This plugins provides IMAP SASL XOAUTH2 authentication mechanism for mail receiv
 
 Currently implemented for:
 
- * [Google (Gmail)](https://developers.google.com/gmail/imap/xoauth2-protocol)
- * [Microsoft Azure (Microsoft 365)](https://docs.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth)
+ * [Google (G Suite and Gmail)](https://developers.google.com/gmail/imap/xoauth2-protocol)
+ * [Microsoft (Office 365 via Azure AD)](https://docs.microsoft.com/en-us/exchange/client-developer/legacy-protocols/how-to-authenticate-an-imap-pop-smtp-application-by-using-oauth)
 
 ![Configuration page](docs/screenshots/config.png)
 ![mail receiver setup](docs/screenshots/config_oauth_mailcollector.png)
