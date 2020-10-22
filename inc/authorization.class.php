@@ -101,7 +101,6 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       } else {
          echo '<tr>';
          echo '<th>' . __('Email') . '</th>';
-         echo '<th>' . __('Expires at', 'oauthimap') . '</th>';
          echo '<th></th>';
          echo '</tr>';
 
@@ -109,22 +108,6 @@ class PluginOauthimapAuthorization extends CommonDBChild {
             echo '<tr class="tab_bg_2">';
 
             echo '<td>' . $row['email'] . '</td>';
-
-            echo '<td>';
-            try {
-               $decoded = Toolbox::sodiumDecrypt($row['token']);
-               $values = ($decoded !== null) ? json_decode($decoded, true) : null;
-               $token = $values !== null ? new AccessToken($values) : null;
-               $expires = $token !== null ? $token->getExpires() : null;
-            } catch (\Throwable $e) {
-               $expires = null;
-            }
-            if ($expires !== null) {
-               $dt = new DateTime('@' . $expires);
-               $dt->setTimezone(new DateTimeZone(date_default_timezone_get()));
-               echo Html::convDateTime($dt->format('Y-m-d H:i:s'));
-            }
-            echo '</td>';
 
             echo '<td>';
             echo '<form method="POST" action="' . Plugin::getWebDir('oauthimap') . '/front/authorization.form.php">';
