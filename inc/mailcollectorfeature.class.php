@@ -337,6 +337,37 @@ JAVASCRIPT;
    }
 
    /**
+    * Update mail collectors linked to the authorization.
+    *
+    * @param PluginOauthimapAuthorization $authorization
+    *
+    * @return void
+    */
+   public static function postUpdateAuthorization(PluginOauthimapAuthorization $authorization): void {
+      if (in_array('email', $authorization->updates) && array_key_exists('email', $authorization->oldvalues)) {
+         $collectors = self::getAssociatedMailCollectors(
+            self::getMailProtocolTypeIdentifier($authorization->fields[PluginOauthimapApplication::getForeignKeyField()]),
+            $authorization->oldvalues['email']
+         );
+         foreach ($collectors as $row) {
+            $mailcollector = new MailCollector();
+            $mailcollector->update(
+               [
+                  'id'    => $row['id'],
+                  'login' => $authorization->fields['email'],
+               ]
+            );
+            Session::addMessageAfterRedirect(
+               sprintf(
+                  __('Mail receiver "%s" has been updated.', 'oauthimap'),
+                  $mailcollector->getName()
+               )
+            );
+         }
+      }
+   }
+
+   /**
     * Deactivate mail collectors using given protocol type and given login.
     *
     * @param string $protocol_type
