@@ -190,7 +190,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       // Get token
       try {
          $token = $provider->getAccessToken('authorization_code', ['code'  => $code]);
-      } catch (Throwable $e) {
+      } catch (\Throwable $e) {
          trigger_error(
             sprintf('Error during authorization code fetching: %s', $e->getMessage()),
             E_USER_WARNING

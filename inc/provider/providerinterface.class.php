@@ -26,8 +26,8 @@
 
 namespace GlpiPlugin\Oauthimap\Provider;
 
-use League\OAuth2\Client\Token\AccessToken;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
+use League\OAuth2\Client\Token\AccessToken;
 
 interface ProviderInterface {
 

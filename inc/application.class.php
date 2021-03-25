@@ -30,9 +30,9 @@ if (!defined('GLPI_ROOT')) {
 
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Provider\Azure;
+use GlpiPlugin\Oauthimap\Provider\Google;
 use GlpiPlugin\Oauthimap\Provider\ProviderInterface;
 use League\OAuth2\Client\Provider\AbstractProvider;
-use GlpiPlugin\Oauthimap\Provider\Google;
 
 class PluginOauthimapApplication extends CommonDropdown {
 

@@ -27,8 +27,8 @@
 namespace GlpiPlugin\Oauthimap\Provider;
 
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
-use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Grant\AbstractGrant;
+use League\OAuth2\Client\Token\AccessToken;
 
 class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements ProviderInterface {
 
