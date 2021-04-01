@@ -27,12 +27,30 @@
 include ('../../../inc/includes.php');
 
 $authorization = new PluginOauthimapAuthorization();
+$application   = new PluginOauthimapApplication();
 
 if (isset($_POST['id']) && isset($_POST['delete'])) {
    $authorization->check($_POST['id'], DELETE);
    $authorization->delete($_POST);
 
    Html::back();
-}
+} else if (isset($_POST['id']) && isset($_POST['update'])) {
+   $authorization->check($_POST['id'], UPDATE);
+   if ($authorization->update($_POST)
+      && $application->getFromDB($authorization->fields[$application->getForeignKeyField()])) {
+      Html::redirect($application->getLinkURL());
+   }
 
-Html::displayErrorAndDie('lost');
+   Html::back();
+} else if (isset($_GET['id'])) {
+   $application = new PluginOauthimapApplication();
+   $application->displayHeader();
+   $authorization->display(
+      [
+         'id' => $_GET['id'],
+      ]
+   );
+   Html::footer();
+} else {
+   Html::displayErrorAndDie('lost');
+}

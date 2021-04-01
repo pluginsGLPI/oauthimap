@@ -34,6 +34,9 @@ use League\OAuth2\Client\Token\AccessToken;
 
 class PluginOauthimapAuthorization extends CommonDBChild {
 
+   // From CommonGlpi
+   protected $displaylist  = false;
+
    // From CommonDBTM
    public $dohistory       = true;
 
@@ -100,7 +103,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
          echo '<tr><th>' . __('No authorizations.', 'oauthimap') . '</th></tr>';
       } else {
          echo '<tr>';
-         echo '<th>' . __('Email') . '</th>';
+         echo '<th>' . __('Email', 'oauthimap') . '</th>';
          echo '<th></th>';
          echo '</tr>';
 
@@ -110,7 +113,11 @@ class PluginOauthimapAuthorization extends CommonDBChild {
             echo '<td>' . $row['email'] . '</td>';
 
             echo '<td>';
-            echo '<form method="POST" action="' . Plugin::getWebDir('oauthimap') . '/front/authorization.form.php">';
+            echo '<a class="vsubmit" href="' . self::getFormURLWithID($row['id']) . '">';
+            echo __('Update', 'oauthimap');
+            echo '</a>';
+            echo ' ';
+            echo '<form method="POST" action="' . self::getFormURL() . '" style="display:inline-block;">';
             echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
             echo Html::hidden('id', ['value' => $row['id']]);
             echo '<button type="submit" class="vsubmit" name="delete" value="1">';
@@ -125,6 +132,38 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       }
       echo '</table>';
       echo '</div>';
+
+      return true;
+   }
+
+   public function showForm($id, $options = []) {
+
+      $options['colspan'] = 1;
+
+      $this->initForm($id, $options);
+      $this->showFormHeader($options);
+
+      echo '<tr class="tab_bg_1">';
+      echo '<td>';
+      echo __('Email', 'oauthimap');
+      echo ' ';
+      echo Html::showToolTip(
+         __('This email address corresponds to the "user" field of the SASL XOAUTH2 authentication query.'),
+         ['display' => false]
+      );
+      echo '</td>';
+      echo '<td>';
+      echo Html::input(
+         'email',
+         [
+            'value' => $this->fields['email'],
+            'style' => 'width:90%'
+         ]
+      );
+      echo '</td>';
+      echo '</tr>';
+
+      $this->showFormButtons($options + ['candel' => false]);
 
       return true;
    }
@@ -292,6 +331,10 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       return $this->owner_details;
    }
 
+   function post_updateItem($history = 1) {
+      MailCollectorFeature::postUpdateAuthorization($this);
+      parent::post_updateItem($history);
+   }
 
    function post_purgeItem() {
       MailCollectorFeature::postPurgeAuthorization($this);
