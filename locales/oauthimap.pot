@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-14 13:17+0000\n"
+"POT-Creation-Date: 2021-04-01 07:07+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,50 +35,59 @@ msgstr ""
 msgid "Unable to save authorization code"
 msgstr ""
 
-#: inc/authorization.class.php:51
+#: inc/authorization.class.php:54
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/authorization.class.php:92
+#: inc/authorization.class.php:95
 msgid "Create an authorization"
 msgstr ""
 
-#: inc/authorization.class.php:100
+#: inc/authorization.class.php:103
 msgid "No authorizations."
 msgstr ""
 
-#: inc/authorization.class.php:104
-msgid "Expires at"
+#: inc/authorization.class.php:106 inc/authorization.class.php:148
+msgid "Email"
 msgstr ""
 
-#: inc/authorization.class.php:135
+#: inc/authorization.class.php:117
+msgid "Update"
+msgstr ""
+
+#: inc/authorization.class.php:125
 msgid "Delete"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:360
+#: inc/mailcollectorfeature.class.php:362
+#, php-format
+msgid "Mail receiver \"%s\" has been updated."
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:391
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:423
+#: inc/mailcollectorfeature.class.php:454
 msgid "No associated receivers."
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:426
+#: inc/mailcollectorfeature.class.php:457
 msgid "Name"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:427
+#: inc/mailcollectorfeature.class.php:458
 msgid "Connection string"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:428
+#: inc/mailcollectorfeature.class.php:459
 msgid "Login"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:429
+#: inc/mailcollectorfeature.class.php:460
 msgid "Is active ?"
 msgstr ""
 
