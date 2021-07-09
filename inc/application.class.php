@@ -490,9 +490,7 @@ JAVASCRIPT;
       // Specific parameters
       switch ($this->fields['provider']) {
          case Azure::class:
-            $params['authWithResource'] = false;
-            $params['pathAuthorize']    = '/oauth2/v2.0/authorize';
-            $params['pathToken']        = '/oauth2/v2.0/token';
+            $params['defaultEndPointVersion'] = '2.0';
             if (!empty($this->fields['tenant_id'])) {
                $params['tenant'] = $this->fields['tenant_id'];
             }
