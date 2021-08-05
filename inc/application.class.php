@@ -423,11 +423,19 @@ JAVASCRIPT;
 
       $provider = $this->getProvider();
 
-      $auth_url = $provider->getAuthorizationUrl(
-         [
-            'scope' => self::getProviderScopes($this->fields['provider'])
-         ]
-      );
+      $options = [
+         'scope' => self::getProviderScopes($this->fields['provider'])
+      ];
+      switch ($this->fields['provider']) {
+         case Azure::class:
+            $options['prompt'] = 'login';
+            break;
+         case Google::class:
+            $options['prompt'] = 'select_account';
+            break;
+      }
+
+      $auth_url = $provider->getAuthorizationUrl($options);
 
       $_SESSION['oauth2state'] = $provider->getState();
       $_SESSION[$this->getForeignKeyField()] = $this->fields['id'];
@@ -490,9 +498,7 @@ JAVASCRIPT;
       // Specific parameters
       switch ($this->fields['provider']) {
          case Azure::class:
-            $params['authWithResource'] = false;
-            $params['pathAuthorize']    = '/oauth2/v2.0/authorize';
-            $params['pathToken']        = '/oauth2/v2.0/token';
+            $params['defaultEndPointVersion'] = '2.0';
             if (!empty($this->fields['tenant_id'])) {
                $params['tenant'] = $this->fields['tenant_id'];
             }
