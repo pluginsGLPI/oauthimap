@@ -42,6 +42,18 @@ if (isset($_POST['id']) && isset($_POST['delete'])) {
    }
 
    Html::back();
+} else if (isset($_REQUEST['id']) && isset($_REQUEST['diagnose'])) {
+   $authorization->check($_REQUEST['id'], READ);
+
+   $authorization = new PluginOauthimapAuthorization();
+   $application   = new PluginOauthimapApplication();
+
+   Html::popHeader($application::getTypeName(Session::getPluralNumber()));
+   $authorization->check($_REQUEST['id'], READ);
+
+   $authorization->showDiagnosticForm($_POST);
+
+   Html::popFooter();
 } else if (isset($_GET['id'])) {
    $application = new PluginOauthimapApplication();
    $application->displayHeader();
