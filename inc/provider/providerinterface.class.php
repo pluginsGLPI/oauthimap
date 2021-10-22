@@ -53,4 +53,25 @@ interface ProviderInterface {
     * @return OwnerDetails|null
     */
    public function getOwnerDetails(AccessToken $token): ?OwnerDetails;
+
+   /**
+    * Returns default host for IMAP connection.
+    *
+    * @return string
+    */
+   public function getDefaultHost(): string;
+
+   /**
+    * Returns default port for IMAP connection.
+    *
+    * @return int|null
+    */
+   public function getDefaultPort(): ?int;
+
+   /**
+    * Returns default SSL flag ('SSL', 'TLS' or null) for IMAP connection.
+    *
+    * @return string|null
+    */
+   public function getDefaultSslFlag(): ?string;
 }

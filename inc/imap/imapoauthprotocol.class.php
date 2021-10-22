@@ -33,10 +33,46 @@ use PluginOauthimapAuthorization;
 class ImapOauthProtocol extends Imap implements ProtocolInterface {
 
    /**
+    * Prefix to use when writing a sent line in diagnostic log.
+    *
+    * @var string
+    */
+   private const DIAGNOSTIC_PREFIX_SENT     = '>>> ';
+
+   /**
+    * Prefix to use when writing a received line in diagnostic log.
+    *
+    * @var string
+    */
+   private const DIAGNOSTIC_PREFIX_RECEIVED = '<<< ';
+
+   /**
     * ID of PluginOauthimapApplication to use.
+    *
     * @var int
     */
    private $application_id;
+
+   /**
+    * Indicates whether diagnostic is enabled.
+    *
+    * @var boolean
+    */
+   private $diagnostic_enabled = false;
+
+   /**
+    * Diagnostic log.
+    *
+    * @var string[]
+    */
+   private $diagnostic_log = [];
+
+   /**
+    * Connection timeout.
+    *
+    * @var int
+    */
+   private $timeout = self::TIMEOUT_CONNECTION;
 
     /**
      * @param  int   $application_id   ID of PluginOauthimapApplication to use
@@ -44,6 +80,50 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface {
    public function __construct($application_id) {
       $this->application_id = $application_id;
       parent::__construct();
+   }
+
+   /**
+    * Almost identical to parent class method, just to be able to redefine timeout in case of diagnostic.
+    *
+    * {@inheritDoc}
+    */
+   public function connect($host, $port = null, $ssl = false) {
+      $transport = 'tcp';
+      $isTls = false;
+
+      if ($ssl) {
+         $ssl = strtolower($ssl);
+      }
+
+      switch ($ssl) {
+         case 'ssl':
+            $transport = 'ssl';
+            if (! $port) {
+               $port = 993;
+            }
+            break;
+         case 'tls':
+            $isTls = true;
+            // break intentionally omitted
+         default:
+            if (! $port) {
+               $port = 143;
+            }
+      }
+
+      $this->socket = $this->setupSocket($transport, $host, $port, $this->timeout);
+
+      if (!$this->assumedNextLine('* OK')) {
+         throw new \Laminas\Mail\Protocol\Exception\RuntimeException('host doesn\'t allow connection');
+      }
+
+      if ($isTls) {
+         $result = $this->requestAndResponse('STARTTLS');
+         $result = $result && stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod());
+         if (!$result) {
+            throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot enable TLS');
+         }
+      }
    }
 
    public function login($user, $password) {
@@ -80,5 +160,100 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface {
       }
 
       return false;
+   }
+
+   /**
+    * Almost identical to parent class method, some `$this->addToDiagnosticLog()` calls were added.
+    *
+    * {@inheritDoc}
+    */
+   public function sendRequest($command, $tokens = [], &$tag = null) {
+      if (! $tag) {
+         ++$this->tagCount;
+         $tag = 'TAG' . $this->tagCount;
+      }
+
+      $line = $tag . ' ' . $command;
+
+      foreach ($tokens as $token) {
+         if (is_array($token)) {
+            $tosend = $line . ' ' . $token[0] . "\r\n";
+            if (fwrite($this->socket, $tosend) === false) {
+               throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot write - connection closed?');
+            }
+            $this->addToDiagnosticLog($tosend, self::DIAGNOSTIC_PREFIX_SENT);
+            if (!$this->assumedNextLine('+ ')) {
+               throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot send literal string');
+            }
+            $line = $token[1];
+         } else {
+            $line .= ' ' . $token;
+         }
+      }
+
+      $tosend = $line . "\r\n";
+      if (fwrite($this->socket, $line . "\r\n") === false) {
+         throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot write - connection closed?');
+      }
+      $this->addToDiagnosticLog($tosend, self::DIAGNOSTIC_PREFIX_SENT);
+   }
+
+   /**
+    * Almost identical to parent class method, `$this->addToDiagnosticLog()` call added.
+    *
+    * {@inheritDoc}
+    */
+   protected function nextLine() {
+      $line = fgets($this->socket);
+      if ($line === false) {
+         throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot read - connection closed?');
+      }
+      $this->addToDiagnosticLog($line, self::DIAGNOSTIC_PREFIX_RECEIVED);
+
+      return $line;
+   }
+
+   /**
+    * Enable diagnostic.
+    *
+    * @return void
+    */
+   public function enableDiagnostic(): void {
+      $this->diagnostic_enabled = true;
+   }
+
+   /**
+    * Get the diagnostic log.
+    *
+    * @return string
+    */
+   public function getDiagnosticLog(): string {
+      return implode('', $this->diagnostic_log);
+   }
+
+   /**
+    * Add line to diagnostic log.
+    *
+    * @param string $line
+    * @param string $prefix
+    *
+    * @return void
+    */
+   private function addToDiagnosticLog(string $line, string $prefix = '') {
+      if (!$this->diagnostic_enabled) {
+         return;
+      }
+      $this->diagnostic_log[] = $prefix . $line;
+   }
+
+   /**
+    * Defines socket timeout.
+    *
+    * @param int $timeout
+    *
+    * @return void
+    */
+   public function setTimeout(int $timeout): void {
+      $this->timeout = $timeout;
    }
 }
