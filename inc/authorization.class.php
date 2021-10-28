@@ -31,6 +31,8 @@ if (!defined('GLPI_ROOT')) {
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
+use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
+use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 
 class PluginOauthimapAuthorization extends CommonDBChild {
 
@@ -113,6 +115,19 @@ class PluginOauthimapAuthorization extends CommonDBChild {
             echo '<td>' . $row['email'] . '</td>';
 
             echo '<td>';
+            $modal_id = 'plugin_oauthimap_authorization_diagnostic_' . mt_rand();
+            Ajax::createIframeModalWindow(
+               $modal_id,
+               self::getFormURLWithID($row['id']) . '&diagnose',
+               [
+                  'title'  => __('Connection diagnostic', 'oauthimap'),
+                  'height' => 650,
+               ]
+            );
+            echo '<a class="vsubmit" href="" onclick="$(\'#' . $modal_id . '\').dialog(\'open\'); return false;">';
+            echo '<i class="fas fa-bug"></i> ' . __('Diagnose', 'oauthimap');
+            echo '</a>';
+            echo ' ';
             echo '<a class="vsubmit" href="' . self::getFormURLWithID($row['id']) . '">';
             echo __('Update', 'oauthimap');
             echo '</a>';
@@ -166,6 +181,152 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       $this->showFormButtons($options + ['candel' => false]);
 
       return true;
+   }
+
+   /**
+    * Displays diagnostic form.
+    *
+    * @param array $params
+    *
+    * @return void
+    */
+   public function showDiagnosticForm(array $params) {
+
+      $application = new PluginOauthimapApplication();
+      if (!$application->getFromDB($this->fields[PluginOauthimapApplication::getForeignKeyField()])
+          || ($provider = $application->getProvider()) === null) {
+         return;
+      }
+
+      $user    = $params['user'] ?? $this->fields['email'];
+      $host    = $params['host'] ?? $provider->getDefaultHost();
+      $port    = (int)($params['port'] ?? $provider->getDefaultPort());
+      $ssl     = $params['ssl'] ?? $provider->getDefaultSslFlag();
+      $timeout = (int)($params['timeout'] ?? 2); // 2 seconds timeout by default
+
+      echo '<form method="post" action="' . $this->getFormURL() . '">';
+
+      echo '<input type="hidden" name="diagnose" value="1" />';
+      echo '<input type="hidden" name="id" value="' . $this->fields['id'] .'" />';
+      echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
+
+      echo '<table class="tab_cadre_fixe">';
+
+      echo '<tr class="tab_bg_1">';
+      echo '<td>';
+      echo __('Email', 'oauthimap');
+      echo '</td>';
+      echo '<td colspan="7">';
+      echo Html::input(
+         'email',
+         [
+            'disabled' => 'disabled',
+            'value'    => $user,
+            'style'    => 'width:90%',
+         ]
+      );
+      echo '</td>';
+      echo '</tr>';
+
+      echo '<tr class="tab_bg_1">';
+      echo '<td>';
+      echo __('Server host', 'oauthimap');
+      echo '</td>';
+      echo '<td>';
+      echo Html::input(
+         'host',
+         [
+            'value' => $host,
+            'size'  => 30,
+         ]
+      );
+      echo '</td>';
+      echo '<td>';
+      echo __('Server port', 'oauthimap');
+      echo '</td>';
+      echo '<td>';
+      echo Html::input(
+         'port',
+         [
+            'type'  => 'integer',
+            'min'   => 1,
+            'value' => $port,
+            'size'  => 5,
+         ]
+      );
+      echo '</td>';
+      echo '<td>';
+      echo __('Security level', 'oauthimap');
+      echo '</td>';
+      echo '<td>';
+      echo Html::select(
+         'ssl',
+         [
+            ''    => __('', 'oauthimap'),
+            'SSL' => __('SSL', 'oauthimap'),
+            'TLS' => __('SSL + TLS', 'oauthimap'),
+         ],[
+            'selected' => $ssl,
+         ]
+      );
+      echo '</td>';
+      echo '<td>';
+      echo __('Timeout', 'oauthimap');
+      echo '</td>';
+      echo '<td>';
+      echo Html::input(
+         'timeout',
+         [
+            'type'  => 'integer',
+            'min'   => 1,
+            'max'   => 30,
+            'value' => $timeout,
+            'size'  => 5,
+         ]
+      );
+      echo '</td>';
+      echo '</tr>';
+
+      echo '<tr class="tab_bg_2">';
+      echo '<td class="center" colspan="8">';
+      echo Html::submit(
+         __('Refresh connection diagnostic', 'oauthimap'),
+         ['name' => 'diagnose']
+      );
+      echo '</td>';
+      echo '</tr>';
+
+      echo '<tr class="tab_bg_2">';
+      echo '<td colspan="8">';
+      echo '<div style="color:red; font-weight:bold; background:rgba(127, 127, 127, 0.2); padding:5px; margin-top:10px;">';
+      echo '<i class="fa fa-exclamation-triangle"></i>';
+      echo __('Diagnostic log contains sensitive information, such as the access token.', 'oauthimap');
+      echo '</div>';
+      $protocol = new ImapOauthProtocol($application->fields['id']);
+      $protocol->enableDiagnostic();
+      $protocol->setTimeout($timeout);
+      $error = null;
+      try {
+         $protocol->connect($host, $port, $ssl);
+         if ($protocol->login($user, '')) {
+            new ImapOauthStorage($protocol); // Will automatically send 'select INBOX'.
+         }
+      } catch (\Throwable $e) {
+         $error = $e;
+      }
+      echo '<div style="font-family:monospace; white-space:pre-wrap; word-break:break-all;">';
+      echo $protocol->getDiagnosticLog();
+      echo '</pre>';
+      if ($error !== null) {
+         echo '<div style="color:red; font-weight:bold;">';
+         echo sprintf(__('Unexpected error: %s', 'oauthimap'), $error->getMessage());
+         echo '</div>';
+      }
+      echo '</td>';
+      echo '</tr>';
+
+      echo '</table>';
+      echo '</form>';
    }
 
    function prepareInputForAdd($input) {

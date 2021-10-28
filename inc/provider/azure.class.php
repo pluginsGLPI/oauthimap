@@ -54,4 +54,16 @@ class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements Provider
 
       return $owner_details;
    }
+
+   public function getDefaultHost(): string {
+      return 'outlook.office365.com';
+   }
+
+   public function getDefaultPort(): ?int {
+      return 993;
+   }
+
+   public function getDefaultSslFlag(): ?string {
+      return 'SSL';
+   }
 }

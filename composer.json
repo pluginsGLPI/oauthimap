@@ -5,7 +5,7 @@
         "thenetworg/oauth2-azure": "^2.0"
     },
     "require-dev": {
-        "glpi-project/tools": "^0.1"
+        "glpi-project/tools": "^0.3"
     },
     "config": {
         "optimize-autoloader": true,

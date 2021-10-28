@@ -50,4 +50,16 @@ class Google extends \League\OAuth2\Client\Provider\Google implements ProviderIn
 
       return $owner_details;
    }
+
+   public function getDefaultHost(): string {
+      return 'imap.gmail.com';
+   }
+
+   public function getDefaultPort(): ?int {
+      return 993;
+   }
+
+   public function getDefaultSslFlag(): ?string {
+      return 'SSL';
+   }
 }

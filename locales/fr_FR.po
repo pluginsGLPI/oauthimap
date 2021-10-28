@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 07:07+0000\n"
+"POT-Creation-Date: 2021-10-28 08:43+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Cédric Anne, 2021\n"
 "Language-Team: French (France) (https://www.transifex.com/teclib/teams/28042/fr_FR/)\n"
@@ -38,31 +38,80 @@ msgstr "Impossible d'obtenir le code d'autorisation"
 msgid "Unable to save authorization code"
 msgstr "Impossible de sauvegarder le code d'autorisation"
 
-#: inc/authorization.class.php:54
+#: inc/authorization.class.php:56
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] "Autorisation Oauth"
 msgstr[1] "Autorisations Oauth"
 
-#: inc/authorization.class.php:95
+#: inc/authorization.class.php:97
 msgid "Create an authorization"
 msgstr "Créer une autorisation"
 
-#: inc/authorization.class.php:103
+#: inc/authorization.class.php:105
 msgid "No authorizations."
 msgstr "Aucune autorisation."
 
-#: inc/authorization.class.php:106 inc/authorization.class.php:148
+#: inc/authorization.class.php:108 inc/authorization.class.php:163
+#: inc/authorization.class.php:217
 msgid "Email"
 msgstr "E-mail"
 
-#: inc/authorization.class.php:117
+#: inc/authorization.class.php:123
+msgid "Connection diagnostic"
+msgstr "Diagnostic de la connexion"
+
+#: inc/authorization.class.php:128
+msgid "Diagnose"
+msgstr "Diagnostiquer"
+
+#: inc/authorization.class.php:132
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: inc/authorization.class.php:125
+#: inc/authorization.class.php:140
 msgid "Delete"
 msgstr "Supprimer"
+
+#: inc/authorization.class.php:233
+msgid "Server host"
+msgstr "Hôte du serveur"
+
+#: inc/authorization.class.php:245
+msgid "Server port"
+msgstr "Port du serveur"
+
+#: inc/authorization.class.php:259
+msgid "Security level"
+msgstr "Niveau de sécurité"
+
+#: inc/authorization.class.php:266
+msgid "SSL"
+msgstr "SSL"
+
+#: inc/authorization.class.php:267
+msgid "SSL + TLS"
+msgstr "SSL + TLS"
+
+#: inc/authorization.class.php:274
+msgid "Timeout"
+msgstr "Délai d'attente max."
+
+#: inc/authorization.class.php:293
+msgid "Refresh connection diagnostic"
+msgstr "Actualiser le diagnostic"
+
+#: inc/authorization.class.php:303
+msgid ""
+"Diagnostic log contains sensitive information, such as the access token."
+msgstr ""
+"Le journal de diagnostic contient des informations sensibles, telles que le "
+"jeton d'accès."
+
+#: inc/authorization.class.php:322
+#, php-format
+msgid "Unexpected error: %s"
+msgstr "Erreur inattendue : %s"
 
 #: inc/mailcollectorfeature.class.php:362
 #, php-format
