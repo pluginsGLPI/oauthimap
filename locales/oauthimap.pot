@@ -3,12 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
+#: inc/authorization.class.php:265
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-04-01 07:07+0000\n"
+"POT-Creation-Date: 2021-10-28 08:43+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -35,30 +36,77 @@ msgstr ""
 msgid "Unable to save authorization code"
 msgstr ""
 
-#: inc/authorization.class.php:54
+#: inc/authorization.class.php:56
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] ""
 msgstr[1] ""
 
-#: inc/authorization.class.php:95
+#: inc/authorization.class.php:97
 msgid "Create an authorization"
 msgstr ""
 
-#: inc/authorization.class.php:103
+#: inc/authorization.class.php:105
 msgid "No authorizations."
 msgstr ""
 
-#: inc/authorization.class.php:106 inc/authorization.class.php:148
+#: inc/authorization.class.php:108 inc/authorization.class.php:163
+#: inc/authorization.class.php:217
 msgid "Email"
 msgstr ""
 
-#: inc/authorization.class.php:117
+#: inc/authorization.class.php:123
+msgid "Connection diagnostic"
+msgstr ""
+
+#: inc/authorization.class.php:128
+msgid "Diagnose"
+msgstr ""
+
+#: inc/authorization.class.php:132
 msgid "Update"
 msgstr ""
 
-#: inc/authorization.class.php:125
+#: inc/authorization.class.php:140
 msgid "Delete"
+msgstr ""
+
+#: inc/authorization.class.php:233
+msgid "Server host"
+msgstr ""
+
+#: inc/authorization.class.php:245
+msgid "Server port"
+msgstr ""
+
+#: inc/authorization.class.php:259
+msgid "Security level"
+msgstr ""
+
+#: inc/authorization.class.php:266
+msgid "SSL"
+msgstr ""
+
+#: inc/authorization.class.php:267
+msgid "SSL + TLS"
+msgstr ""
+
+#: inc/authorization.class.php:274
+msgid "Timeout"
+msgstr ""
+
+#: inc/authorization.class.php:293
+msgid "Refresh connection diagnostic"
+msgstr ""
+
+#: inc/authorization.class.php:303
+msgid ""
+"Diagnostic log contains sensitive information, such as the access token."
+msgstr ""
+
+#: inc/authorization.class.php:322
+#, php-format
+msgid "Unexpected error: %s"
 msgstr ""
 
 #: inc/mailcollectorfeature.class.php:362
