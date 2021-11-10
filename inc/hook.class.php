@@ -28,20 +28,36 @@
  * -------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
+if (!defined('GLPI_ROOT')) {
+   die("Sorry. You can't access this file directly");
+}
 
-$dropdown = new PluginOauthimapApplication();
+use GlpiPlugin\Oauthimap\MailCollectorFeature;
 
-if (isset($_POST['id']) && isset($_POST['request_authorization'])) {
-   $dropdown->check($_POST['id'], UPDATE);
-   $dropdown->redirectToAuthorizationUrl();
-} else {
-   Html::requireJs('clipboard');
+class PluginOauthimapHook {
 
-   if (array_key_exists('client_secret', $_POST)) {
-      // Client secret must not be altered.
-      $_POST['client_secret'] = $_UPOST['client_secret'];
+   /**
+    * Handle post_item_form hook.
+    *
+    * @param array $params
+    *
+    * @return void
+    */
+   public static function postItemForm(array $params): void {
+
+      $item = $params['item'];
+
+      if (!is_object($item)) {
+         return;
+      }
+
+      switch (get_class($item)) {
+         case MailCollector::class:
+            MailCollectorFeature::alterMailCollectorForm();
+            break;
+         case PluginOauthimapApplication::class:
+            PluginOauthimapApplication::showFormExtra((int)$item->fields[PluginOauthimapApplication::getIndexName()]);
+            break;
+      }
    }
-
-   include (GLPI_ROOT . '/front/dropdown.common.form.php');
 }

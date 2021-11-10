@@ -91,30 +91,38 @@ class PluginOauthimapAuthorization extends CommonDBChild {
          ]
       );
 
-      echo '<div class="center">';
+      $item->showFormHeader([
+         'formtitle' => $item->fields['name'],
+         'target'    => Plugin::getWebDir('oauthimap') . '/front/application.form.php',
+      ]);
 
-      echo '<form method="POST" action="' . Plugin::getWebDir('oauthimap') . '/front/application.form.php">';
+      echo '<div class="row">';
+      echo '<div class="col text-end">';
       echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
       echo Html::hidden('id', ['value' => $item->getID()]);
-      echo '<button type="submit" class="vsubmit" name="request_authorization" value="1">';
-      echo '<i class="fas fa-plus"></i> ';
-      echo __('Create an authorization', 'oauthimap');
+      echo '<button type="submit" class="btn btn-primary" name="request_authorization" value="1">';
+      echo '<i class="fas fa-plus"></i> ' . __('Create an authorization', 'oauthimap');
       echo '</button>';
-      echo '</form>';
+      echo '</div>';
+      echo '</div>';
 
-      echo '<br />';
+      echo '</div>'; // #mainformtable
+      echo '</form>';  // [name=asset_form]
 
-      echo '<table class="tab_cadre_fixehov">';
+      echo '<table class="table table-striped table-hover my-4">';
       if ($iterator->count() === 0) {
-         echo '<tr><th>' . __('No authorizations.', 'oauthimap') . '</th></tr>';
+         echo '<tbody><tr><th>' . __('No authorizations.', 'oauthimap') . '</th></tr></tbody>';
       } else {
+         echo '<thead>';
          echo '<tr>';
          echo '<th>' . __('Email', 'oauthimap') . '</th>';
          echo '<th></th>';
          echo '</tr>';
+         echo '</thead>';
 
+         echo '<tbody>';
          foreach ($iterator as $row) {
-            echo '<tr class="tab_bg_2">';
+            echo '<tr>';
 
             echo '<td>' . $row['email'] . '</td>';
 
@@ -128,18 +136,18 @@ class PluginOauthimapAuthorization extends CommonDBChild {
                   'height' => 650,
                ]
             );
-            echo '<a class="vsubmit" href="" onclick="$(\'#' . $modal_id . '\').dialog(\'open\'); return false;">';
+            echo '<a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#' . $modal_id . '">';
             echo '<i class="fas fa-bug"></i> ' . __('Diagnose', 'oauthimap');
             echo '</a>';
             echo ' ';
-            echo '<a class="vsubmit" href="' . self::getFormURLWithID($row['id']) . '">';
-            echo __('Update', 'oauthimap');
+            echo '<a class="btn btn-primary btn-sm" href="' . self::getFormURLWithID($row['id']) . '">';
+            echo '<i class="fas fa-edit"></i> ' .__('Update', 'oauthimap');
             echo '</a>';
             echo ' ';
             echo '<form method="POST" action="' . self::getFormURL() . '" style="display:inline-block;">';
             echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
             echo Html::hidden('id', ['value' => $row['id']]);
-            echo '<button type="submit" class="vsubmit" name="delete" value="1">';
+            echo '<button type="submit" class="btn btn-primary btn-sm" name="delete" value="1">';
             echo '<i class="fas fa-trash-alt"></i> ';
             echo __('Delete', 'oauthimap');
             echo '</button>';
@@ -148,9 +156,9 @@ class PluginOauthimapAuthorization extends CommonDBChild {
 
             echo '</tr>';
          }
+         echo '</tbody>';
       }
       echo '</table>';
-      echo '</div>';
 
       return true;
    }
@@ -220,13 +228,12 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       echo '<td>';
       echo __('Email', 'oauthimap');
       echo '</td>';
-      echo '<td colspan="7">';
+      echo '<td colspan="3">';
       echo Html::input(
          'email',
          [
             'disabled' => 'disabled',
             'value'    => $user,
-            'style'    => 'width:90%',
          ]
       );
       echo '</td>';
@@ -241,7 +248,6 @@ class PluginOauthimapAuthorization extends CommonDBChild {
          'host',
          [
             'value' => $host,
-            'size'  => 30,
          ]
       );
       echo '</td>';
@@ -259,6 +265,9 @@ class PluginOauthimapAuthorization extends CommonDBChild {
          ]
       );
       echo '</td>';
+      echo '</tr>';
+
+      echo '<tr class="tab_bg_1">';
       echo '<td>';
       echo __('Security level', 'oauthimap');
       echo '</td>';
@@ -271,6 +280,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
             'TLS' => __('SSL + TLS', 'oauthimap'),
          ],[
             'selected' => $ssl,
+            'class'    => 'form-select',
          ]
       );
       echo '</td>';
@@ -295,7 +305,10 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       echo '<td class="center" colspan="8">';
       echo Html::submit(
          __('Refresh connection diagnostic', 'oauthimap'),
-         ['name' => 'diagnose']
+         [
+            'name'   => 'diagnose',
+            'class'  => 'btn btn-secondary',
+         ]
       );
       echo '</td>';
       echo '</tr>';
@@ -346,7 +359,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       foreach (['code', 'token', 'refresh_token'] as $field_name) {
          if (array_key_exists($field_name, $input)
              && !empty($input[$field_name]) && $input[$field_name] !== 'NULL'
-             && $input[$field_name] === Toolbox::sodiumDecrypt($this->fields[$field_name])) {
+             && $input[$field_name] === (new GLPIKey())->decrypt($this->fields[$field_name])) {
             unset($input[$field_name]);
          }
       }
@@ -368,7 +381,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       foreach (['code', 'token', 'refresh_token'] as $field_name) {
          if (array_key_exists($field_name, $input)
              && !empty($input[$field_name]) && $input[$field_name] !== 'NULL') {
-            $input[$field_name] = Toolbox::sodiumEncrypt($input[$field_name]);
+            $input[$field_name] = (new GLPIKey())->encrypt($input[$field_name]);
          }
       }
 
@@ -452,14 +465,14 @@ class PluginOauthimapAuthorization extends CommonDBChild {
       }
 
       try {
-         $token = new AccessToken(json_decode(Toolbox::sodiumDecrypt($self->fields['token']), true));
+         $token = new AccessToken(json_decode((new GLPIKey())->decrypt($self->fields['token']), true));
       } catch (\Throwable $e) {
          return null; // Field value may be corrupted
       }
 
       if ($token->hasExpired()) {
          // Token has expired, refresh it
-         $refresh_token = Toolbox::sodiumDecrypt($self->fields['refresh_token']);
+         $refresh_token = (new GLPIKey())->decrypt($self->fields['refresh_token']);
 
          $provider = $application->getProvider();
          $token = $provider->getAccessToken(
@@ -492,7 +505,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
    public function getAccessToken(): ?AccessToken {
 
       try {
-         $token = new AccessToken(json_decode(Toolbox::sodiumDecrypt($this->fields['token']), true));
+         $token = new AccessToken(json_decode((new GLPIKey())->decrypt($this->fields['token']), true));
       } catch (\Throwable $e) {
          return null; // Field value may be corrupted
       }
@@ -525,27 +538,33 @@ class PluginOauthimapAuthorization extends CommonDBChild {
 
       global $DB;
 
+      $default_charset = DBConnection::getDefaultCharset();
+      $default_collation = DBConnection::getDefaultCollation();
+      $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
+
       $table = self::getTable();
       $application_fkey = PluginOauthimapApplication::getForeignKeyField();
 
       if (!$DB->tableExists($table)) {
          $migration->displayMessage("Installing $table");
 
-         $query = "CREATE TABLE IF NOT EXISTS `$table` (
-                      `id` int(11) NOT NULL AUTO_INCREMENT,
-                      `$application_fkey` int(11) NOT NULL DEFAULT '0',
-                      `code` text COLLATE utf8_unicode_ci,
-                      `token` text COLLATE utf8_unicode_ci,
-                      `refresh_token` text COLLATE utf8_unicode_ci,
-                      `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-                      `date_creation` timestamp NULL DEFAULT NULL,
-                      `date_mod` timestamp NULL DEFAULT NULL,
-                      PRIMARY KEY (`id`),
-                      KEY `$application_fkey` (`$application_fkey`),
-                      KEY `date_creation` (`date_creation`),
-                      KEY `date_mod` (`date_mod`),
-                      UNIQUE KEY `unicity` (`$application_fkey`,`email`)
-                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+         $query = <<<SQL
+CREATE TABLE IF NOT EXISTS `$table` (
+  `id` int {$default_key_sign} NOT NULL AUTO_INCREMENT,
+  `$application_fkey` int {$default_key_sign} NOT NULL DEFAULT '0',
+  `code` text,
+  `token` text,
+  `refresh_token` text,
+  `email` varchar(255) NOT NULL,
+  `date_creation` timestamp NULL DEFAULT NULL,
+  `date_mod` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `$application_fkey` (`$application_fkey`),
+  KEY `date_creation` (`date_creation`),
+  KEY `date_mod` (`date_mod`),
+  UNIQUE KEY `unicity` (`$application_fkey`,`email`)
+) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
+SQL;
          $DB->query($query) or die($DB->error());
       } else {
          if (!$DB->fieldExists($table, 'refresh_token')) {
@@ -562,13 +581,13 @@ class PluginOauthimapAuthorization extends CommonDBChild {
 
             $iterator = $DB->request(['FROM' => $table]);
             foreach ($iterator as $row) {
-               $token_fields = json_decode(Toolbox::sodiumDecrypt($row['token']), true);
+               $token_fields = json_decode((new GLPIKey())->decrypt($row['token']), true);
                if (isset($token_fields['refresh_token'])) {
                   $migration->addPostQuery(
                      $DB->buildUpdate(
                         $table,
                         [
-                           'refresh_token' => Toolbox::sodiumEncrypt($token_fields['refresh_token']),
+                           'refresh_token' => (new GLPIKey())->encrypt($token_fields['refresh_token']),
                         ],
                         [
                            'id'            => $row['id']

@@ -42,12 +42,6 @@ class PluginOauthimapApplication extends CommonDropdown {
 
    static $rightname     = 'config';
 
-   /**
-    * Random integer used in some form field id.
-    * @var int
-    */
-   private $form_rand;
-
    public static function getTypeName($nb = 0) {
       return _n('Oauth IMAP application', 'Oauth IMAP applications', $nb, 'oauthimap');
    }
@@ -154,7 +148,9 @@ class PluginOauthimapApplication extends CommonDropdown {
       return $tabs;
    }
 
-   public function displaySpecificTypeField($ID, $field = []) {
+   public function displaySpecificTypeField($ID, $field = [], array $options = []) {
+
+      $rand = sprintf('oauthimap-application-%s', (int)$ID);
 
       $field_name  = $field['name'];
       $field_type  = $field['type'];
@@ -173,7 +169,7 @@ class PluginOauthimapApplication extends CommonDropdown {
                $values,
                [
                   'display_emptychoice' => true,
-                  'rand'                => $this->form_rand,
+                  'rand'                => $rand,
                   'value'               => $field_value,
                ]
             );
@@ -193,7 +189,7 @@ class PluginOauthimapApplication extends CommonDropdown {
                      return $('<span><i class="fab fa-lg ' + icons[item.id] + '"></i>&nbsp;' + item.text + '</span>');
                   };
 
-                  $("#dropdown_{$field_name}{$this->form_rand}").select2({
+                  $("#dropdown_{$field_name}{$rand}").select2({
                      dropdownAutoWidth: true,
                      templateSelection: displayOptionIcon,
                      templateResult: displayOptionIcon,
@@ -208,8 +204,7 @@ JAVASCRIPT;
                $field_name,
                [
                   'autocomplete' => 'off',
-                  'size'         => 50,
-                  'value'        => Toolbox::sodiumDecrypt($field_value),
+                  'value'        => Html::entities_deep((new GLPIKey())->decrypt($field_value)),
                ]
             );
             break;
@@ -218,7 +213,6 @@ JAVASCRIPT;
                $field_name,
                [
                   'data-provider' => $field['provider'],
-                  'size'          => 50,
                   'value'         => $field_value,
                ]
             );
@@ -258,8 +252,8 @@ JAVASCRIPT;
             $elements = ['' => Dropdown::EMPTY_VALUE];
             foreach (self::getSupportedProviders() as $class) {
                $elements[$class] = $class::getName();
-               if (Toolbox::stripslashes_deep($class) === $values[$field]) {
-                  $selected = $class; // Too many slashes removed in $values[$field]
+               if ($class === $values[$field]) {
+                  $selected = $class;
                }
             }
             return Dropdown::showFromArray(
@@ -275,8 +269,15 @@ JAVASCRIPT;
       return parent::getSpecificValueToSelect($field, $name, $values, $options);
    }
 
-   public function showForm($id, $options = []) {
-      $this->form_rand = mt_rand();
+   /**
+    * Displays form extra fields/scripts.
+    *
+    * @param int $id
+    *
+    * @return void
+    */
+   public static function showFormExtra(int $id): void {
+      $rand = sprintf('oauthimap-application-%s', $id);
 
       $documentation_urls_json = json_encode(self::getProvidersDocumentationUrls());
 
@@ -286,7 +287,7 @@ JAVASCRIPT;
             var documentation_urls = {$documentation_urls_json};
 
             var updateDocumentationLink = function () {
-               var provider = $('#dropdown_provider{$this->form_rand}').val();
+               var provider = $('#dropdown_provider{$rand}').val();
 
                var url = documentation_urls.hasOwnProperty(provider)
                   ? documentation_urls[provider]
@@ -297,45 +298,35 @@ JAVASCRIPT;
 
             var onProviderChange = function () {
                var provider = $.escapeSelector($(this).val()); // escape selector as it contains slashes
-               $('[data-provider="' + provider + '"]').closest('tr').find('td').show();
-               $('[data-provider]:not([data-provider="' + provider + '"])').closest('tr').find('td').hide();
+               $('[data-provider="' + provider + '"]').closest('.form-field').show();
+               $('[data-provider]:not([data-provider="' + provider + '"])').closest('.form-field').hide();
 
                updateDocumentationLink();
             };
 
-            $('#dropdown_provider{$this->form_rand}').change(onProviderChange);
-            onProviderChange.call($('#dropdown_provider{$this->form_rand}'));
+            $('#dropdown_provider{$rand}').change(onProviderChange);
+            onProviderChange.call($('#dropdown_provider{$rand}'));
          })(jQuery);
 JAVASCRIPT;
+
+      echo '<div class="form-field row col-12 col-sm-6 mb-2">';
       echo Html::scriptBlock($additionnal_params_js);
-
-      parent::showForm($id, $options);
-   }
-
-   public function showFormButtons($options = []) {
-
-      echo '<tr class="tab_bg_1">';
-      echo '<td>';
-      echo '<label for="_callback_url_' . $this->form_rand  . '">';
+      echo '<label class="col-form-label col-xxl-5 text-xxl-end" for="_callback_url_' . $rand  . '">';
       echo __('Callback url', 'oauthimap');
-      echo '<i class="fa fa-info pointer" title="' . __('copy it in the management console of provider', 'oauthimap') . '"></i>';
+      echo ' <i class="fa fa-info pointer" title="' . __('copy it in the management console of provider', 'oauthimap') . '"></i>';
       echo '</label>';
-      echo '</td>';
-      echo '<td colspan="3">';
-      echo '<span class="copy_to_clipboard_wrapper">';
+      echo '<div class="col-xxl-7 field-container">';
+      echo '<div class="copy_to_clipboard_wrapper">';
       echo Html::input(
          '',
          [
-            'value'    => $this->getCallbackUrl(),
-            'size'     => 50,
+            'value'    => self::getCallbackUrl(),
             'readonly' => 'readonly',
          ]
       );
-      echo '</span>';
-      echo '</td>';
-      echo '</tr>';
-
-      parent::showFormButtons($options);
+      echo '</div>';
+      echo '</div>';
+      echo '</div>';
    }
 
    function prepareInputForAdd($input) {
@@ -352,7 +343,7 @@ JAVASCRIPT;
       foreach (['client_secret'] as $field_name) {
          if (array_key_exists($field_name, $input)
              && !empty($input[$field_name]) && $input[$field_name] !== 'NULL'
-             && $input[$field_name] === Toolbox::sodiumDecrypt($this->fields[$field_name])) {
+             && $input[$field_name] === (new GLPIKey())->decrypt($this->fields[$field_name])) {
             unset($input[$field_name]);
          }
       }
@@ -377,7 +368,7 @@ JAVASCRIPT;
       }
 
       if (array_key_exists('provider', $input)
-          && !in_array(stripslashes($input['provider']), self::getSupportedProviders())) {
+          && !in_array($input['provider'], self::getSupportedProviders())) {
          Session::addMessageAfterRedirect(__('Invalid provider', 'oauthimap'), false, ERROR);
          return false;
       }
@@ -385,7 +376,7 @@ JAVASCRIPT;
       foreach (['client_secret'] as $field_name) {
          if (array_key_exists($field_name, $input)
              && !empty($input[$field_name]) && $input[$field_name] !== 'NULL') {
-            $input[$field_name] = Toolbox::sodiumEncrypt($input[$field_name]);
+            $input[$field_name] = (new GLPIKey())->encrypt($input[$field_name]);
          }
       }
 
@@ -494,7 +485,7 @@ JAVASCRIPT;
 
       $params = [
          'clientId'     => $this->fields['client_id'],
-         'clientSecret' => Toolbox::sodiumDecrypt($this->fields['client_secret']),
+         'clientSecret' => (new GLPIKey())->decrypt($this->fields['client_secret']),
          'redirectUri'  => $this->getCallbackUrl(),
          'scope'        => self::getProviderScopes($this->fields['provider']),
       ];
@@ -560,7 +551,7 @@ JAVASCRIPT;
     *
     * @return string
     */
-   private function getCallbackUrl(): string {
+   private static function getCallbackUrl(): string {
       return Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
    }
 
@@ -580,28 +571,34 @@ JAVASCRIPT;
 
       global $DB;
 
+      $default_charset = DBConnection::getDefaultCharset();
+      $default_collation = DBConnection::getDefaultCollation();
+      $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
+
       $table = self::getTable();
 
       if (!$DB->tableExists($table)) {
          $migration->displayMessage("Installing $table");
 
-         $query = "CREATE TABLE IF NOT EXISTS `$table` (
-                      `id` int(11) NOT NULL AUTO_INCREMENT,
-                      `name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
-                      `is_active` tinyint(1) NOT NULL DEFAULT '0',
-                      `comment` text COLLATE utf8_unicode_ci,
-                      `date_creation` timestamp NULL DEFAULT NULL,
-                      `date_mod` timestamp NULL DEFAULT NULL,
-                      `provider` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
-                      `client_id` text COLLATE utf8_unicode_ci NOT NULL,
-                      `client_secret` text COLLATE utf8_unicode_ci NOT NULL,
-                      `tenant_id` varchar(255) COLLATE utf8_unicode_ci NULL,
-                      PRIMARY KEY (`id`),
-                      KEY `name` (`name`),
-                      KEY `is_active` (`is_active`),
-                      KEY `date_creation` (`date_creation`),
-                      KEY `date_mod` (`date_mod`)
-                      ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
+         $query = <<<SQL
+CREATE TABLE IF NOT EXISTS `$table` (
+  `id` int {$default_key_sign} NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) DEFAULT NULL,
+  `is_active` tinyint NOT NULL DEFAULT '0',
+  `comment` text,
+  `date_creation` timestamp NULL DEFAULT NULL,
+  `date_mod` timestamp NULL DEFAULT NULL,
+  `provider` varchar(255) NOT NULL,
+  `client_id` text NOT NULL,
+  `client_secret` text NOT NULL,
+  `tenant_id` varchar(255) NULL,
+  PRIMARY KEY (`id`),
+  KEY `name` (`name`),
+  KEY `is_active` (`is_active`),
+  KEY `date_creation` (`date_creation`),
+  KEY `date_mod` (`date_mod`)
+) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
+SQL;
          $DB->query($query) or die($DB->error());
       }
 

@@ -31,9 +31,9 @@
 define('PLUGIN_OAUTHIMAP_VERSION', '1.3.3');
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_OAUTHIMAP_MIN_GLPI', '9.5');
+define('PLUGIN_OAUTHIMAP_MIN_GLPI', '10.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_OAUTHIMAP_MAX_GLPI', '9.6');
+define('PLUGIN_OAUTHIMAP_MAX_GLPI', '10.0.99');
 
 define('PLUGIN_OAUTHIMAP_ROOT', Plugin::getPhpDir('oauthimap'));
 
@@ -64,11 +64,13 @@ function plugin_init_oauthimap() {
          PluginOauthimapAuthorization::getTableField('refresh_token'),
       ];
 
+      // Plugin hooks
+      $PLUGIN_HOOKS['post_item_form']['oauthimap'] = [PluginOauthimapHook::class, 'postItemForm'];
+
       // MailCollector hooks
       $PLUGIN_HOOKS['mail_server_protocols']['oauthimap'] = function (array $additionnal_protocols) {
          return array_merge($additionnal_protocols, MailCollectorFeature::getMailProtocols());
       };
-      $PLUGIN_HOOKS['post_item_form']['oauthimap'] = [MailCollectorFeature::class, 'alterMailCollectorForm'];
       $PLUGIN_HOOKS['pre_item_update']['oauthimap'] = [
          'MailCollector' => [MailCollectorFeature::class, 'forceMailCollectorUpdate'],
       ];

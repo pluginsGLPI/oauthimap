@@ -60,7 +60,7 @@ if (isset($_POST['id']) && isset($_POST['delete'])) {
    Html::popFooter();
 } else if (isset($_GET['id'])) {
    $application = new PluginOauthimapApplication();
-   $application->displayHeader();
+   $application->displayCentralHeader();
    $authorization->display(
       [
          'id' => $_GET['id'],
