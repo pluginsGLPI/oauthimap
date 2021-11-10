@@ -122,17 +122,9 @@ class MailCollectorFeature {
    /**
     * Alter MailCollector form in order to handle IMAP Oauth connections.
     *
-    * @param array $params
-    *
     * @return void
     */
-   static public function alterMailCollectorForm(array $params): void {
-
-      $item = $params['item'];
-
-      if (!($item instanceof MailCollector)) {
-         return;
-      }
+   static public function alterMailCollectorForm(): void {
 
       $locator_id = 'plugin_oauthimap_locator_'. mt_rand();
       $plugin_path = Plugin::getWebDir('oauthimap');
