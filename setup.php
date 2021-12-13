@@ -24,7 +24,7 @@
  --------------------------------------------------------------------------
  */
 
-define('PLUGIN_OAUTHIMAP_VERSION', '1.3.0');
+define('PLUGIN_OAUTHIMAP_VERSION', '1.3.1');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_OAUTHIMAP_MIN_GLPI', '9.5');
@@ -55,8 +55,9 @@ function plugin_init_oauthimap() {
       // Secured fields that are encrypted
       $PLUGIN_HOOKS['secured_fields']['oauthimap'] = [
          PluginOauthimapApplication::getTableField('client_secret'),
-         PluginOauthimapApplication::getTableField('code'),
-         PluginOauthimapApplication::getTableField('token'),
+         PluginOauthimapAuthorization::getTableField('code'),
+         PluginOauthimapAuthorization::getTableField('token'),
+         PluginOauthimapAuthorization::getTableField('refresh_token'),
       ];
 
       // MailCollector hooks

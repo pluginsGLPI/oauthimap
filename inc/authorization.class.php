@@ -339,7 +339,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
    function prepareInputForUpdate($input) {
       // Unset encrypted fields input if corresponding to current value
       // (encryption produces a different value each time, so GLPI will consider them as updated on each form submit)
-      foreach (['code', 'token'] as $field_name) {
+      foreach (['code', 'token', 'refresh_token'] as $field_name) {
          if (array_key_exists($field_name, $input)
              && !empty($input[$field_name]) && $input[$field_name] !== 'NULL'
              && $input[$field_name] === Toolbox::sodiumDecrypt($this->fields[$field_name])) {
@@ -361,7 +361,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
     * @return bool|array
     */
    private function prepareInput($input) {
-      foreach (['code', 'token'] as $field_name) {
+      foreach (['code', 'token', 'refresh_token'] as $field_name) {
          if (array_key_exists($field_name, $input)
              && !empty($input[$field_name]) && $input[$field_name] !== 'NULL') {
             $input[$field_name] = Toolbox::sodiumEncrypt($input[$field_name]);
@@ -454,14 +454,26 @@ class PluginOauthimapAuthorization extends CommonDBChild {
 
       if ($token->hasExpired()) {
          // Token has expired, refresh it
+         $refresh_token = Toolbox::sodiumDecrypt($self->fields['refresh_token']);
+
          $provider = $application->getProvider();
          $token = $provider->getAccessToken(
             'refresh_token',
             [
-               'refresh_token' => $token->getRefreshToken(),
+               'refresh_token' => $refresh_token,
             ]
          );
-         $self->update(['id' => $self->fields['id'], 'token' => json_encode($token->jsonSerialize())]);
+
+         $input = [
+            'id' => $self->fields['id'],
+            'token' => json_encode($token->jsonSerialize())
+         ];
+         if (!empty($token->getRefreshToken()) && $token->getRefreshToken() !== $refresh_token) {
+            // Update refresh token if a new one has been received in response.
+            $input['refresh_token'] = $token->getRefreshToken();
+         }
+
+         $self->update($input);
       }
 
       return $token->getToken();
@@ -519,6 +531,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
                       `$application_fkey` int(11) NOT NULL DEFAULT '0',
                       `code` text COLLATE utf8_unicode_ci,
                       `token` text COLLATE utf8_unicode_ci,
+                      `refresh_token` text COLLATE utf8_unicode_ci,
                       `email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
                       `date_creation` timestamp NULL DEFAULT NULL,
                       `date_mod` timestamp NULL DEFAULT NULL,
@@ -529,6 +542,38 @@ class PluginOauthimapAuthorization extends CommonDBChild {
                       UNIQUE KEY `unicity` (`$application_fkey`,`email`)
                       ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;";
          $DB->query($query) or die($DB->error());
+      } else {
+         if (!$DB->fieldExists($table, 'refresh_token')) {
+            // V1.3.1: add new refresh_token field
+            $migration->addField(
+               $table,
+               'refresh_token',
+               'text',
+               [
+                  'after'     => 'token',
+                  'nodefault' => true,
+               ]
+            );
+
+            $iterator = $DB->request(['FROM' => $table]);
+            foreach ($iterator as $row) {
+               $token_fields = json_decode(Toolbox::sodiumDecrypt($row['token']), true);
+               if (isset($token_fields['refresh_token'])) {
+                  $migration->addPostQuery(
+                     $DB->buildUpdate(
+                        $table,
+                        [
+                           'refresh_token' => Toolbox::sodiumEncrypt($token_fields['refresh_token']),
+                        ],
+                        [
+                           'id'            => $row['id']
+                        ]
+                     )
+                  );
+               }
+            }
+         }
+
       }
    }
 
