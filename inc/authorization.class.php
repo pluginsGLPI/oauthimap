@@ -411,6 +411,7 @@ class PluginOauthimapAuthorization extends CommonDBChild {
          $application->getForeignKeyField() => $application_id,
          'code'                             => $code,
          'token'                            => json_encode($token->jsonSerialize()),
+         'refresh_token'                    => $token->getRefreshToken(),
          'email'                            => $email,
       ];
 
