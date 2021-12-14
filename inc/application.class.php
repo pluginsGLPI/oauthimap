@@ -431,7 +431,7 @@ JAVASCRIPT;
             $options['prompt'] = 'login';
             break;
          case Google::class:
-            $options['prompt'] = 'select_account';
+            $options['prompt'] = 'consent select_account';
             break;
       }
 
