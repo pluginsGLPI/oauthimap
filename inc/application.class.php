@@ -399,7 +399,7 @@ JAVASCRIPT;
          // Remove codes and tokens if any credentials parameter changed
          $this->deleteChildrenAndRelationsFromDb(
             [
-               PluginOauthimapApplication::class,
+               PluginOauthimapAuthorization::class,
             ]
          );
       }
@@ -567,7 +567,7 @@ JAVASCRIPT;
    function cleanDBonPurge() {
       $this->deleteChildrenAndRelationsFromDb(
          [
-            PluginOauthimapApplication::class,
+            PluginOauthimapAuthorization::class,
          ]
       );
    }
