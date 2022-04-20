@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-define('PLUGIN_OAUTHIMAP_VERSION', '1.3.3');
+define('PLUGIN_OAUTHIMAP_VERSION', '1.4.0');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_OAUTHIMAP_MIN_GLPI', '10.0.0');
