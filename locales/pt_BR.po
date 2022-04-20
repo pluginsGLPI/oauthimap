@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-10-28 08:43+0000\n"
+"POT-Creation-Date: 2022-04-20 13:55+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Cédric Anne, 2021\n"
 "Language-Team: Portuguese (Brazil) (https://www.transifex.com/teclib/teams/28042/pt_BR/)\n"
@@ -22,176 +22,176 @@ msgstr ""
 "Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: front/authorization.callback.php:39
+#: front/authorization.callback.php:43
 #, php-format
 msgid "Authorization failed with error: %s"
 msgstr "Falha na autorização com erro: %s"
 
-#: front/authorization.callback.php:47
-msgid "Unable to verify authorization code"
-msgstr "Não é possível verificar o código de autorização"
+#: inc/application.class.php:315
+msgid "Callback url"
+msgstr "Url de callback"
 
-#: front/authorization.callback.php:49
-msgid "Unable to get authorization code"
-msgstr "Incapaz de obter código de autorização"
-
-#: front/authorization.callback.php:51
-msgid "Unable to save authorization code"
-msgstr "Incapaz de salvar código de autorização"
-
-#: inc/authorization.class.php:56
-msgid "Oauth authorization"
-msgid_plural "Oauth authorizations"
-msgstr[0] "Autorização Oauth"
-msgstr[1] "Autorizações Oauth"
-
-#: inc/authorization.class.php:97
-msgid "Create an authorization"
-msgstr "Crie uma autorização"
-
-#: inc/authorization.class.php:105
-msgid "No authorizations."
-msgstr "Sem autorizações."
-
-#: inc/authorization.class.php:108 inc/authorization.class.php:163
-#: inc/authorization.class.php:217
-msgid "Email"
-msgstr "E-mail"
-
-#: inc/authorization.class.php:123
-msgid "Connection diagnostic"
-msgstr ""
-
-#: inc/authorization.class.php:128
-msgid "Diagnose"
-msgstr ""
-
-#: inc/authorization.class.php:132
-msgid "Update"
-msgstr "Atualizar"
-
-#: inc/authorization.class.php:140
-msgid "Delete"
-msgstr "Excluir"
-
-#: inc/authorization.class.php:233
-msgid "Server host"
-msgstr ""
-
-#: inc/authorization.class.php:245
-msgid "Server port"
-msgstr ""
-
-#: inc/authorization.class.php:259
-msgid "Security level"
-msgstr ""
-
-#: inc/authorization.class.php:266
-msgid "SSL"
-msgstr ""
-
-#: inc/authorization.class.php:267
-msgid "SSL + TLS"
-msgstr ""
-
-#: inc/authorization.class.php:274
-msgid "Timeout"
-msgstr ""
-
-#: inc/authorization.class.php:293
-msgid "Refresh connection diagnostic"
-msgstr ""
-
-#: inc/authorization.class.php:303
-msgid ""
-"Diagnostic log contains sensitive information, such as the access token."
-msgstr ""
-
-#: inc/authorization.class.php:322
-#, php-format
-msgid "Unexpected error: %s"
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:362
-#, php-format
-msgid "Mail receiver \"%s\" has been updated."
-msgstr "O receptor de e-mail \"%s\" foi atualizado."
-
-#: inc/mailcollectorfeature.class.php:391
-#, php-format
-msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "O receptor de e-mail \"%s\" foi desativado."
-
-#: inc/mailcollectorfeature.class.php:454
-msgid "No associated receivers."
-msgstr "Sem receptores associados."
-
-#: inc/mailcollectorfeature.class.php:457
-msgid "Name"
-msgstr "Nome"
-
-#: inc/mailcollectorfeature.class.php:458
-msgid "Connection string"
-msgstr "String de conexão"
-
-#: inc/mailcollectorfeature.class.php:459
-msgid "Login"
-msgstr "Login"
-
-#: inc/mailcollectorfeature.class.php:460
-msgid "Is active ?"
-msgstr "Está ativo?"
-
-#: inc/application.class.php:48
-msgid "Oauth IMAP application"
-msgid_plural "Oauth IMAP applications"
-msgstr[0] "Aplicação Oauth IMAP"
-msgstr[1] "Aplicações Oauth IMAP"
-
-#: inc/application.class.php:86 inc/application.class.php:119
-msgid "Oauth provider"
-msgstr "Provedor Oauth"
-
-#: inc/application.class.php:92 inc/application.class.php:128
+#: inc/application.class.php:90 inc/application.class.php:126
 msgid "Client ID"
 msgstr "ID do Cliente"
 
-#: inc/application.class.php:98
+#: inc/application.class.php:96
 msgid "Client secret"
 msgstr "Segredo do cliente"
 
-#: inc/application.class.php:104 inc/application.class.php:136
-msgid "Tenant ID"
-msgstr "ID do Cliente"
+#: inc/authorization.class.php:135
+msgid "Connection diagnostic"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:454
+msgid "Connection string"
+msgstr "String de conexão"
+
+#: inc/authorization.class.php:104
+msgid "Create an authorization"
+msgstr "Crie uma autorização"
+
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Criar autorização para outro usuário"
+
+#: inc/authorization.class.php:152
+msgid "Delete"
+msgstr "Excluir"
 
 #: inc/application.class.php:177
 msgid "Developer help for this provider"
 msgstr "Ajuda do desenvolvedor para este provedor"
 
-#: inc/application.class.php:316
-msgid "Callback url"
-msgstr "Url de callback"
+#: inc/authorization.class.php:140
+msgid "Diagnose"
+msgstr ""
 
-#: inc/application.class.php:317
-msgid "copy it in the management console of provider"
-msgstr "copiá-lo no console de gerenciamento do provedor"
+#: inc/authorization.class.php:320
+msgid ""
+"Diagnostic log contains sensitive information, such as the access token."
+msgstr ""
 
-#: inc/application.class.php:371
-msgid "Name cannot be empty"
-msgstr "O nome não pode ser vazio"
+#: inc/authorization.class.php:118 inc/authorization.class.php:175
+#: inc/authorization.class.php:229
+msgid "Email"
+msgstr "E-mail"
 
-#: inc/application.class.php:377
+#: inc/application.class.php:372
 msgid "Invalid provider"
 msgstr "Provedor inválido"
 
-#: setup.php:81
+#: inc/mailcollectorfeature.class.php:456
+msgid "Is active ?"
+msgstr "Está ativo?"
+
+#: inc/mailcollectorfeature.class.php:455
+msgid "Login"
+msgstr "Login"
+
+#: inc/mailcollectorfeature.class.php:387
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr "O receptor de e-mail \"%s\" foi desativado."
+
+#: inc/mailcollectorfeature.class.php:358
+#, php-format
+msgid "Mail receiver \"%s\" has been updated."
+msgstr "O receptor de e-mail \"%s\" foi atualizado."
+
+#: inc/mailcollectorfeature.class.php:453
+msgid "Name"
+msgstr "Nome"
+
+#: inc/application.class.php:366
+msgid "Name cannot be empty"
+msgstr "O nome não pode ser vazio"
+
+#: inc/mailcollectorfeature.class.php:450
+msgid "No associated receivers."
+msgstr "Sem receptores associados."
+
+#: inc/authorization.class.php:114
+msgid "No authorizations."
+msgstr "Sem autorizações."
+
+#: setup.php:88
 msgid "Oauth IMAP"
 msgstr "Oauth IMAP"
 
-#: setup.php:97
+#: inc/application.class.php:46
+msgid "Oauth IMAP application"
+msgid_plural "Oauth IMAP applications"
+msgstr[0] "Aplicação Oauth IMAP"
+msgstr[1] "Aplicações Oauth IMAP"
+
+#: inc/authorization.class.php:60
+msgid "Oauth authorization"
+msgid_plural "Oauth authorizations"
+msgstr[0] "Autorização Oauth"
+msgstr[1] "Autorizações Oauth"
+
+#: inc/application.class.php:84 inc/application.class.php:117
+msgid "Oauth provider"
+msgstr "Provedor Oauth"
+
+#: inc/authorization.class.php:307
+msgid "Refresh connection diagnostic"
+msgstr ""
+
+#: setup.php:104
 msgid "Run \"composer install --no-dev\" in the plugin directory."
 msgstr "Execute \"composer install --no-dev\" na pasta do plugin."
 
-#: ajax/dropdownAuthorization.php:44
-msgid "Create authorization for another user"
-msgstr "Criar autorização para outro usuário"
+#: inc/authorization.class.php:279
+msgid "SSL"
+msgstr ""
+
+#: inc/authorization.class.php:280
+msgid "SSL + TLS"
+msgstr ""
+
+#: inc/authorization.class.php:272
+msgid "Security level"
+msgstr ""
+
+#: inc/authorization.class.php:244
+msgid "Server host"
+msgstr ""
+
+#: inc/authorization.class.php:255
+msgid "Server port"
+msgstr ""
+
+#: inc/application.class.php:102 inc/application.class.php:134
+msgid "Tenant ID"
+msgstr "ID do Cliente"
+
+#: inc/authorization.class.php:288
+msgid "Timeout"
+msgstr ""
+
+#: front/authorization.callback.php:53
+msgid "Unable to get authorization code"
+msgstr "Incapaz de obter código de autorização"
+
+#: front/authorization.callback.php:55
+msgid "Unable to save authorization code"
+msgstr "Incapaz de salvar código de autorização"
+
+#: front/authorization.callback.php:51
+msgid "Unable to verify authorization code"
+msgstr "Não é possível verificar o código de autorização"
+
+#: inc/authorization.class.php:339
+#, php-format
+msgid "Unexpected error: %s"
+msgstr ""
+
+#: inc/authorization.class.php:144
+msgid "Update"
+msgstr "Atualizar"
+
+#: inc/application.class.php:316
+msgid "copy it in the management console of provider"
+msgstr "copiá-lo no console de gerenciamento do provedor"
