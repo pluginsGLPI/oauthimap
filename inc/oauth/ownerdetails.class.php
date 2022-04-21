@@ -30,11 +30,11 @@
 
 namespace GlpiPlugin\Oauthimap\Oauth;
 
-class OwnerDetails {
+class OwnerDetails
+{
+    public $email;
 
-   public $email;
+    public $firstname;
 
-   public $firstname;
-
-   public $lastname;
+    public $lastname;
 }

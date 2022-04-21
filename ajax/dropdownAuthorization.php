@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-include ("../../../inc/includes.php");
+include("../../../inc/includes.php");
 header("Content-Type: text/html; charset=UTF-8");
 Html::header_nocache();
 
@@ -37,29 +37,29 @@ Session::checkLoginUser();
 global $DB;
 
 $iterator = $DB->request(
-   [
-      'FROM'   => PluginOauthimapAuthorization::getTable(),
-      'WHERE'  => [
-         PluginOauthimapApplication::getForeignKeyField() => $_POST['application_id'] ?? null,
-      ],
-   ]
+    [
+        'FROM'   => PluginOauthimapAuthorization::getTable(),
+        'WHERE'  => [
+            PluginOauthimapApplication::getForeignKeyField() => $_POST['application_id'] ?? null,
+        ],
+    ]
 );
 $authorizations = [
-   '-1' => __('Create authorization for another user', 'oauthimap')
+    '-1' => __('Create authorization for another user', 'oauthimap')
 ];
 $value = -1;
 foreach ($iterator as $row) {
-   $authorizations[$row['id']] = $row['email'];
-   if (array_key_exists('selected', $_POST) && $row['email'] == $_POST['selected']) {
-      $value = $row['id'];
-   }
+    $authorizations[$row['id']] = $row['email'];
+    if (array_key_exists('selected', $_POST) && $row['email'] == $_POST['selected']) {
+        $value = $row['id'];
+    }
 }
 
 Dropdown::showFromArray(
-   PluginOauthimapAuthorization::getForeignKeyField(),
-   $authorizations,
-   [
-      'display_emptychoice' => false,
-      'value'               => $value,
-   ]
+    PluginOauthimapAuthorization::getForeignKeyField(),
+    $authorizations,
+    [
+        'display_emptychoice' => false,
+        'value'               => $value,
+    ]
 );

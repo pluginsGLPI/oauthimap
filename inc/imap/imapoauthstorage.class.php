@@ -32,48 +32,49 @@ namespace GlpiPlugin\Oauthimap\Imap;
 
 use Laminas\Mail\Storage\Imap;
 
-class ImapOauthStorage extends Imap {
+class ImapOauthStorage extends Imap
+{
+    public function __construct($params)
+    {
+        if (is_array($params)) {
+            $params = (object) $params;
+        }
 
-   public function __construct($params) {
-      if (is_array($params)) {
-         $params = (object) $params;
-      }
+        $this->has['flags'] = true;
 
-      $this->has['flags'] = true;
+        if ($params instanceof ImapOauthProtocol) {
+            $this->protocol = $params;
+            try {
+                $this->selectFolder('INBOX');
+            } catch (\Laminas\Mail\Storage\Exception\ExceptionInterface $e) {
+                throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
+            }
+            return;
+        }
 
-      if ($params instanceof ImapOauthProtocol) {
-         $this->protocol = $params;
-         try {
-            $this->selectFolder('INBOX');
-         } catch (\Laminas\Mail\Storage\Exception\ExceptionInterface $e) {
-            throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
-         }
-         return;
-      }
+        if (!isset($params->application_id)) {
+            throw new \Laminas\Mail\Storage\Exception\InvalidArgumentException('Oauth credentials must be defined');
+        }
 
-      if (!isset($params->application_id)) {
-         throw new \Laminas\Mail\Storage\Exception\InvalidArgumentException('Oauth credentials must be defined');
-      }
+        if (!isset($params->user)) {
+            throw new \Laminas\Mail\Storage\Exception\InvalidArgumentException('need at least user in params');
+        }
 
-      if (!isset($params->user)) {
-         throw new \Laminas\Mail\Storage\Exception\InvalidArgumentException('need at least user in params');
-      }
+        $host     = isset($params->host) ? $params->host : 'localhost';
+        $password = ''; // No password used in Oauth process
+        $port     = isset($params->port) ? $params->port : null;
+        $ssl      = isset($params->ssl) ? $params->ssl : false;
 
-      $host     = isset($params->host) ? $params->host : 'localhost';
-      $password = ''; // No password used in Oauth process
-      $port     = isset($params->port) ? $params->port : null;
-      $ssl      = isset($params->ssl) ? $params->ssl : false;
+        $this->protocol = new ImapOauthProtocol($params->application_id);
 
-      $this->protocol = new ImapOauthProtocol($params->application_id);
+        if (isset($params->novalidatecert)) {
+            $this->protocol->setNoValidateCert((bool)$params->novalidatecert);
+        }
 
-      if (isset($params->novalidatecert)) {
-         $this->protocol->setNoValidateCert((bool)$params->novalidatecert);
-      }
-
-      $this->protocol->connect($host, $port, $ssl);
-      if (!$this->protocol->login($params->user, $password)) {
-         throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot login, user or password wrong');
-      }
-      $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
-   }
+        $this->protocol->connect($host, $port, $ssl);
+        if (!$this->protocol->login($params->user, $password)) {
+            throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot login, user or password wrong');
+        }
+        $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
+    }
 }

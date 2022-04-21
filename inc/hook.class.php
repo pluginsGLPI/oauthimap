@@ -29,13 +29,13 @@
  */
 
 if (!defined('GLPI_ROOT')) {
-   die("Sorry. You can't access this file directly");
+    die("Sorry. You can't access this file directly");
 }
 
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 
-class PluginOauthimapHook {
-
+class PluginOauthimapHook
+{
    /**
     * Handle post_item_form hook.
     *
@@ -43,21 +43,22 @@ class PluginOauthimapHook {
     *
     * @return void
     */
-   public static function postItemForm(array $params): void {
+    public static function postItemForm(array $params): void
+    {
 
-      $item = $params['item'];
+        $item = $params['item'];
 
-      if (!is_object($item)) {
-         return;
-      }
+        if (!is_object($item)) {
+            return;
+        }
 
-      switch (get_class($item)) {
-         case MailCollector::class:
-            MailCollectorFeature::alterMailCollectorForm();
-            break;
-         case PluginOauthimapApplication::class:
-            PluginOauthimapApplication::showFormExtra((int)$item->fields[PluginOauthimapApplication::getIndexName()]);
-            break;
-      }
-   }
+        switch (get_class($item)) {
+            case MailCollector::class:
+                MailCollectorFeature::alterMailCollectorForm();
+                break;
+            case PluginOauthimapApplication::class:
+                PluginOauthimapApplication::showFormExtra((int)$item->fields[PluginOauthimapApplication::getIndexName()]);
+                break;
+        }
+    }
 }
