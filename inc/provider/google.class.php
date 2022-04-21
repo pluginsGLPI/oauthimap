@@ -33,37 +33,43 @@ namespace GlpiPlugin\Oauthimap\Provider;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
 
-class Google extends \League\OAuth2\Client\Provider\Google implements ProviderInterface {
+class Google extends \League\OAuth2\Client\Provider\Google implements ProviderInterface
+{
+    public static function getName(): string
+    {
+        return 'Google';
+    }
 
-   public static function getName(): string {
-      return 'Google';
-   }
+    public static function getIcon(): string
+    {
+        return 'fa-google';
+    }
 
-   public static function getIcon(): string {
-      return 'fa-google';
-   }
+    public function getOwnerDetails(AccessToken $token): ?OwnerDetails
+    {
+        /* @var \League\OAuth2\Client\Provider\GoogleUser $owner */
+        $owner = $this->getResourceOwner($token);
 
-   public function getOwnerDetails(AccessToken $token): ?OwnerDetails {
-      /* @var \League\OAuth2\Client\Provider\GoogleUser $owner */
-      $owner = $this->getResourceOwner($token);
+        $owner_details = new OwnerDetails();
+        $owner_details->email     = $owner->getEmail();
+        $owner_details->firstname = $owner->getFirstName();
+        $owner_details->lastname  = $owner->getLastName();
 
-      $owner_details = new OwnerDetails();
-      $owner_details->email     = $owner->getEmail();
-      $owner_details->firstname = $owner->getFirstName();
-      $owner_details->lastname  = $owner->getLastName();
+        return $owner_details;
+    }
 
-      return $owner_details;
-   }
+    public function getDefaultHost(): string
+    {
+        return 'imap.gmail.com';
+    }
 
-   public function getDefaultHost(): string {
-      return 'imap.gmail.com';
-   }
+    public function getDefaultPort(): ?int
+    {
+        return 993;
+    }
 
-   public function getDefaultPort(): ?int {
-      return 993;
-   }
-
-   public function getDefaultSslFlag(): ?string {
-      return 'SSL';
-   }
+    public function getDefaultSslFlag(): ?string
+    {
+        return 'SSL';
+    }
 }

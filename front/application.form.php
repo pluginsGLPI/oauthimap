@@ -28,20 +28,20 @@
  * -------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
+include('../../../inc/includes.php');
 
 $dropdown = new PluginOauthimapApplication();
 
 if (isset($_POST['id']) && isset($_POST['request_authorization'])) {
-   $dropdown->check($_POST['id'], UPDATE);
-   $dropdown->redirectToAuthorizationUrl();
+    $dropdown->check($_POST['id'], UPDATE);
+    $dropdown->redirectToAuthorizationUrl();
 } else {
-   Html::requireJs('clipboard');
+    Html::requireJs('clipboard');
 
-   if (array_key_exists('client_secret', $_POST)) {
-      // Client secret must not be altered.
-      $_POST['client_secret'] = $_UPOST['client_secret'];
-   }
+    if (array_key_exists('client_secret', $_POST)) {
+        // Client secret must not be altered.
+        $_POST['client_secret'] = $_UPOST['client_secret'];
+    }
 
-   include (GLPI_ROOT . '/front/dropdown.common.form.php');
+    include(GLPI_ROOT . '/front/dropdown.common.form.php');
 }

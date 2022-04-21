@@ -28,54 +28,57 @@
  * -------------------------------------------------------------------------
  */
 
-function plugin_oauthimap_install() {
-   $version   = plugin_version_oauthimap();
-   $migration = new Migration($version['version']);
+function plugin_oauthimap_install()
+{
+    $version   = plugin_version_oauthimap();
+    $migration = new Migration($version['version']);
 
-   // Parse inc directory
-   foreach (glob(dirname(__FILE__).'/inc/*') as $filepath) {
-      // Load *.class.php files and get the class name
-      if (preg_match("/inc.(.+)\.class.php$/", $filepath, $matches)) {
-         $classname = 'PluginOauthimap' . ucfirst($matches[1]);
-         include_once($filepath);
-         // If the install method exists, load it
-         if (method_exists($classname, 'install')) {
-            $classname::install($migration);
-         }
-      }
-   }
-   $migration->executeMigration();
+    // Parse inc directory
+    foreach (glob(dirname(__FILE__) . '/inc/*') as $filepath) {
+        // Load *.class.php files and get the class name
+        if (preg_match("/inc.(.+)\.class.php$/", $filepath, $matches)) {
+            $classname = 'PluginOauthimap' . ucfirst($matches[1]);
+            include_once($filepath);
+            // If the install method exists, load it
+            if (method_exists($classname, 'install')) {
+                $classname::install($migration);
+            }
+        }
+    }
+    $migration->executeMigration();
 
-   return true;
+    return true;
 }
 
-function plugin_oauthimap_uninstall() {
-   $migration = new Migration(PLUGIN_OAUTHIMAP_VERSION);
+function plugin_oauthimap_uninstall()
+{
+    $migration = new Migration(PLUGIN_OAUTHIMAP_VERSION);
 
-   // Parse inc directory
-   foreach (glob(dirname(__FILE__).'/inc/*') as $filepath) {
-      // Load *.class.php files and get the class name
-      if (preg_match("/inc.(.+)\.class.php/", $filepath, $matches)) {
-         $classname = 'PluginOauthimap' . ucfirst($matches[1]);
-         include_once($filepath);
-         // If the install method exists, load it
-         if (method_exists($classname, 'uninstall')) {
-            $classname::uninstall($migration);
-         }
-      }
-   }
-   return true;
+    // Parse inc directory
+    foreach (glob(dirname(__FILE__) . '/inc/*') as $filepath) {
+        // Load *.class.php files and get the class name
+        if (preg_match("/inc.(.+)\.class.php/", $filepath, $matches)) {
+            $classname = 'PluginOauthimap' . ucfirst($matches[1]);
+            include_once($filepath);
+            // If the install method exists, load it
+            if (method_exists($classname, 'uninstall')) {
+                $classname::uninstall($migration);
+            }
+        }
+    }
+    return true;
 }
 
-function plugin_oauthimap_getDropdown() {
+function plugin_oauthimap_getDropdown()
+{
 
-   $plugin = new Plugin();
+    $plugin = new Plugin();
 
-   if ($plugin->isActivated('oauthimap')) {
-      return [
-         'PluginOauthimapApplication' => PluginOauthimapApplication::getTypeName(Session::getPluralNumber()),
-      ];
-   }
+    if ($plugin->isActivated('oauthimap')) {
+        return [
+            'PluginOauthimapApplication' => PluginOauthimapApplication::getTypeName(Session::getPluralNumber()),
+        ];
+    }
 
-   return [];
+    return [];
 }

@@ -28,7 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
-include ("../../../inc/includes.php");
+include("../../../inc/includes.php");
 
 $dropdown = new PluginOauthimapApplication();
 Html::redirect($dropdown->getSearchURL());

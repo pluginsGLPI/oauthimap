@@ -28,45 +28,47 @@
  * -------------------------------------------------------------------------
  */
 
-include ('../../../inc/includes.php');
+include('../../../inc/includes.php');
 
 $authorization = new PluginOauthimapAuthorization();
 $application   = new PluginOauthimapApplication();
 
 if (isset($_POST['id']) && isset($_POST['delete'])) {
-   $authorization->check($_POST['id'], DELETE);
-   $authorization->delete($_POST);
+    $authorization->check($_POST['id'], DELETE);
+    $authorization->delete($_POST);
 
-   Html::back();
-} else if (isset($_POST['id']) && isset($_POST['update'])) {
-   $authorization->check($_POST['id'], UPDATE);
-   if ($authorization->update($_POST)
-      && $application->getFromDB($authorization->fields[$application->getForeignKeyField()])) {
-      Html::redirect($application->getLinkURL());
-   }
+    Html::back();
+} elseif (isset($_POST['id']) && isset($_POST['update'])) {
+    $authorization->check($_POST['id'], UPDATE);
+    if (
+        $authorization->update($_POST)
+        && $application->getFromDB($authorization->fields[$application->getForeignKeyField()])
+    ) {
+        Html::redirect($application->getLinkURL());
+    }
 
-   Html::back();
-} else if (isset($_REQUEST['id']) && isset($_REQUEST['diagnose'])) {
-   $authorization->check($_REQUEST['id'], READ);
+    Html::back();
+} elseif (isset($_REQUEST['id']) && isset($_REQUEST['diagnose'])) {
+    $authorization->check($_REQUEST['id'], READ);
 
-   $authorization = new PluginOauthimapAuthorization();
-   $application   = new PluginOauthimapApplication();
+    $authorization = new PluginOauthimapAuthorization();
+    $application   = new PluginOauthimapApplication();
 
-   Html::popHeader($application::getTypeName(Session::getPluralNumber()));
-   $authorization->check($_REQUEST['id'], READ);
+    Html::popHeader($application::getTypeName(Session::getPluralNumber()));
+    $authorization->check($_REQUEST['id'], READ);
 
-   $authorization->showDiagnosticForm($_POST);
+    $authorization->showDiagnosticForm($_POST);
 
-   Html::popFooter();
-} else if (isset($_GET['id'])) {
-   $application = new PluginOauthimapApplication();
-   $application->displayCentralHeader();
-   $authorization->display(
-      [
-         'id' => $_GET['id'],
-      ]
-   );
-   Html::footer();
+    Html::popFooter();
+} elseif (isset($_GET['id'])) {
+    $application = new PluginOauthimapApplication();
+    $application->displayCentralHeader();
+    $authorization->display(
+        [
+            'id' => $_GET['id'],
+        ]
+    );
+    Html::footer();
 } else {
-   Html::displayErrorAndDie('lost');
+    Html::displayErrorAndDie('lost');
 }
