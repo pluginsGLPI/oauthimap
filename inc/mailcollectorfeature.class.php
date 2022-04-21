@@ -43,7 +43,7 @@ use Session;
 
 class MailCollectorFeature
 {
-    function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         switch ($item->getType()) {
             case PluginOauthimapApplication::class:
@@ -64,7 +64,7 @@ class MailCollectorFeature
         return '';
     }
 
-    static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
+    public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
         switch ($item->getType()) {
             case PluginOauthimapApplication::class:

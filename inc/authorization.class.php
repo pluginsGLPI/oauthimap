@@ -28,10 +28,6 @@
  * -------------------------------------------------------------------------
  */
 
-if (!defined('GLPI_ROOT')) {
-    die("Sorry. You can't access this file directly");
-}
-
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
@@ -61,7 +57,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return _n('Oauth authorization', 'Oauth authorizations', $nb, 'oauthimap');
     }
 
-    function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
+    public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
 
         $count = 0;
@@ -76,7 +72,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return self::createTabEntry(self::getTypeName(1), $count);
     }
 
-    static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
+    public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
 
         if (!($item instanceof PluginOauthimapApplication)) {
@@ -354,7 +350,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo '</form>';
     }
 
-    function prepareInputForAdd($input)
+    public function prepareInputForAdd($input)
     {
         if (!($input = $this->prepareInput($input))) {
             return false;
@@ -362,7 +358,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return parent::prepareInputForAdd($input);
     }
 
-    function prepareInputForUpdate($input)
+    public function prepareInputForUpdate($input)
     {
         // Unset encrypted fields input if corresponding to current value
         // (encryption produces a different value each time, so GLPI will consider them as updated on each form submit)
@@ -541,13 +537,15 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return $this->owner_details;
     }
 
-    function post_updateItem($history = 1)
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName
+    public function post_updateItem($history = 1)
     {
         MailCollectorFeature::postUpdateAuthorization($this);
         parent::post_updateItem($history);
     }
 
-    function post_purgeItem()
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName
+    public function post_purgeItem()
     {
         MailCollectorFeature::postPurgeAuthorization($this);
     }

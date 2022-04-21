@@ -28,10 +28,6 @@
  * -------------------------------------------------------------------------
  */
 
-if (!defined('GLPI_ROOT')) {
-    die("Sorry. You can't access this file directly");
-}
-
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Provider\Azure;
 use GlpiPlugin\Oauthimap\Provider\Google;
@@ -40,14 +36,14 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 
 class PluginOauthimapApplication extends CommonDropdown
 {
-    static $rightname     = 'config';
+    public static $rightname     = 'config';
 
     public static function getTypeName($nb = 0)
     {
         return _n('Oauth IMAP application', 'Oauth IMAP applications', $nb, 'oauthimap');
     }
 
-    static function getMenuContent()
+    public static function getMenuContent()
     {
 
         $menu = [];
@@ -67,12 +63,12 @@ class PluginOauthimapApplication extends CommonDropdown
         return 'fas fa-sign-in-alt';
     }
 
-    static function canCreate()
+    public static function canCreate()
     {
         return static::canUpdate();
     }
 
-    static function canPurge()
+    public static function canPurge()
     {
         return static::canUpdate();
     }
@@ -113,7 +109,7 @@ class PluginOauthimapApplication extends CommonDropdown
         ];
     }
 
-    function rawSearchOptions()
+    public function rawSearchOptions()
     {
         $tab = parent::rawSearchOptions();
 
@@ -145,7 +141,7 @@ class PluginOauthimapApplication extends CommonDropdown
         return $tab;
     }
 
-    function defineTabs($options = [])
+    public function defineTabs($options = [])
     {
 
         $tabs = parent::defineTabs($options);
@@ -231,7 +227,7 @@ JAVASCRIPT;
         }
     }
 
-    static function getSpecificValueToDisplay($field, $values, array $options = [])
+    public static function getSpecificValueToDisplay($field, $values, array $options = [])
     {
 
         if (!is_array($values)) {
@@ -250,7 +246,7 @@ JAVASCRIPT;
         return parent::getSpecificValueToDisplay($field, $values, $options);
     }
 
-    static function getSpecificValueToSelect($field, $name = '', $values = '', array $options = [])
+    public static function getSpecificValueToSelect($field, $name = '', $values = '', array $options = [])
     {
 
         if (!is_array($values)) {
@@ -341,7 +337,7 @@ JAVASCRIPT;
         echo '</div>';
     }
 
-    function prepareInputForAdd($input)
+    public function prepareInputForAdd($input)
     {
         if (!($input = $this->prepareInput($input))) {
             return false;
@@ -349,7 +345,7 @@ JAVASCRIPT;
         return parent::prepareInputForAdd($input);
     }
 
-    function prepareInputForUpdate($input)
+    public function prepareInputForUpdate($input)
     {
         // Unset encrypted fields input if corresponding to current value
         // (encryption produces a different value each time,
@@ -404,7 +400,8 @@ JAVASCRIPT;
         return $input;
     }
 
-    function pre_updateInDB()
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName
+    public function pre_updateInDB()
     {
         if (
             in_array('provider', $this->updates)
@@ -420,7 +417,8 @@ JAVASCRIPT;
         }
     }
 
-    function post_updateItem($history = 1)
+    // phpcs:ignore PSR1.Methods.CamelCapsMethodName
+    public function post_updateItem($history = 1)
     {
         if (in_array('is_active', $this->updates) && !$this->fields['is_active']) {
             MailCollectorFeature::postDeactivateApplication($this);
@@ -587,7 +585,7 @@ JAVASCRIPT;
         return Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
     }
 
-    function cleanDBonPurge()
+    public function cleanDBonPurge()
     {
         $this->deleteChildrenAndRelationsFromDb(
             [
