@@ -47,7 +47,7 @@ class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements Provider
 
     public function getOwnerDetails(AccessToken $token): ?OwnerDetails
     {
-       /* @var \TheNetworg\OAuth2\Client\Provider\AzureResourceOwner $owner */
+        /* @var \TheNetworg\OAuth2\Client\Provider\AzureResourceOwner $owner */
         $owner = $this->getResourceOwner($token);
 
         $owner_details = new OwnerDetails();

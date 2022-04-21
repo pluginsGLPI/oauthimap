@@ -110,23 +110,23 @@ class MailCollectorFeature
         return $mail_protocols;
     }
 
-   /**
-    * Return mail protocol type identifier.
-    *
-    * @param int $application_id
-    *
-    * @return string
-    */
+    /**
+     * Return mail protocol type identifier.
+     *
+     * @param int $application_id
+     *
+     * @return string
+     */
     public static function getMailProtocolTypeIdentifier($application_id)
     {
         return sprintf('imap-oauth-%s', $application_id);
     }
 
-   /**
-    * Alter MailCollector form in order to handle IMAP Oauth connections.
-    *
-    * @return void
-    */
+    /**
+     * Alter MailCollector form in order to handle IMAP Oauth connections.
+     *
+     * @return void
+     */
     public static function alterMailCollectorForm(): void
     {
 
@@ -135,119 +135,119 @@ class MailCollectorFeature
 
         echo '<span id="' . $locator_id . '" style="display:none;"></span>';
         $javascript = <<<JAVASCRIPT
-         $(
-            function () {
-               var form = $('#{$locator_id}').closest('form');
+            $(
+                function () {
+                    var form = $('#{$locator_id}').closest('form');
 
-               var server_type_field = form.find('[name="server_type"]');
-               var password_field = form.find('[name="passwd"]');
-               var login_field = form.find('[name="login"]');
+                    var server_type_field = form.find('[name="server_type"]');
+                    var password_field = form.find('[name="passwd"]');
+                    var login_field = form.find('[name="login"]');
 
-               form.append('<input type="hidden" name="plugin_oauthimap_applications_id" />');
-               var application_field = form.find('[name="plugin_oauthimap_applications_id"]');
+                    form.append('<input type="hidden" name="plugin_oauthimap_applications_id" />');
+                    var application_field = form.find('[name="plugin_oauthimap_applications_id"]');
 
-               login_field.parent().append('<div id="auth_field_container" style="display:none;"></div>');
-               var auth_field_container = $('#auth_field_container');
+                    login_field.parent().append('<div id="auth_field_container" style="display:none;"></div>');
+                    var auth_field_container = $('#auth_field_container');
 
-               server_type_field.on(
-                  'change',
-                  function (evt) {
-                     if (/^\/imap-oauth-\d+$/.test($(this).val())) {
-                        var application_id = $(this).val().replace('/imap-oauth-', '');
+                    server_type_field.on(
+                        'change',
+                        function (evt) {
+                            if (/^\/imap-oauth-\d+$/.test($(this).val())) {
+                                var application_id = $(this).val().replace('/imap-oauth-', '');
 
-                        password_field.closest('tr').hide();
-                        login_field.hide();
-                        auth_field_container.show();
+                                password_field.closest('tr').hide();
+                                login_field.hide();
+                                auth_field_container.show();
 
-                        application_field.val(application_id);
-                        auth_field_container.load(
-                           '{$plugin_path}/ajax/dropdownAuthorization.php',
-                           {
-                              application_id: application_id,
-                              selected: login_field.val()
-                           }
-                        );
-                     } else {
-                        password_field.closest('tr').show();
-                        auth_field_container.hide();
-                        login_field.show();
+                                application_field.val(application_id);
+                                auth_field_container.load(
+                                    '{$plugin_path}/ajax/dropdownAuthorization.php',
+                                    {
+                                        application_id: application_id,
+                                        selected: login_field.val()
+                                    }
+                                );
+                            } else {
+                                password_field.closest('tr').show();
+                                auth_field_container.hide();
+                                login_field.show();
 
-                        application_field.val('');
-                     }
-                  }
-               );
+                                application_field.val('');
+                            }
+                        }
+                    );
 
-               // Change login field value to trigger mail collector update
-               auth_field_container.on(
-                  'change',
-                  'select',
-                  function (evt) {
-                     if ($(this).val() == -1) {
-                        login_field.val('');
-                     } else {
-                        login_field.val($(this).find('option:selected').text());
-                     }
-                  }
-               );
+                    // Change login field value to trigger mail collector update
+                    auth_field_container.on(
+                        'change',
+                        'select',
+                        function (evt) {
+                            if ($(this).val() == -1) {
+                                login_field.val('');
+                            } else {
+                                login_field.val($(this).find('option:selected').text());
+                            }
+                        }
+                    );
 
-               server_type_field.trigger('change');
-            }
-         );
+                    server_type_field.trigger('change');
+                }
+            );
 JAVASCRIPT;
 
         echo Html::scriptBlock($javascript);
     }
 
-   /**
-    * Force mailcollector update if oauth fields should trigger an authorization request.
-    *
-    * @param MailCollector $item
-    *
-    * @return void
-    */
+    /**
+     * Force mailcollector update if oauth fields should trigger an authorization request.
+     *
+     * @param MailCollector $item
+     *
+     * @return void
+     */
     public static function forceMailCollectorUpdate(MailCollector $item)
     {
         if (
             !array_key_exists('plugin_oauthimap_applications_id', $item->input)
             || !array_key_exists('plugin_oauthimap_authorizations_id', $item->input)
         ) {
-           // Plugin fields are not present, update was not made inside form.
+            // Plugin fields are not present, update was not made inside form.
             return true;
         }
 
         if (!($item->input['plugin_oauthimap_applications_id'] > 0)) {
-           // No application selected => mail collector does not use Oauth.
-           // Return true to continue update.
+            // No application selected => mail collector does not use Oauth.
+            // Return true to continue update.
             return true;
         }
         if ($item->input['plugin_oauthimap_authorizations_id'] > 0) {
-           // Existing authorization selected => no need to trigger authorization request.
-           // Return true to continue update.
+            // Existing authorization selected => no need to trigger authorization request.
+            // Return true to continue update.
             return true;
         }
 
-       // Defines "date_mod" field of mail collector to force its update.
-       // Indeed, if no mail collector field changed, "item_update" hook will not be called and authorization request
-       // will not be triggered.
+        // Defines "date_mod" field of mail collector to force its update.
+        // Indeed, if no mail collector field changed, "item_update" hook will not be called and authorization request
+        // will not be triggered.
         $item->input['date_mod'] = $_SESSION['glpi_currenttime'];
 
         return true;
     }
 
-   /**
-    * Handle authorization process after creation/update of a mail collector.
-    *
-    * @param MailCollector $item
-    *
-    * @return void
-    */
+    /**
+     * Handle authorization process after creation/update of a mail collector.
+     *
+     * @param MailCollector $item
+     *
+     * @return void
+     */
     public static function handleMailCollectorSaving(MailCollector $item): void
     {
         if (
             !array_key_exists('plugin_oauthimap_applications_id', $item->input)
             || !array_key_exists('plugin_oauthimap_authorizations_id', $item->input)
         ) {
-           // Plugin fields are not present, update was not made inside form.
+            // Plugin fields are not present, update was not made inside form.
             return;
         }
 
@@ -255,7 +255,7 @@ JAVASCRIPT;
         $authorizations_id = $item->input['plugin_oauthimap_authorizations_id'];
 
         if (!($applications_id > 0)) {
-           // No application selected => mail collector does not use Oauth.
+            // No application selected => mail collector does not use Oauth.
             return;
         }
 
@@ -264,7 +264,7 @@ JAVASCRIPT;
         $authorization = new PluginOauthimapAuthorization();
 
         if ($authorizations_id > 0 && $authorization->getFromDB($authorizations_id)) {
-           // Use existing authorization
+            // Use existing authorization
             self::updateMailCollectorOnAuthorizationCallback(
                 true,
                 $authorization,
@@ -273,7 +273,7 @@ JAVASCRIPT;
                 ]
             );
         } else {
-           // Create new authorization
+            // Create new authorization
             $application->redirectToAuthorizationUrl(
                 [self::class, 'updateMailCollectorOnAuthorizationCallback'],
                 [
@@ -283,15 +283,15 @@ JAVASCRIPT;
         }
     }
 
-   /**
-    * Update login field of mail collector on authorization callback.
-    *
-    * @param bool                         $success
-    * @param PluginOauthimapAuthorization $authorization
-    * @param array                        $params
-    *
-    * @return void
-    */
+    /**
+     * Update login field of mail collector on authorization callback.
+     *
+     * @param bool                         $success
+     * @param PluginOauthimapAuthorization $authorization
+     * @param array                        $params
+     *
+     * @return void
+     */
     public static function updateMailCollectorOnAuthorizationCallback(
         bool $success,
         PluginOauthimapAuthorization $authorization,
@@ -314,13 +314,13 @@ JAVASCRIPT;
         Html::redirect($mailcollector->getLinkURL());
     }
 
-   /**
-    * Deactivate mail collectors linked to the application.
-    *
-    * @param PluginOauthimapApplication $application
-    *
-    * @return void
-    */
+    /**
+     * Deactivate mail collectors linked to the application.
+     *
+     * @param PluginOauthimapApplication $application
+     *
+     * @return void
+     */
     public static function postDeactivateApplication(PluginOauthimapApplication $application): void
     {
         self::deactivateMailCollectors(
@@ -328,13 +328,13 @@ JAVASCRIPT;
         );
     }
 
-   /**
-    * Deactivate mail collectors linked to the authorization.
-    *
-    * @param PluginOauthimapAuthorization $authorization
-    *
-    * @return void
-    */
+    /**
+     * Deactivate mail collectors linked to the authorization.
+     *
+     * @param PluginOauthimapAuthorization $authorization
+     *
+     * @return void
+     */
     public static function postPurgeAuthorization(PluginOauthimapAuthorization $authorization): void
     {
         $application_id = $authorization->fields[PluginOauthimapApplication::getForeignKeyField()];
@@ -344,13 +344,13 @@ JAVASCRIPT;
         );
     }
 
-   /**
-    * Update mail collectors linked to the authorization.
-    *
-    * @param PluginOauthimapAuthorization $authorization
-    *
-    * @return void
-    */
+    /**
+     * Update mail collectors linked to the authorization.
+     *
+     * @param PluginOauthimapAuthorization $authorization
+     *
+     * @return void
+     */
     public static function postUpdateAuthorization(PluginOauthimapAuthorization $authorization): void
     {
         if (in_array('email', $authorization->updates) && array_key_exists('email', $authorization->oldvalues)) {
@@ -376,14 +376,14 @@ JAVASCRIPT;
         }
     }
 
-   /**
-    * Deactivate mail collectors using given protocol type and given login.
-    *
-    * @param string $protocol_type
-    * @param string $login
-    *
-    * @return void
-    */
+    /**
+     * Deactivate mail collectors using given protocol type and given login.
+     *
+     * @param string $protocol_type
+     * @param string $login
+     *
+     * @return void
+     */
     private static function deactivateMailCollectors(string $protocol_type, ?string $login = null)
     {
         $collectors = self::getAssociatedMailCollectors($protocol_type, $login);
@@ -405,15 +405,15 @@ JAVASCRIPT;
         }
     }
 
-   /**
-    * Return mail collectors using given protocol type and given login.
-    *
-    * @param string $protocol_type
-    * @param string $login
-    * @param bool   $only_active
-    *
-    * @return void
-    */
+    /**
+     * Return mail collectors using given protocol type and given login.
+     *
+     * @param string $protocol_type
+     * @param string $login
+     * @param bool   $only_active
+     *
+     * @return void
+     */
     private static function getAssociatedMailCollectors(
         string $protocol_type,
         string $login = null,
@@ -432,11 +432,11 @@ JAVASCRIPT;
         $result = [];
 
         foreach ($data as $row) {
-           // type follows first found "/" and ends on next "/" (or end of server string)
-           // server string is surrounded by "{}" and can be followed by a folder name
-           // i.e. "{mail.domain.org/imap/ssl}INBOX", or "{mail.domain.org/pop}"
-           //
-           // see Toolbox::parseMailServerConnectString()
+            // type follows first found "/" and ends on next "/" (or end of server string)
+            // server string is surrounded by "{}" and can be followed by a folder name
+            // i.e. "{mail.domain.org/imap/ssl}INBOX", or "{mail.domain.org/pop}"
+            //
+            // see Toolbox::parseMailServerConnectString()
             $type = preg_replace('/^\{[^\/]+\/([^\/]+)(?:\/.+)*\}.*/', '$1', $row['host']);
             if ($type === $protocol_type) {
                 $result[] = $row;
@@ -447,13 +447,13 @@ JAVASCRIPT;
     }
 
 
-   /**
-    * Display "mail collectors" tab of application page.
-    *
-    * @param PluginOauthimapApplication $application
-    *
-    * @return void
-    */
+    /**
+     * Display "mail collectors" tab of application page.
+     *
+     * @param PluginOauthimapApplication $application
+     *
+     * @return void
+     */
     public static function showMailCollectorsForApplication(PluginOauthimapApplication $application): void
     {
         $collectors = self::getAssociatedMailCollectors(

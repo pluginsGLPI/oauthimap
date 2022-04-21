@@ -36,13 +36,13 @@ use GlpiPlugin\Oauthimap\MailCollectorFeature;
 
 class PluginOauthimapHook
 {
-   /**
-    * Handle post_item_form hook.
-    *
-    * @param array $params
-    *
-    * @return void
-    */
+    /**
+     * Handle post_item_form hook.
+     *
+     * @param array $params
+     *
+     * @return void
+     */
     public static function postItemForm(array $params): void
     {
 

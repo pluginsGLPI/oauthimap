@@ -47,7 +47,7 @@ class Google extends \League\OAuth2\Client\Provider\Google implements ProviderIn
 
     public function getOwnerDetails(AccessToken $token): ?OwnerDetails
     {
-       /* @var \League\OAuth2\Client\Provider\GoogleUser $owner */
+        /* @var \League\OAuth2\Client\Provider\GoogleUser $owner */
         $owner = $this->getResourceOwner($token);
 
         $owner_details = new OwnerDetails();

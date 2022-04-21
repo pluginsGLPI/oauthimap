@@ -35,47 +35,47 @@ use League\OAuth2\Client\Token\AccessToken;
 
 interface ProviderInterface
 {
-   /**
-    * Return provider name.
-    *
-    * @return string
-    */
+    /**
+     * Return provider name.
+     *
+     * @return string
+     */
     public static function getName(): string;
 
-   /**
-    * Return provider icon (Font-Awesome identifier).
-    *
-    * @return string
-    */
+    /**
+     * Return provider icon (Font-Awesome identifier).
+     *
+     * @return string
+     */
     public static function getIcon(): string;
 
-   /**
-    * Return token owner details.
-    *
-    * @param AccessToken $token
-    *
-    * @return OwnerDetails|null
-    */
+    /**
+     * Return token owner details.
+     *
+     * @param AccessToken $token
+     *
+     * @return OwnerDetails|null
+     */
     public function getOwnerDetails(AccessToken $token): ?OwnerDetails;
 
-   /**
-    * Returns default host for IMAP connection.
-    *
-    * @return string
-    */
+    /**
+     * Returns default host for IMAP connection.
+     *
+     * @return string
+     */
     public function getDefaultHost(): string;
 
-   /**
-    * Returns default port for IMAP connection.
-    *
-    * @return int|null
-    */
+    /**
+     * Returns default port for IMAP connection.
+     *
+     * @return int|null
+     */
     public function getDefaultPort(): ?int;
 
-   /**
-    * Returns default SSL flag ('SSL', 'TLS' or null) for IMAP connection.
-    *
-    * @return string|null
-    */
+    /**
+     * Returns default SSL flag ('SSL', 'TLS' or null) for IMAP connection.
+     *
+     * @return string|null
+     */
     public function getDefaultSslFlag(): ?string;
 }

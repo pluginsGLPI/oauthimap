@@ -189,22 +189,22 @@ class PluginOauthimapApplication extends CommonDropdown
 
                 $json_icons = json_encode($icons);
                 $js = <<<JAVASCRIPT
-               $(function() {
-                  var icons = $json_icons;
-                  var displayOptionIcon = function(item) {
-                     if (!item.id || !icons[item.id]) {
-                        return item.text;
-                     }
-                     return $('<span><i class="fab fa-lg ' + icons[item.id] + '"></i>&nbsp;' + item.text + '</span>');
-                  };
+                    $(function() {
+                        var icons = $json_icons;
+                        var displayOptionIcon = function(item) {
+                            if (!item.id || !icons[item.id]) {
+                                return item.text;
+                            }
+                            return $('<span><i class="fab fa-lg ' + icons[item.id] + '"></i>&nbsp;' + item.text + '</span>');
+                        };
 
-                  $("#dropdown_{$field_name}{$rand}").select2({
-                     dropdownAutoWidth: true,
-                     templateSelection: displayOptionIcon,
-                     templateResult: displayOptionIcon,
-                     width: ''
-                  });
-               });
+                        $("#dropdown_{$field_name}{$rand}").select2({
+                            dropdownAutoWidth: true,
+                            templateSelection: displayOptionIcon,
+                            templateResult: displayOptionIcon,
+                            width: ''
+                        });
+                    });
 JAVASCRIPT;
                 echo Html::scriptBlock($js);
                 break;
@@ -280,13 +280,13 @@ JAVASCRIPT;
         return parent::getSpecificValueToSelect($field, $name, $values, $options);
     }
 
-   /**
-    * Displays form extra fields/scripts.
-    *
-    * @param int $id
-    *
-    * @return void
-    */
+    /**
+     * Displays form extra fields/scripts.
+     *
+     * @param int $id
+     *
+     * @return void
+     */
     public static function showFormExtra(int $id): void
     {
         $rand = sprintf('oauthimap-application-%s', $id);
@@ -295,30 +295,30 @@ JAVASCRIPT;
 
        // Display/hide additionnal params and update documentation link depending on selected provider
         $additionnal_params_js = <<<JAVASCRIPT
-         (function($) {
-            var documentation_urls = {$documentation_urls_json};
+            (function($) {
+                var documentation_urls = {$documentation_urls_json};
 
-            var updateDocumentationLink = function () {
-               var provider = $('#dropdown_provider{$rand}').val();
+                var updateDocumentationLink = function () {
+                    var provider = $('#dropdown_provider{$rand}').val();
 
-               var url = documentation_urls.hasOwnProperty(provider)
-                  ? documentation_urls[provider]
-                  : null;
+                    var url = documentation_urls.hasOwnProperty(provider)
+                        ? documentation_urls[provider]
+                        : null;
 
-               $('.help-link').attr('href', url).toggle(url !== null);
-            };
+                    $('.help-link').attr('href', url).toggle(url !== null);
+                };
 
-            var onProviderChange = function () {
-               var provider = $.escapeSelector($(this).val()); // escape selector as it contains slashes
-               $('[data-provider="' + provider + '"]').closest('.form-field').show();
-               $('[data-provider]:not([data-provider="' + provider + '"])').closest('.form-field').hide();
+                var onProviderChange = function () {
+                    var provider = $.escapeSelector($(this).val()); // escape selector as it contains slashes
+                    $('[data-provider="' + provider + '"]').closest('.form-field').show();
+                    $('[data-provider]:not([data-provider="' + provider + '"])').closest('.form-field').hide();
 
-               updateDocumentationLink();
-            };
+                    updateDocumentationLink();
+                };
 
-            $('#dropdown_provider{$rand}').change(onProviderChange);
-            onProviderChange.call($('#dropdown_provider{$rand}'));
-         })(jQuery);
+                $('#dropdown_provider{$rand}').change(onProviderChange);
+                onProviderChange.call($('#dropdown_provider{$rand}'));
+            })(jQuery);
 JAVASCRIPT;
 
         echo '<div class="form-field row col-12 col-sm-6 mb-2">';
@@ -351,9 +351,9 @@ JAVASCRIPT;
 
     function prepareInputForUpdate($input)
     {
-       // Unset encrypted fields input if corresponding to current value
-       // (encryption produces a different value each time,
-       // so GLPI will consider them as updated on each form submit)
+        // Unset encrypted fields input if corresponding to current value
+        // (encryption produces a different value each time,
+        // so GLPI will consider them as updated on each form submit)
         foreach (['client_secret'] as $field_name) {
             if (
                 array_key_exists($field_name, $input)
@@ -370,13 +370,13 @@ JAVASCRIPT;
         return parent::prepareInputForUpdate($input);
     }
 
-   /**
-    * Encrypt values of secured fields.
-    *
-    * @param array $input
-    *
-    * @return bool|array
-    */
+    /**
+     * Encrypt values of secured fields.
+     *
+     * @param array $input
+     *
+     * @return bool|array
+     */
     private function prepareInput($input)
     {
         if (array_key_exists('name', $input) && empty(trim($input['name']))) {
@@ -411,7 +411,7 @@ JAVASCRIPT;
             || in_array('client_id', $this->updates)
             || in_array('client_secret', $this->updates)
         ) {
-           // Remove codes and tokens if any credentials parameter changed
+            // Remove codes and tokens if any credentials parameter changed
             $this->deleteChildrenAndRelationsFromDb(
                 [
                     PluginOauthimapAuthorization::class,
@@ -427,14 +427,14 @@ JAVASCRIPT;
         }
     }
 
-   /**
-    * Redirect to authorization URL corresponding to credentials.
-    *
-    * @param callable|null $callback_callable   Callable to call on authorization callback
-    * @param array         $callback_params     Parameters to pass to callable
-    *
-    * @return void
-    */
+    /**
+     * Redirect to authorization URL corresponding to credentials.
+     *
+     * @param callable|null $callback_callable   Callable to call on authorization callback
+     * @param array         $callback_params     Parameters to pass to callable
+     *
+     * @return void
+     */
     public function redirectToAuthorizationUrl(?callable $callback_callable = null, array $callback_params = []): void
     {
 
@@ -467,27 +467,27 @@ JAVASCRIPT;
         Html::redirect($auth_url);
     }
 
-   /**
-    * Check if credentials are valid (i.e. all fields are correclty set).
-    *
-    * @return bool
-    */
+    /**
+     * Check if credentials are valid (i.e. all fields are correclty set).
+     *
+     * @return bool
+     */
     private function areCredentialsValid(): bool
     {
         return !$this->isNewItem()
-         && array_key_exists('provider', $this->fields)
-         && in_array($this->fields['provider'], self::getSupportedProviders())
-         && array_key_exists('client_id', $this->fields)
-         && !empty($this->fields['client_id'])
-         && array_key_exists('client_secret', $this->fields)
-         && !empty($this->fields['client_secret']);
+            && array_key_exists('provider', $this->fields)
+            && in_array($this->fields['provider'], self::getSupportedProviders())
+            && array_key_exists('client_id', $this->fields)
+            && !empty($this->fields['client_id'])
+            && array_key_exists('client_secret', $this->fields)
+            && !empty($this->fields['client_secret']);
     }
 
-   /**
-    * Get list of supported providers classnames.
-    *
-    * @return array
-    */
+    /**
+     * Get list of supported providers classnames.
+     *
+     * @return array
+     */
     private static function getSupportedProviders(): array
     {
         return [
@@ -496,11 +496,11 @@ JAVASCRIPT;
         ];
     }
 
-   /**
-    * Returns oauth provider class instance.
-    *
-    * @return AbstractProvider|ProviderInterface|null
-    */
+    /**
+     * Returns oauth provider class instance.
+     *
+     * @return AbstractProvider|ProviderInterface|null
+     */
     public function getProvider(): ?AbstractProvider
     {
 
@@ -519,7 +519,7 @@ JAVASCRIPT;
             'scope'        => self::getProviderScopes($this->fields['provider']),
         ];
 
-       // Specific parameters
+        // Specific parameters
         switch ($this->fields['provider']) {
             case Azure::class:
                 $params['defaultEndPointVersion'] = '2.0';
@@ -535,13 +535,13 @@ JAVASCRIPT;
         return new $this->fields['provider']($params);
     }
 
-   /**
-    * Get required scopes for given provider.
-    *
-    * @param string $provider Provider classname
-    *
-    * @return array
-    */
+    /**
+     * Get required scopes for given provider.
+     *
+     * @param string $provider Provider classname
+     *
+     * @return array
+     */
     private static function getProviderScopes(string $provider): array
     {
         $scopes = [];
@@ -563,12 +563,12 @@ JAVASCRIPT;
         return $scopes;
     }
 
-   /**
-    * Get documentation URLs.
-    * Keys are providers classnames, values are URL.
-    *
-    * @return array
-    */
+    /**
+     * Get documentation URLs.
+     * Keys are providers classnames, values are URL.
+     *
+     * @return array
+     */
     private static function getProvidersDocumentationUrls(): array
     {
         return [
@@ -577,11 +577,11 @@ JAVASCRIPT;
         ];
     }
 
-   /**
-    * Get callback URL used during authorization process.
-    *
-    * @return string
-    */
+    /**
+     * Get callback URL used during authorization process.
+     *
+     * @return string
+     */
     private static function getCallbackUrl(): string
     {
         return Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
@@ -597,9 +597,9 @@ JAVASCRIPT;
     }
 
 
-   /**
-    * Install all necessary data for this class.
-    */
+    /**
+     * Install all necessary data for this class.
+     */
     public static function install(Migration $migration)
     {
 
@@ -636,7 +636,7 @@ SQL;
             $DB->query($query) or die($DB->error());
         }
 
-       // Add display preferences
+        // Add display preferences
         $migration->updateDisplayPrefs(
             [
                 'PluginOauthimapApplication' => [1, 5, 6, 7, 121, 19],
@@ -644,9 +644,9 @@ SQL;
         );
     }
 
-   /**
-    * Uninstall previously installed data for this class.
-    */
+    /**
+     * Uninstall previously installed data for this class.
+     */
     public static function uninstall(Migration $migration)
     {
 

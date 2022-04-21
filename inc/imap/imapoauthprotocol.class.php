@@ -36,46 +36,46 @@ use PluginOauthimapAuthorization;
 
 class ImapOauthProtocol extends Imap implements ProtocolInterface
 {
-   /**
-    * Prefix to use when writing a sent line in diagnostic log.
-    *
-    * @var string
-    */
+    /**
+     * Prefix to use when writing a sent line in diagnostic log.
+     *
+     * @var string
+     */
     private const DIAGNOSTIC_PREFIX_SENT     = '>>> ';
 
-   /**
-    * Prefix to use when writing a received line in diagnostic log.
-    *
-    * @var string
-    */
+    /**
+     * Prefix to use when writing a received line in diagnostic log.
+     *
+     * @var string
+     */
     private const DIAGNOSTIC_PREFIX_RECEIVED = '<<< ';
 
-   /**
-    * ID of PluginOauthimapApplication to use.
-    *
-    * @var int
-    */
+    /**
+     * ID of PluginOauthimapApplication to use.
+     *
+     * @var int
+     */
     private $application_id;
 
-   /**
-    * Indicates whether diagnostic is enabled.
-    *
-    * @var boolean
-    */
+    /**
+     * Indicates whether diagnostic is enabled.
+     *
+     * @var boolean
+     */
     private $diagnostic_enabled = false;
 
-   /**
-    * Diagnostic log.
-    *
-    * @var string[]
-    */
+    /**
+     * Diagnostic log.
+     *
+     * @var string[]
+     */
     private $diagnostic_log = [];
 
-   /**
-    * Connection timeout.
-    *
-    * @var int
-    */
+    /**
+     * Connection timeout.
+     *
+     * @var int
+     */
     private $timeout = self::TIMEOUT_CONNECTION;
 
     /**
@@ -87,11 +87,11 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         parent::__construct();
     }
 
-   /**
-    * Almost identical to parent class method, just to be able to redefine timeout in case of diagnostic.
-    *
-    * {@inheritDoc}
-    */
+    /**
+     * Almost identical to parent class method, just to be able to redefine timeout in case of diagnostic.
+     *
+     * {@inheritDoc}
+     */
     public function connect($host, $port = null, $ssl = false)
     {
         $transport = 'tcp';
@@ -110,7 +110,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
                 break;
             case 'tls':
                 $isTls = true;
-               // break intentionally omitted
+                // break intentionally omitted
             default:
                 if (! $port) {
                     $port = 143;
@@ -171,11 +171,11 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         return false;
     }
 
-   /**
-    * Almost identical to parent class method, some `$this->addToDiagnosticLog()` calls were added.
-    *
-    * {@inheritDoc}
-    */
+    /**
+     * Almost identical to parent class method, some `$this->addToDiagnosticLog()` calls were added.
+     *
+     * {@inheritDoc}
+     */
     public function sendRequest($command, $tokens = [], &$tag = null)
     {
         if (! $tag) {
@@ -208,11 +208,11 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         $this->addToDiagnosticLog($tosend, self::DIAGNOSTIC_PREFIX_SENT);
     }
 
-   /**
-    * Almost identical to parent class method, `$this->addToDiagnosticLog()` call added.
-    *
-    * {@inheritDoc}
-    */
+    /**
+     * Almost identical to parent class method, `$this->addToDiagnosticLog()` call added.
+     *
+     * {@inheritDoc}
+     */
     protected function nextLine()
     {
         $line = fgets($this->socket);
@@ -224,34 +224,34 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         return $line;
     }
 
-   /**
-    * Enable diagnostic.
-    *
-    * @return void
-    */
+    /**
+     * Enable diagnostic.
+     *
+     * @return void
+     */
     public function enableDiagnostic(): void
     {
         $this->diagnostic_enabled = true;
     }
 
-   /**
-    * Get the diagnostic log.
-    *
-    * @return string
-    */
+    /**
+     * Get the diagnostic log.
+     *
+     * @return string
+     */
     public function getDiagnosticLog(): string
     {
         return implode('', $this->diagnostic_log);
     }
 
-   /**
-    * Add line to diagnostic log.
-    *
-    * @param string $line
-    * @param string $prefix
-    *
-    * @return void
-    */
+    /**
+     * Add line to diagnostic log.
+     *
+     * @param string $line
+     * @param string $prefix
+     *
+     * @return void
+     */
     private function addToDiagnosticLog(string $line, string $prefix = '')
     {
         if (!$this->diagnostic_enabled) {
@@ -260,13 +260,13 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         $this->diagnostic_log[] = $prefix . $line;
     }
 
-   /**
-    * Defines socket timeout.
-    *
-    * @param int $timeout
-    *
-    * @return void
-    */
+    /**
+     * Defines socket timeout.
+     *
+     * @param int $timeout
+     *
+     * @return void
+     */
     public function setTimeout(int $timeout): void
     {
         $this->timeout = $timeout;

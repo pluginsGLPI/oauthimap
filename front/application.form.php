@@ -39,7 +39,7 @@ if (isset($_POST['id']) && isset($_POST['request_authorization'])) {
     Html::requireJs('clipboard');
 
     if (array_key_exists('client_secret', $_POST)) {
-       // Client secret must not be altered.
+        // Client secret must not be altered.
         $_POST['client_secret'] = $_UPOST['client_secret'];
     }
 

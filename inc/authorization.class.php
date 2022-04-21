@@ -40,20 +40,20 @@ use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 
 class PluginOauthimapAuthorization extends CommonDBChild
 {
-   // From CommonGlpi
+    // From CommonGlpi
     protected $displaylist  = false;
 
-   // From CommonDBTM
+    // From CommonDBTM
     public $dohistory       = true;
 
-   // From CommonDBChild
+    // From CommonDBChild
     public static $itemtype = 'PluginOauthimapApplication';
     public static $items_id = 'plugin_oauthimap_applications_id';
 
-   /**
-    * Authorization owner details.
-    * @var OwnerDetails
-    */
+    /**
+     * Authorization owner details.
+     * @var OwnerDetails
+     */
     private $owner_details;
 
     public static function getTypeName($nb = 0)
@@ -199,13 +199,13 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return true;
     }
 
-   /**
-    * Displays diagnostic form.
-    *
-    * @param array $params
-    *
-    * @return void
-    */
+    /**
+     * Displays diagnostic form.
+     *
+     * @param array $params
+     *
+     * @return void
+     */
     public function showDiagnosticForm(array $params)
     {
 
@@ -364,8 +364,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     function prepareInputForUpdate($input)
     {
-       // Unset encrypted fields input if corresponding to current value
-       // (encryption produces a different value each time, so GLPI will consider them as updated on each form submit)
+        // Unset encrypted fields input if corresponding to current value
+        // (encryption produces a different value each time, so GLPI will consider them as updated on each form submit)
         foreach (['code', 'token', 'refresh_token'] as $field_name) {
             if (
                 array_key_exists($field_name, $input)
@@ -382,13 +382,13 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return parent::prepareInputForUpdate($input);
     }
 
-   /**
-    * Encrypt values of secured fields.
-    *
-    * @param array $input
-    *
-    * @return bool|array
-    */
+    /**
+     * Encrypt values of secured fields.
+     *
+     * @param array $input
+     *
+     * @return bool|array
+     */
     private function prepareInput($input)
     {
         foreach (['code', 'token', 'refresh_token'] as $field_name) {
@@ -403,14 +403,14 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return $input;
     }
 
-   /**
-    * Create an authorization based on authorizarion code.
-    *
-    * @param int    $application_id
-    * @param string $code
-    *
-    * @return bool
-    */
+    /**
+     * Create an authorization based on authorizarion code.
+     *
+     * @param int    $application_id
+     * @param string $code
+     *
+     * @return bool
+     */
     public function createFromCode(int $application_id, string $code): bool
     {
         $application = new PluginOauthimapApplication();
@@ -420,7 +420,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         $provider = $application->getProvider();
 
-       // Get token
+        // Get token
         try {
             $token = $provider->getAccessToken('authorization_code', ['code'  => $code]);
         } catch (\Throwable $e) {
@@ -431,7 +431,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             return false;
         }
 
-       // Get user details
+        // Get user details
         $this->owner_details = $provider->getOwnerDetails($token);
         $email = $this->owner_details->email;
         if ($email === null) {
@@ -439,7 +439,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             return false;
         }
 
-       // Save informations
+        // Save informations
         $input = [
             $application->getForeignKeyField() => $application_id,
             'code'                             => $code,
@@ -461,14 +461,14 @@ class PluginOauthimapAuthorization extends CommonDBChild
         }
     }
 
-   /**
-    * Get a fresh access token related to given email using given application.
-    *
-    * @param int    $application_id
-    * @param string $email
-    *
-    * @return string|null
-    */
+    /**
+     * Get a fresh access token related to given email using given application.
+     *
+     * @param int    $application_id
+     * @param string $email
+     *
+     * @return string|null
+     */
     public static function getAccessTokenForApplicationAndEmail($application_id, $email): ?string
     {
         $application = new PluginOauthimapApplication();
@@ -488,7 +488,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         }
 
         if ($token->hasExpired()) {
-           // Token has expired, refresh it
+            // Token has expired, refresh it
             $refresh_token = (new GLPIKey())->decrypt($self->fields['refresh_token']);
 
             $provider = $application->getProvider();
@@ -514,11 +514,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return $token->getToken();
     }
 
-   /**
-    * Get existing access token.
-    *
-    * @return AccessToken|null
-    */
+    /**
+     * Get existing access token.
+     *
+     * @return AccessToken|null
+     */
     public function getAccessToken(): ?AccessToken
     {
 
@@ -531,11 +531,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return $token;
     }
 
-   /**
-    * Returns owner details fetched when creating authorization.
-    *
-    * @return OwnerDetails|null
-    */
+    /**
+     * Returns owner details fetched when creating authorization.
+     *
+     * @return OwnerDetails|null
+     */
     public function getOwnerDetails(): ?OwnerDetails
     {
         return $this->owner_details;
@@ -552,9 +552,9 @@ class PluginOauthimapAuthorization extends CommonDBChild
         MailCollectorFeature::postPurgeAuthorization($this);
     }
 
-   /**
-    * Install all necessary data for this class.
-    */
+    /**
+     * Install all necessary data for this class.
+     */
     public static function install(Migration $migration)
     {
 
@@ -622,9 +622,9 @@ SQL;
         }
     }
 
-   /**
-    * Uninstall previously installed data for this class.
-    */
+    /**
+     * Uninstall previously installed data for this class.
+     */
     public static function uninstall(Migration $migration)
     {
 

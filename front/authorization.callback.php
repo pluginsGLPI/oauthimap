@@ -40,7 +40,7 @@ if (
     array_key_exists('error', $_GET) && !empty($_GET['error'])
     || array_key_exists('error_description', $_GET) && !empty($_GET['error_description'])
 ) {
-   // Got an error, probably user denied access
+    // Got an error, probably user denied access
     Session::addMessageAfterRedirect(
         sprintf(__('Authorization failed with error: %s', 'oauthimap'), $_GET['error_description'] ?? $_GET['error']),
         false,

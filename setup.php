@@ -49,10 +49,10 @@ function plugin_init_oauthimap()
     if ($plugin->isInstalled('oauthimap') && $plugin->isActivated('oauthimap')) {
         include_once(__DIR__ . '/vendor/autoload.php');
 
-       // Config page: redirect to dropdown page
+        // Config page: redirect to dropdown page
         $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/config.form.php';
 
-       // Menu link
+        // Menu link
         $PLUGIN_HOOKS['menu_toadd']['oauthimap'] = [
             'config' => 'PluginOauthimapApplication',
         ];
@@ -65,10 +65,10 @@ function plugin_init_oauthimap()
             PluginOauthimapAuthorization::getTableField('refresh_token'),
         ];
 
-       // Plugin hooks
+        // Plugin hooks
         $PLUGIN_HOOKS['post_item_form']['oauthimap'] = [PluginOauthimapHook::class, 'postItemForm'];
 
-       // MailCollector hooks
+        // MailCollector hooks
         $PLUGIN_HOOKS['mail_server_protocols']['oauthimap'] = function (array $additionnal_protocols) {
             return array_merge($additionnal_protocols, MailCollectorFeature::getMailProtocols());
         };
