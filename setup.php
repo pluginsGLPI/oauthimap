@@ -45,8 +45,7 @@ function plugin_init_oauthimap()
 
     $PLUGIN_HOOKS['csrf_compliant']['oauthimap'] = true;
 
-    $plugin = new Plugin();
-    if ($plugin->isInstalled('oauthimap') && $plugin->isActivated('oauthimap')) {
+    if (Plugin::isPluginActive('oauthimap')) {
         include_once(__DIR__ . '/vendor/autoload.php');
 
         // Config page: redirect to dropdown page
