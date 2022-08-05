@@ -501,6 +501,7 @@ JAVASCRIPT;
      */
     public function getProvider(): ?AbstractProvider
     {
+        global $CFG_GLPI;
 
         if (!$this->areCredentialsValid()) {
             throw new \RuntimeException('Invalid credentials.');
@@ -516,6 +517,24 @@ JAVASCRIPT;
             'redirectUri'  => $this->getCallbackUrl(),
             'scope'        => self::getProviderScopes($this->fields['provider']),
         ];
+
+        if (!empty($CFG_GLPI['proxy_name'])) {
+            // Connection using proxy
+            $params['proxy'] = !empty($CFG_GLPI['proxy_user'])
+                ? sprintf(
+                    '%s:%s@%s:%s',
+                    rawurlencode($CFG_GLPI['proxy_user']),
+                    rawurlencode((new GLPIKey())->decrypt($CFG_GLPI['proxy_passwd'])),
+                    $CFG_GLPI['proxy_name'],
+                    $CFG_GLPI['proxy_port']
+                )
+                : sprintf(
+                    '%s:%s',
+                    $CFG_GLPI['proxy_name'],
+                    $CFG_GLPI['proxy_port']
+                );
+            $params['verify'] = false;
+        }
 
         // Specific parameters
         switch ($this->fields['provider']) {
