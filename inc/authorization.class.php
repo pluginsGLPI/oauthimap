@@ -278,7 +278,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo Html::select(
             'ssl',
             [
-                ''    => __('', 'oauthimap'),
+                ''    => '',
                 'SSL' => __('SSL', 'oauthimap'),
                 'TLS' => __('SSL + TLS', 'oauthimap'),
             ],
