@@ -2,7 +2,7 @@
     "require": {
         "php": "^7.2",
         "league/oauth2-google": "^3.0",
-        "thenetworg/oauth2-azure": "^2.0"
+        "thenetworg/oauth2-azure": "^2.1"
     },
     "require-dev": {
         "glpi-project/tools": "^0.4"
