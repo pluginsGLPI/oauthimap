@@ -28,6 +28,26 @@
  * -------------------------------------------------------------------------
  */
 
+
+if (!array_key_exists('cookie_refresh', $_GET)) {
+    // Session cookie will not be accessible when user will be redirected from provider website
+    // if `session.cookie_samesite` configuration value is `strict`.
+    // Redirecting on self using `http-equiv="refresh"` will get around this limitation.
+    $url = htmlspecialchars(
+        $_SERVER['REQUEST_URI'] . (strpos($_SERVER['REQUEST_URI'], '?') !== false ? '&' : '?') . 'cookie_refresh'
+    );
+
+    echo <<<HTML
+<html>
+<head>
+    <meta http-equiv="refresh" content="0;URL='{$url}'"/>
+</head>
+    <body></body>
+</html>
+HTML;
+    exit;
+}
+
 include('../../../inc/includes.php');
 
 $application   = new PluginOauthimapApplication();
