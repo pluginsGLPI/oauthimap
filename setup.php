@@ -31,7 +31,7 @@
 define('PLUGIN_OAUTHIMAP_VERSION', '1.4.1');
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_OAUTHIMAP_MIN_GLPI', '10.0.0');
+define('PLUGIN_OAUTHIMAP_MIN_GLPI', '10.0.7');
 // Maximum GLPI version, exclusive
 define('PLUGIN_OAUTHIMAP_MAX_GLPI', '10.0.99');
 
@@ -46,8 +46,6 @@ function plugin_init_oauthimap()
     $PLUGIN_HOOKS['csrf_compliant']['oauthimap'] = true;
 
     if (Plugin::isPluginActive('oauthimap')) {
-        include_once(__DIR__ . '/vendor/autoload.php');
-
         // Config page: redirect to dropdown page
         $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/config.form.php';
 
@@ -98,14 +96,4 @@ function plugin_version_oauthimap()
             ]
         ]
     ];
-}
-
-function plugin_oauthimap_check_prerequisites()
-{
-    if (!is_file(__DIR__ . '/vendor/autoload.php') || !is_readable(__DIR__ . '/vendor/autoload.php')) {
-        echo __('Run "composer install --no-dev" in the plugin directory.', 'oauthimap');
-        return false;
-    }
-
-    return true;
 }
