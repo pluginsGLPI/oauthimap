@@ -79,6 +79,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             return;
         }
 
+        /** @var \DBmysql $DB */
         global $DB;
 
         $iterator = $DB->request(
@@ -555,7 +556,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
      */
     public static function install(Migration $migration)
     {
-
+        /** @var \DBmysql $DB */
         global $DB;
 
         $default_charset = DBConnection::getDefaultCharset();
@@ -585,7 +586,8 @@ CREATE TABLE IF NOT EXISTS `$table` (
   UNIQUE KEY `unicity` (`$application_fkey`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
-            $DB->query($query) or die($DB->error());
+            $method = version_compare(GLPI_VERSION, '10.0.11', '>=') ? 'doQueryOrDie' : 'queryOrDie';
+            $DB->$method($query);
         } else {
             if (!$DB->fieldExists($table, 'refresh_token')) {
                // V1.3.1: add new refresh_token field
