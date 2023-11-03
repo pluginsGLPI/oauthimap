@@ -100,5 +100,5 @@ jobs:
           docker exec ${{ job.services.app.id }} bin/console glpi:database:install --ansi --no-interaction --db-name=glpi --db-host=db --db-user=root --strict-configuration
           docker exec ${{ job.services.app.id }} bin/console glpi:plugin:install --ansi --no-interaction --username=glpi oauthimap
           docker exec ${{ job.services.app.id }} bin/console glpi:plugin:activate --ansi --no-interaction oauthimap
-      - name: PHPStan checks
-        run: docker exec ${{ job.services.app.id }} cd plugins/oauthimap && php vendor/bin/phpstan analyze --ansi --memory-limit=1G --no-interaction --no-progress
+      - name: "PHPStan checks"
+        run: docker exec ${{ job.services.app.id }} bash -c "cd plugins/oauthimap && php vendor/bin/phpstan analyze --ansi --memory-limit=1G --no-interaction --no-progress"
