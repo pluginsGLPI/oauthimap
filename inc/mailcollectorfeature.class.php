@@ -58,7 +58,6 @@ class MailCollectorFeature
                 }
 
                 return CommonGLPI::createTabEntry(MailCollector::getTypeName(Session::getPluralNumber()), $count);
-            break;
         }
 
         return '';
@@ -297,9 +296,10 @@ JAVASCRIPT;
         PluginOauthimapAuthorization $authorization,
         array $params = []
     ): void {
+        $mailcollector = new MailCollector();
+        $redirect = $mailcollector->getSearchURL();
         if ($success) {
            // Store authorized email into MailCollector
-            $mailcollector = new MailCollector();
             $mailcollector_id = $params[$mailcollector->getForeignKeyField()] ?? null;
             if ($mailcollector_id !== null && $mailcollector->getFromDB($mailcollector_id)) {
                 $mailcollector->update(
@@ -308,11 +308,11 @@ JAVASCRIPT;
                         'login' => $authorization->fields['email'],
                     ]
                 );
-                Html::redirect($mailcollector->getLinkURL());
+                $redirect = $mailcollector->getLinkURL();
             }
         }
 
-        Html::back();
+        Html::redirect($redirect);
     }
 
     /**
