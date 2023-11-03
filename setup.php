@@ -41,6 +41,7 @@ use GlpiPlugin\Oauthimap\MailCollectorFeature;
 
 function plugin_init_oauthimap()
 {
+    /** @var array $PLUGIN_HOOKS */
     global $PLUGIN_HOOKS;
 
     $PLUGIN_HOOKS['csrf_compliant']['oauthimap'] = true;

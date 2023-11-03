@@ -34,6 +34,7 @@ Html::header_nocache();
 
 Session::checkLoginUser();
 
+/** @var \DBmysql $DB */
 global $DB;
 
 $iterator = $DB->request(

@@ -501,6 +501,7 @@ JAVASCRIPT;
      */
     public function getProvider(): ?AbstractProvider
     {
+        /** @var array $CFG_GLPI */
         global $CFG_GLPI;
 
         if (!$this->areCredentialsValid()) {
@@ -619,7 +620,7 @@ JAVASCRIPT;
      */
     public static function install(Migration $migration)
     {
-
+        /** @var \DBmysql $DB */
         global $DB;
 
         $default_charset = DBConnection::getDefaultCharset();
@@ -650,7 +651,8 @@ CREATE TABLE IF NOT EXISTS `$table` (
   KEY `date_mod` (`date_mod`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
-            $DB->query($query) or die($DB->error());
+            $method = version_compare(GLPI_VERSION, '10.0.11', '>=') ? 'doQueryOrDie' : 'queryOrDie';
+            $DB->$method($query);
         }
 
         // Add display preferences
