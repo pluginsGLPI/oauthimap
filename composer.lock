@@ -4,26 +4,30 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "b475f12a9971c0d1af29215fee9b291f",
+    "content-hash": "e0c0d417353c37eedd4b88ee3961debf",
     "packages": [],
     "packages-dev": [
         {
             "name": "glpi-project/tools",
-            "version": "0.6.4",
+            "version": "0.7.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/glpi-project/tools.git",
-                "reference": "8ef917fa2967e716eaed198bb803f418a80cd621"
+                "reference": "4bc5a725d9f4da0ee946ad3cbdd54a782d2f40fb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/glpi-project/tools/zipball/8ef917fa2967e716eaed198bb803f418a80cd621",
-                "reference": "8ef917fa2967e716eaed198bb803f418a80cd621",
+                "url": "https://api.github.com/repos/glpi-project/tools/zipball/4bc5a725d9f4da0ee946ad3cbdd54a782d2f40fb",
+                "reference": "4bc5a725d9f4da0ee946ad3cbdd54a782d2f40fb",
                 "shasum": ""
             },
             "require": {
                 "symfony/console": "^5.4 || ^6.0",
                 "twig/twig": "^3.3"
+            },
+            "require-dev": {
+                "nikic/php-parser": "^4.13",
+                "phpstan/phpstan-src": "^1.10"
             },
             "bin": [
                 "bin/extract-locales",
@@ -33,7 +37,7 @@
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "Glpi\\": "src/"
+                    "GlpiProject\\Tools\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -57,7 +61,7 @@
                 "issues": "https://github.com/glpi-project/tools/issues",
                 "source": "https://github.com/glpi-project/tools"
             },
-            "time": "2023-07-27T12:32:25+00:00"
+            "time": "2023-10-16T11:40:35+00:00"
         },
         {
             "name": "php-parallel-lint/php-parallel-lint",
