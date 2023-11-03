@@ -30,6 +30,9 @@
 
 include('../../../inc/includes.php');
 
+/** @var array */
+global $_UPOST;
+
 $dropdown = new PluginOauthimapApplication();
 
 if (isset($_POST['id']) && isset($_POST['request_authorization'])) {
@@ -38,7 +41,7 @@ if (isset($_POST['id']) && isset($_POST['request_authorization'])) {
 } else {
     Html::requireJs('clipboard');
 
-    if (array_key_exists('client_secret', $_POST)) {
+    if (array_key_exists('client_secret', $_POST) && array_key_exists('client_secret', $_UPOST)) {
         // Client secret must not be altered.
         $_POST['client_secret'] = $_UPOST['client_secret'];
     }

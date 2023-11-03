@@ -1,0 +1,17 @@
+parameters:
+    parallel:
+        maximumNumberOfProcesses: 2
+    level: 1
+    bootstrapFiles:
+        - ../../inc/based_config.php
+        - setup.php
+    paths:
+        - inc
+        - front
+        - ajax
+        - hook.php
+    scanDirectories:
+        - ../../inc
+        - ../../src
+    stubFiles:
+        - ../../stubs/glpi_constants.php

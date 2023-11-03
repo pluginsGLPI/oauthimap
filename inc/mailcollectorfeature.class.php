@@ -68,7 +68,7 @@ class MailCollectorFeature
     {
         switch ($item->getType()) {
             case PluginOauthimapApplication::class:
-                MailCollectorFeature::showMailCollectorsForApplication($item, $tabnum);
+                MailCollectorFeature::showMailCollectorsForApplication($item);
                 break;
         }
 
@@ -308,10 +308,11 @@ JAVASCRIPT;
                         'login' => $authorization->fields['email'],
                     ]
                 );
+                Html::redirect($mailcollector->getLinkURL());
             }
         }
 
-        Html::redirect($mailcollector->getLinkURL());
+        Html::back();
     }
 
     /**
@@ -412,7 +413,7 @@ JAVASCRIPT;
      * @param string $login
      * @param bool   $only_active
      *
-     * @return void
+     * @return array
      */
     private static function getAssociatedMailCollectors(
         string $protocol_type,
