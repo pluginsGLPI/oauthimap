@@ -2,7 +2,7 @@
    <name>Oauth IMAP</name>
    <key>oauthimap</key>
    <state>stable</state>
-   <logo>https://raw.githubusercontent.com/pluginsGLPI/oauthimap/master/docs/logo.png</logo>
+   <logo>https://raw.githubusercontent.com/pluginsGLPI/oauthimap/main/docs/logo.png</logo>
    <description>
       <short>
          <fr>Ce plugin supporte la connexion Oauth pour les collecteurs de mails</fr>
@@ -126,7 +126,7 @@ It permits emails fetching from G Suite and Azure AD mailboxes.
       </en>
    </tags>
    <screenshots>
-      <screenshot>https://raw.githubusercontent.com/pluginsGLPI/oauthimap/master/docs/screenshots/config.png</screenshot>
-      <screenshot>https://raw.githubusercontent.com/pluginsGLPI/oauthimap/master/docs/screenshots/config_oauth_mailcollector.png</screenshot>
+      <screenshot>https://raw.githubusercontent.com/pluginsGLPI/oauthimap/main/docs/screenshots/config.png</screenshot>
+      <screenshot>https://raw.githubusercontent.com/pluginsGLPI/oauthimap/main/docs/screenshots/config_oauth_mailcollector.png</screenshot>
    </screenshots>
 </root>
