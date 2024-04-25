@@ -534,7 +534,6 @@ JAVASCRIPT;
                     $CFG_GLPI['proxy_name'],
                     $CFG_GLPI['proxy_port']
                 );
-            $params['verify'] = false;
         }
 
         // Specific parameters
