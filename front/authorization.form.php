@@ -66,7 +66,7 @@ if (isset($_POST['id']) && isset($_POST['delete'])) {
     $authorization->display(
         [
             'id' => $_GET['id'],
-        ]
+        ],
     );
     Html::footer();
 } else {

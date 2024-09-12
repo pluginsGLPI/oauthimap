@@ -28,8 +28,8 @@
  * -------------------------------------------------------------------------
  */
 
-include("../../../inc/includes.php");
-header("Content-Type: text/html; charset=UTF-8");
+include('../../../inc/includes.php');
+header('Content-Type: text/html; charset=UTF-8');
 Html::header_nocache();
 
 Session::checkLoginUser();
@@ -39,14 +39,14 @@ global $DB;
 
 $iterator = $DB->request(
     [
-        'FROM'   => PluginOauthimapAuthorization::getTable(),
-        'WHERE'  => [
+        'FROM'  => PluginOauthimapAuthorization::getTable(),
+        'WHERE' => [
             PluginOauthimapApplication::getForeignKeyField() => $_POST['application_id'] ?? null,
         ],
-    ]
+    ],
 );
 $authorizations = [
-    '-1' => __('Create authorization for another user', 'oauthimap')
+    '-1' => __('Create authorization for another user', 'oauthimap'),
 ];
 $value = -1;
 foreach ($iterator as $row) {
@@ -62,5 +62,5 @@ Dropdown::showFromArray(
     [
         'display_emptychoice' => false,
         'value'               => $value,
-    ]
+    ],
 );

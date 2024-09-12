@@ -55,7 +55,7 @@ function plugin_init_oauthimap()
             'config' => 'PluginOauthimapApplication',
         ];
 
-       // Secured fields that are encrypted
+        // Secured fields that are encrypted
         $PLUGIN_HOOKS['secured_fields']['oauthimap'] = [
             PluginOauthimapApplication::getTableField('client_secret'),
             PluginOauthimapAuthorization::getTableField('code'),
@@ -85,16 +85,16 @@ function plugin_init_oauthimap()
 function plugin_version_oauthimap()
 {
     return [
-        'name'           => __('Oauth IMAP', 'oauthimap'),
-        'version'        => PLUGIN_OAUTHIMAP_VERSION,
-        'author'         => '<a href="http://www.teclib.com">Teclib\'</a>',
-        'license'        => 'GPL v2+',
-        'homepage'       => 'http://www.teclib.com',
-        'requirements'   => [
+        'name'         => __('Oauth IMAP', 'oauthimap'),
+        'version'      => PLUGIN_OAUTHIMAP_VERSION,
+        'author'       => '<a href="http://www.teclib.com">Teclib\'</a>',
+        'license'      => 'GPL v2+',
+        'homepage'     => 'http://www.teclib.com',
+        'requirements' => [
             'glpi' => [
                 'min' => PLUGIN_OAUTHIMAP_MIN_GLPI,
                 'max' => PLUGIN_OAUTHIMAP_MAX_GLPI,
-            ]
-        ]
+            ],
+        ],
     ];
 }

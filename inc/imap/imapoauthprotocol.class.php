@@ -41,7 +41,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
      *
      * @var string
      */
-    private const DIAGNOSTIC_PREFIX_SENT     = '>>> ';
+    private const DIAGNOSTIC_PREFIX_SENT = '>>> ';
 
     /**
      * Prefix to use when writing a received line in diagnostic log.
@@ -95,7 +95,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
     public function connect($host, $port = null, $ssl = false)
     {
         $transport = 'tcp';
-        $isTls = false;
+        $isTls     = false;
 
         if ($ssl) {
             $ssl = strtolower($ssl);
@@ -104,15 +104,16 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         switch ($ssl) {
             case 'ssl':
                 $transport = 'ssl';
-                if (! $port) {
+                if (!$port) {
                     $port = 993;
                 }
                 break;
             case 'tls':
                 $isTls = true;
                 // break intentionally omitted
+                // no break
             default:
-                if (! $port) {
+                if (!$port) {
                     $port = 143;
                 }
         }
@@ -138,6 +139,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
 
         if ($token === null) {
             trigger_error('Unable to get access token', E_USER_WARNING);
+
             return;
         }
 
@@ -145,24 +147,23 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
             'AUTHENTICATE',
             [
                 'XOAUTH2',
-                base64_encode("user={$user}\001auth=Bearer {$token}\001\001")
-            ]
+                base64_encode("user={$user}\001auth=Bearer {$token}\001\001"),
+            ],
         );
 
         while (true) {
             $response = '';
-            $isPlus = $this->readLine($response, '+', true);
+            $isPlus   = $this->readLine($response, '+', true);
             if ($isPlus) {
                 // Send empty client response.
                 $this->sendRequest('');
             } else {
                 if (
-                    preg_match('/^NO /i', $response) ||
-                    preg_match('/^BAD /i', $response)
+                    preg_match('/^NO /i', $response) || preg_match('/^BAD /i', $response)
                 ) {
                     return false;
                 }
-                if (preg_match("/^OK /i", $response)) {
+                if (preg_match('/^OK /i', $response)) {
                     return true;
                 }
             }
@@ -178,7 +179,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
      */
     public function sendRequest($command, $tokens = [], &$tag = null)
     {
-        if (! $tag) {
+        if (!$tag) {
             ++$this->tagCount;
             $tag = 'TAG' . $this->tagCount;
         }

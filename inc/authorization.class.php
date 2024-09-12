@@ -37,10 +37,10 @@ use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 class PluginOauthimapAuthorization extends CommonDBChild
 {
     // From CommonGlpi
-    protected $displaylist  = false;
+    protected $displaylist = false;
 
     // From CommonDBTM
-    public $dohistory       = true;
+    public $dohistory = true;
 
     // From CommonDBChild
     public static $itemtype = 'PluginOauthimapApplication';
@@ -59,22 +59,21 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-
         $count = 0;
         if ($_SESSION['glpishow_count_on_tabs']) {
             $count = countElementsInTable(
                 $this->getTable(),
                 [
                     PluginOauthimapApplication::getForeignKeyField() => $item->getID(),
-                ]
+                ],
             );
         }
+
         return self::createTabEntry(self::getTypeName(1), $count);
     }
 
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
-
         if (!($item instanceof PluginOauthimapApplication)) {
             return;
         }
@@ -87,8 +86,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 'FROM'  => self::getTable(),
                 'WHERE' => [
                     PluginOauthimapApplication::getForeignKeyField() => $item->getID(),
-                ]
-            ]
+                ],
+            ],
         );
 
         $item->showFormHeader([
@@ -134,7 +133,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
                     [
                         'title'  => __('Connection diagnostic', 'oauthimap'),
                         'height' => 650,
-                    ]
+                    ],
                 );
                 echo '<a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#' . $modal_id . '">';
                 echo '<i class="fas fa-bug"></i> ' . __('Diagnose', 'oauthimap');
@@ -165,7 +164,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     public function showForm($id, $options = [])
     {
-
         $options['colspan'] = 1;
 
         $this->initForm($id, $options);
@@ -177,7 +175,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo ' ';
         echo Html::showToolTip(
             __('This email address corresponds to the "user" field of the SASL XOAUTH2 authentication query.'),
-            ['display' => false]
+            ['display' => false],
         );
         echo '</td>';
         echo '<td>';
@@ -185,8 +183,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
             'email',
             [
                 'value' => $this->fields['email'],
-                'style' => 'width:90%'
-            ]
+                'style' => 'width:90%',
+            ],
         );
         echo '</td>';
         echo '</tr>';
@@ -205,7 +203,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
      */
     public function showDiagnosticForm(array $params)
     {
-
         $application = new PluginOauthimapApplication();
         if (
             !$application->getFromDB($this->fields[PluginOauthimapApplication::getForeignKeyField()])
@@ -216,9 +213,9 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         $user    = $params['user'] ?? $this->fields['email'];
         $host    = $params['host'] ?? $provider->getDefaultHost();
-        $port    = (int)($params['port'] ?? $provider->getDefaultPort());
+        $port    = (int) ($params['port'] ?? $provider->getDefaultPort());
         $ssl     = $params['ssl'] ?? $provider->getDefaultSslFlag();
-        $timeout = (int)($params['timeout'] ?? 2); // 2 seconds timeout by default
+        $timeout = (int) ($params['timeout'] ?? 2); // 2 seconds timeout by default
 
         echo '<form method="post" action="' . $this->getFormURL() . '">';
 
@@ -238,7 +235,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             [
                 'disabled' => 'disabled',
                 'value'    => $user,
-            ]
+            ],
         );
         echo '</td>';
         echo '</tr>';
@@ -252,7 +249,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             'host',
             [
                 'value' => $host,
-            ]
+            ],
         );
         echo '</td>';
         echo '<td>';
@@ -266,7 +263,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 'min'   => 1,
                 'value' => $port,
                 'size'  => 5,
-            ]
+            ],
         );
         echo '</td>';
         echo '</tr>';
@@ -286,7 +283,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             [
                 'selected' => $ssl,
                 'class'    => 'form-select',
-            ]
+            ],
         );
         echo '</td>';
         echo '<td>';
@@ -301,7 +298,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 'max'   => 30,
                 'value' => $timeout,
                 'size'  => 5,
-            ]
+            ],
         );
         echo '</td>';
         echo '</tr>';
@@ -311,9 +308,9 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo Html::submit(
             __('Refresh connection diagnostic', 'oauthimap'),
             [
-                'name'   => 'diagnose',
-                'class'  => 'btn btn-secondary',
-            ]
+                'name'  => 'diagnose',
+                'class' => 'btn btn-secondary',
+            ],
         );
         echo '</td>';
         echo '</tr>';
@@ -356,6 +353,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         if (!($input = $this->prepareInput($input))) {
             return false;
         }
+
         return parent::prepareInputForAdd($input);
     }
 
@@ -376,6 +374,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         if (!($input = $this->prepareInput($input))) {
             return false;
         }
+
         return parent::prepareInputForUpdate($input);
     }
 
@@ -419,20 +418,22 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         // Get token
         try {
-            $token = $provider->getAccessToken('authorization_code', ['code'  => $code]);
+            $token = $provider->getAccessToken('authorization_code', ['code' => $code]);
         } catch (\Throwable $e) {
             trigger_error(
                 sprintf('Error during authorization code fetching: %s', $e->getMessage()),
-                E_USER_WARNING
+                E_USER_WARNING,
             );
+
             return false;
         }
 
         // Get user details
         $this->owner_details = $provider->getOwnerDetails($token);
-        $email = $this->owner_details->email;
+        $email               = $this->owner_details->email;
         if ($email === null) {
             trigger_error('Unable to get user email', E_USER_WARNING);
+
             return false;
         }
 
@@ -449,7 +450,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             [
                 $application->getForeignKeyField() => $application_id,
                 'email'                            => $email,
-            ]
+            ],
         );
         if ($exists) {
             return $this->update(['id' => $this->fields['id']] + $input);
@@ -489,19 +490,19 @@ class PluginOauthimapAuthorization extends CommonDBChild
             $refresh_token = (new GLPIKey())->decrypt($self->fields['refresh_token']);
 
             $provider = $application->getProvider();
-            $token = $provider->getAccessToken(
+            $token    = $provider->getAccessToken(
                 'refresh_token',
                 [
                     'refresh_token' => $refresh_token,
-                ]
+                ],
             );
 
             $input = [
-                'id' => $self->fields['id'],
-                'token' => json_encode($token->jsonSerialize())
+                'id'    => $self->fields['id'],
+                'token' => json_encode($token->jsonSerialize()),
             ];
             if (!empty($token->getRefreshToken()) && $token->getRefreshToken() !== $refresh_token) {
-               // Update refresh token if a new one has been received in response.
+                // Update refresh token if a new one has been received in response.
                 $input['refresh_token'] = $token->getRefreshToken();
             }
 
@@ -518,7 +519,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
      */
     public function getAccessToken(): ?AccessToken
     {
-
         try {
             $token = new AccessToken(json_decode((new GLPIKey())->decrypt($this->fields['token']), true));
         } catch (\Throwable $e) {
@@ -559,11 +559,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         /** @var \DBmysql $DB */
         global $DB;
 
-        $default_charset = DBConnection::getDefaultCharset();
+        $default_charset   = DBConnection::getDefaultCharset();
         $default_collation = DBConnection::getDefaultCollation();
-        $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
+        $default_key_sign  = DBConnection::getDefaultPrimaryKeySignOption();
 
-        $table = self::getTable();
+        $table            = self::getTable();
         $application_fkey = PluginOauthimapApplication::getForeignKeyField();
 
         if (!$DB->tableExists($table)) {
@@ -590,7 +590,7 @@ SQL;
             $DB->$method($query);
         } else {
             if (!$DB->fieldExists($table, 'refresh_token')) {
-               // V1.3.1: add new refresh_token field
+                // V1.3.1: add new refresh_token field
                 $migration->addField(
                     $table,
                     'refresh_token',
@@ -598,12 +598,12 @@ SQL;
                     [
                         'after'     => 'token',
                         'nodefault' => true,
-                    ]
+                    ],
                 );
 
                 $iterator = $DB->request(['FROM' => $table]);
                 foreach ($iterator as $row) {
-                     $token_fields = json_decode((new GLPIKey())->decrypt($row['token']), true);
+                    $token_fields = json_decode((new GLPIKey())->decrypt($row['token']), true);
                     if (isset($token_fields['refresh_token'])) {
                         $migration->addPostQuery(
                             $DB->buildUpdate(
@@ -612,9 +612,9 @@ SQL;
                                     'refresh_token' => (new GLPIKey())->encrypt($token_fields['refresh_token']),
                                 ],
                                 [
-                                    'id'            => $row['id']
-                                ]
-                            )
+                                    'id' => $row['id'],
+                                ],
+                            ),
                         );
                     }
                 }
@@ -627,7 +627,6 @@ SQL;
      */
     public static function uninstall(Migration $migration)
     {
-
         $table = self::getTable();
         $migration->displayMessage("Uninstalling $table");
         $migration->dropTable($table);

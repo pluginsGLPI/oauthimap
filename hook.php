@@ -66,12 +66,12 @@ function plugin_oauthimap_uninstall()
             }
         }
     }
+
     return true;
 }
 
 function plugin_oauthimap_getDropdown()
 {
-
     $plugin = new Plugin();
 
     if ($plugin->isActivated('oauthimap')) {

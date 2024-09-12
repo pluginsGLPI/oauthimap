@@ -57,7 +57,7 @@ class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements Provider
             $owner_details->email = $upn;
         }
         $owner_details->firstname = $owner->getFirstName();
-        $owner_details->lastname = $owner->getLastName();
+        $owner_details->lastname  = $owner->getLastName();
 
         return $owner_details;
     }

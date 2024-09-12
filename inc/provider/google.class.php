@@ -50,7 +50,7 @@ class Google extends \League\OAuth2\Client\Provider\Google implements ProviderIn
         /* @var \League\OAuth2\Client\Provider\GoogleUser $owner */
         $owner = $this->getResourceOwner($token);
 
-        $owner_details = new OwnerDetails();
+        $owner_details            = new OwnerDetails();
         $owner_details->email     = $owner->getEmail();
         $owner_details->firstname = $owner->getFirstName();
         $owner_details->lastname  = $owner->getLastName();
