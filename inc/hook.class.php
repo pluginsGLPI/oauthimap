@@ -41,7 +41,6 @@ class PluginOauthimapHook
      */
     public static function postItemForm(array $params): void
     {
-
         $item = $params['item'];
 
         if (!is_object($item)) {
@@ -53,7 +52,7 @@ class PluginOauthimapHook
                 MailCollectorFeature::alterMailCollectorForm();
                 break;
             case PluginOauthimapApplication::class:
-                PluginOauthimapApplication::showFormExtra((int)$item->fields[PluginOauthimapApplication::getIndexName()]);
+                PluginOauthimapApplication::showFormExtra((int) $item->fields[PluginOauthimapApplication::getIndexName()]);
                 break;
         }
     }

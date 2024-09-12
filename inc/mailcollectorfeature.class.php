@@ -52,7 +52,7 @@ class MailCollectorFeature
                     $collectors = MailCollectorFeature::getAssociatedMailCollectors(
                         MailCollectorFeature::getMailProtocolTypeIdentifier($item->getID()),
                         null,
-                        false
+                        false,
                     );
                     $count = count($collectors);
                 }
@@ -74,9 +74,9 @@ class MailCollectorFeature
         return false;
     }
 
-   /**
-    * Get mail protocols specs as expected by 'mail_server_protocols' hook.
-    */
+    /**
+     * Get mail protocols specs as expected by 'mail_server_protocols' hook.
+     */
     public static function getMailProtocols()
     {
         $mail_protocols = [];
@@ -87,16 +87,17 @@ class MailCollectorFeature
                 'WHERE' => [
                     'is_active' => 1,
                 ],
-            ]
+            ],
         );
 
         foreach ($values as $value) {
-            $id = $value['id'];
+            $id             = $value['id'];
             $protocol_class = function () use ($id) {
                 return new ImapOauthProtocol($id);
             };
             $storage_class = function (array $params) use ($id) {
                 $params['application_id'] = $id;
+
                 return new ImapOauthStorage($params);
             };
             $mail_protocols[self::getMailProtocolTypeIdentifier($id)] = [
@@ -128,8 +129,7 @@ class MailCollectorFeature
      */
     public static function alterMailCollectorForm(): void
     {
-
-        $locator_id = 'plugin_oauthimap_locator_' . mt_rand();
+        $locator_id  = 'plugin_oauthimap_locator_' . mt_rand();
         $plugin_path = Plugin::getWebDir('oauthimap');
 
         echo '<span id="' . $locator_id . '" style="display:none;"></span>';
@@ -269,7 +269,7 @@ JAVASCRIPT;
                 $authorization,
                 [
                     MailCollector::getForeignKeyField() => $item->getID(),
-                ]
+                ],
             );
         } else {
             // Create new authorization
@@ -277,7 +277,7 @@ JAVASCRIPT;
                 [self::class, 'updateMailCollectorOnAuthorizationCallback'],
                 [
                     MailCollector::getForeignKeyField() => $item->getID(),
-                ]
+                ],
             );
         }
     }
@@ -297,16 +297,16 @@ JAVASCRIPT;
         array $params = []
     ): void {
         $mailcollector = new MailCollector();
-        $redirect = $mailcollector->getSearchURL();
+        $redirect      = $mailcollector->getSearchURL();
         if ($success) {
-           // Store authorized email into MailCollector
+            // Store authorized email into MailCollector
             $mailcollector_id = $params[$mailcollector->getForeignKeyField()] ?? null;
             if ($mailcollector_id !== null && $mailcollector->getFromDB($mailcollector_id)) {
                 $mailcollector->update(
                     [
                         'id'    => $mailcollector_id,
                         'login' => $authorization->fields['email'],
-                    ]
+                    ],
                 );
                 $redirect = $mailcollector->getLinkURL();
             }
@@ -325,7 +325,7 @@ JAVASCRIPT;
     public static function postDeactivateApplication(PluginOauthimapApplication $application): void
     {
         self::deactivateMailCollectors(
-            self::getMailProtocolTypeIdentifier($application->getID())
+            self::getMailProtocolTypeIdentifier($application->getID()),
         );
     }
 
@@ -341,7 +341,7 @@ JAVASCRIPT;
         $application_id = $authorization->fields[PluginOauthimapApplication::getForeignKeyField()];
         self::deactivateMailCollectors(
             self::getMailProtocolTypeIdentifier($application_id),
-            $authorization->fields['email']
+            $authorization->fields['email'],
         );
     }
 
@@ -357,22 +357,22 @@ JAVASCRIPT;
         if (in_array('email', $authorization->updates) && array_key_exists('email', $authorization->oldvalues)) {
             $collectors = self::getAssociatedMailCollectors(
                 self::getMailProtocolTypeIdentifier($authorization->fields[PluginOauthimapApplication::getForeignKeyField()]),
-                $authorization->oldvalues['email']
+                $authorization->oldvalues['email'],
             );
             foreach ($collectors as $row) {
-                 $mailcollector = new MailCollector();
-                 $mailcollector->update(
-                     [
-                         'id'    => $row['id'],
-                         'login' => $authorization->fields['email'],
-                     ]
-                 );
-                 Session::addMessageAfterRedirect(
-                     sprintf(
-                         __('Mail receiver "%s" has been updated.', 'oauthimap'),
-                         $mailcollector->getName()
-                     )
-                 );
+                $mailcollector = new MailCollector();
+                $mailcollector->update(
+                    [
+                        'id'    => $row['id'],
+                        'login' => $authorization->fields['email'],
+                    ],
+                );
+                Session::addMessageAfterRedirect(
+                    sprintf(
+                        __('Mail receiver "%s" has been updated.', 'oauthimap'),
+                        $mailcollector->getName(),
+                    ),
+                );
             }
         }
     }
@@ -395,13 +395,13 @@ JAVASCRIPT;
                 [
                     'id'        => $row['id'],
                     'is_active' => 0,
-                ]
+                ],
             );
             Session::addMessageAfterRedirect(
                 sprintf(
                     __('Mail receiver "%s" has been deactivated.', 'oauthimap'),
-                    $mailcollector->getName()
-                )
+                    $mailcollector->getName(),
+                ),
             );
         }
     }
@@ -447,7 +447,6 @@ JAVASCRIPT;
         return $result;
     }
 
-
     /**
      * Display "mail collectors" tab of application page.
      *
@@ -460,7 +459,7 @@ JAVASCRIPT;
         $collectors = self::getAssociatedMailCollectors(
             self::getMailProtocolTypeIdentifier($application->getID()),
             null,
-            false
+            false,
         );
 
         echo '<table class="tab_cadre_fixehov">';

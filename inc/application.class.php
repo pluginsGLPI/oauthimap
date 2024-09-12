@@ -36,7 +36,7 @@ use League\OAuth2\Client\Provider\AbstractProvider;
 
 class PluginOauthimapApplication extends CommonDropdown
 {
-    public static $rightname     = 'config';
+    public static $rightname = 'config';
 
     public static function getTypeName($nb = 0)
     {
@@ -45,7 +45,6 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public static function getMenuContent()
     {
-
         $menu = [];
         if (Config::canUpdate()) {
             $menu['title'] = self::getMenuName();
@@ -55,6 +54,7 @@ class PluginOauthimapApplication extends CommonDropdown
         if (count($menu)) {
             return $menu;
         }
+
         return false;
     }
 
@@ -79,25 +79,25 @@ class PluginOauthimapApplication extends CommonDropdown
             [
                 'name'  => 'is_active',
                 'label' => __('Active'),
-                'type'  => 'bool'
+                'type'  => 'bool',
             ],
             [
-                'name'     => 'provider',
-                'label'    => __('Oauth provider', 'oauthimap'),
-                'type'     => 'oauth_provider',
-                'list'     => true,
+                'name'  => 'provider',
+                'label' => __('Oauth provider', 'oauthimap'),
+                'type'  => 'oauth_provider',
+                'list'  => true,
             ],
             [
-                'name'     => 'client_id',
-                'label'    => __('Client ID', 'oauthimap'),
-                'type'     => 'text',
-                'list'     => true,
+                'name'  => 'client_id',
+                'label' => __('Client ID', 'oauthimap'),
+                'type'  => 'text',
+                'list'  => true,
             ],
             [
-                'name'     => 'client_secret',
-                'label'    => __('Client secret', 'oauthimap'),
-                'type'     => 'secured_field',
-                'list'     => false,
+                'name'  => 'client_secret',
+                'label' => __('Client secret', 'oauthimap'),
+                'type'  => 'secured_field',
+                'list'  => false,
             ],
             [
                 'name'     => 'tenant_id',
@@ -114,28 +114,28 @@ class PluginOauthimapApplication extends CommonDropdown
         $tab = parent::rawSearchOptions();
 
         $tab[] = [
-            'id'                 => '5',
-            'table'              => $this->getTable(),
-            'field'              => 'provider',
-            'name'               => __('Oauth provider', 'oauthimap'),
-            'searchtype'         => ['equals', 'notequals'],
-            'datatype'           => 'specific',
+            'id'         => '5',
+            'table'      => $this->getTable(),
+            'field'      => 'provider',
+            'name'       => __('Oauth provider', 'oauthimap'),
+            'searchtype' => ['equals', 'notequals'],
+            'datatype'   => 'specific',
         ];
 
         $tab[] = [
-            'id'                 => '6',
-            'table'              => $this->getTable(),
-            'field'              => 'client_id',
-            'name'               => __('Client ID', 'oauthimap'),
-            'datatype'           => 'text',
+            'id'       => '6',
+            'table'    => $this->getTable(),
+            'field'    => 'client_id',
+            'name'     => __('Client ID', 'oauthimap'),
+            'datatype' => 'text',
         ];
 
         $tab[] = [
-            'id'                 => '7',
-            'table'              => $this->getTable(),
-            'field'              => 'tenant_id',
-            'name'               => __('Tenant ID', 'oauthimap'),
-            'datatype'           => 'text',
+            'id'       => '7',
+            'table'    => $this->getTable(),
+            'field'    => 'tenant_id',
+            'name'     => __('Tenant ID', 'oauthimap'),
+            'datatype' => 'text',
         ];
 
         return $tab;
@@ -143,7 +143,6 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public function defineTabs($options = [])
     {
-
         $tabs = parent::defineTabs($options);
 
         $this->addStandardTab(MailCollectorFeature::class, $tabs, $options);
@@ -154,8 +153,7 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public function displaySpecificTypeField($ID, $field = [], array $options = [])
     {
-
-        $rand = sprintf('oauthimap-application-%s', (int)$ID);
+        $rand = sprintf('oauthimap-application-%s', (int) $ID);
 
         $field_name  = $field['name'];
         $field_type  = $field['type'];
@@ -164,10 +162,10 @@ class PluginOauthimapApplication extends CommonDropdown
         switch ($field_type) {
             case 'oauth_provider':
                 $values = [];
-                $icons = [];
+                $icons  = [];
                 foreach (self::getSupportedProviders() as $provider_class) {
                     $values[$provider_class] = $provider_class::getName();
-                    $icons[$provider_class] = $provider_class::getIcon();
+                    $icons[$provider_class]  = $provider_class::getIcon();
                 }
                 Dropdown::showFromArray(
                     $field_name,
@@ -176,7 +174,7 @@ class PluginOauthimapApplication extends CommonDropdown
                         'display_emptychoice' => true,
                         'rand'                => $rand,
                         'value'               => $field_value,
-                    ]
+                    ],
                 );
 
                 echo '<a href="" target="_blank" class="help-link" title="' . __('Developer help for this provider', 'oauthimap') . '">';
@@ -184,7 +182,7 @@ class PluginOauthimapApplication extends CommonDropdown
                 echo '</a>';
 
                 $json_icons = json_encode($icons);
-                $js = <<<JAVASCRIPT
+                $js         = <<<JAVASCRIPT
                     $(function() {
                         var icons = $json_icons;
                         var displayOptionIcon = function(item) {
@@ -210,7 +208,7 @@ JAVASCRIPT;
                     [
                         'autocomplete' => 'off',
                         'value'        => Html::entities_deep((new GLPIKey())->decrypt($field_value)),
-                    ]
+                    ],
                 );
                 break;
             case 'additionnal_param':
@@ -219,7 +217,7 @@ JAVASCRIPT;
                     [
                         'data-provider' => $field['provider'],
                         'value'         => $field_value,
-                    ]
+                    ],
                 );
                 break;
             default:
@@ -229,7 +227,6 @@ JAVASCRIPT;
 
     public static function getSpecificValueToDisplay($field, $values, array $options = [])
     {
-
         if (!is_array($values)) {
             $values = [$field => $values];
         }
@@ -240,15 +237,16 @@ JAVASCRIPT;
                 if (in_array($value, self::getSupportedProviders())) {
                     return '<i class="fab fa-lg ' . $value::getIcon() . '"></i> ' . $value::getName();
                 }
+
                 return $value;
-            break;
+                break;
         }
+
         return parent::getSpecificValueToDisplay($field, $values, $options);
     }
 
     public static function getSpecificValueToSelect($field, $name = '', $values = '', array $options = [])
     {
-
         if (!is_array($values)) {
             $values = [$field => $values];
         }
@@ -263,16 +261,18 @@ JAVASCRIPT;
                         $selected = $class;
                     }
                 }
+
                 return Dropdown::showFromArray(
                     $name,
                     $elements,
                     [
                         'display' => false,
                         'value'   => $selected,
-                    ]
+                    ],
                 );
-             break;
+                break;
         }
+
         return parent::getSpecificValueToSelect($field, $name, $values, $options);
     }
 
@@ -289,7 +289,7 @@ JAVASCRIPT;
 
         $documentation_urls_json = json_encode(self::getProvidersDocumentationUrls());
 
-       // Display/hide additionnal params and update documentation link depending on selected provider
+        // Display/hide additionnal params and update documentation link depending on selected provider
         $additionnal_params_js = <<<JAVASCRIPT
             (function($) {
                 var documentation_urls = {$documentation_urls_json};
@@ -319,7 +319,7 @@ JAVASCRIPT;
 
         echo '<div class="form-field row col-12 col-sm-6 mb-2">';
         echo Html::scriptBlock($additionnal_params_js);
-        echo '<label class="col-form-label col-xxl-5 text-xxl-end" for="_callback_url_' . $rand  . '">';
+        echo '<label class="col-form-label col-xxl-5 text-xxl-end" for="_callback_url_' . $rand . '">';
         echo __('Callback url', 'oauthimap');
         echo ' <i class="fa fa-info pointer" title="' . __('copy it in the management console of provider', 'oauthimap') . '"></i>';
         echo '</label>';
@@ -330,7 +330,7 @@ JAVASCRIPT;
             [
                 'value'    => self::getCallbackUrl(),
                 'readonly' => 'readonly',
-            ]
+            ],
         );
         echo '</div>';
         echo '</div>';
@@ -342,6 +342,7 @@ JAVASCRIPT;
         if (!($input = $this->prepareInput($input))) {
             return false;
         }
+
         return parent::prepareInputForAdd($input);
     }
 
@@ -363,6 +364,7 @@ JAVASCRIPT;
         if (!($input = $this->prepareInput($input))) {
             return false;
         }
+
         return parent::prepareInputForUpdate($input);
     }
 
@@ -377,6 +379,7 @@ JAVASCRIPT;
     {
         if (array_key_exists('name', $input) && empty(trim($input['name']))) {
             Session::addMessageAfterRedirect(__('Name cannot be empty', 'oauthimap'), false, ERROR);
+
             return false;
         }
 
@@ -385,6 +388,7 @@ JAVASCRIPT;
             && !in_array($input['provider'], self::getSupportedProviders())
         ) {
             Session::addMessageAfterRedirect(__('Invalid provider', 'oauthimap'), false, ERROR);
+
             return false;
         }
 
@@ -412,7 +416,7 @@ JAVASCRIPT;
             $this->deleteChildrenAndRelationsFromDb(
                 [
                     PluginOauthimapAuthorization::class,
-                ]
+                ],
             );
         }
     }
@@ -435,7 +439,6 @@ JAVASCRIPT;
      */
     public function redirectToAuthorizationUrl(?callable $callback_callable = null, array $callback_params = []): void
     {
-
         if (!$this->areCredentialsValid()) {
             throw new \RuntimeException('Invalid credentials.');
         }
@@ -443,7 +446,7 @@ JAVASCRIPT;
         $provider = $this->getProvider();
 
         $options = [
-            'scope' => self::getProviderScopes($this->fields['provider'])
+            'scope' => self::getProviderScopes($this->fields['provider']),
         ];
         switch ($this->fields['provider']) {
             case Azure::class:
@@ -456,7 +459,7 @@ JAVASCRIPT;
 
         $auth_url = $provider->getAuthorizationUrl($options);
 
-        $_SESSION['oauth2state'] = $provider->getState();
+        $_SESSION['oauth2state']               = $provider->getState();
         $_SESSION[$this->getForeignKeyField()] = $this->fields['id'];
 
         $_SESSION['plugin_oauthimap_callback_callable'] = $callback_callable;
@@ -527,12 +530,12 @@ JAVASCRIPT;
                     rawurlencode($CFG_GLPI['proxy_user']),
                     rawurlencode((new GLPIKey())->decrypt($CFG_GLPI['proxy_passwd'])),
                     $CFG_GLPI['proxy_name'],
-                    $CFG_GLPI['proxy_port']
+                    $CFG_GLPI['proxy_port'],
                 )
                 : sprintf(
                     '%s:%s',
                     $CFG_GLPI['proxy_name'],
-                    $CFG_GLPI['proxy_port']
+                    $CFG_GLPI['proxy_port'],
                 );
         }
 
@@ -577,6 +580,7 @@ JAVASCRIPT;
                 ];
                 break;
         }
+
         return $scopes;
     }
 
@@ -609,10 +613,9 @@ JAVASCRIPT;
         $this->deleteChildrenAndRelationsFromDb(
             [
                 PluginOauthimapAuthorization::class,
-            ]
+            ],
         );
     }
-
 
     /**
      * Install all necessary data for this class.
@@ -622,9 +625,9 @@ JAVASCRIPT;
         /** @var \DBmysql $DB */
         global $DB;
 
-        $default_charset = DBConnection::getDefaultCharset();
+        $default_charset   = DBConnection::getDefaultCharset();
         $default_collation = DBConnection::getDefaultCollation();
-        $default_key_sign = DBConnection::getDefaultPrimaryKeySignOption();
+        $default_key_sign  = DBConnection::getDefaultPrimaryKeySignOption();
 
         $table = self::getTable();
 
@@ -658,7 +661,7 @@ SQL;
         $migration->updateDisplayPrefs(
             [
                 'PluginOauthimapApplication' => [1, 5, 6, 7, 121, 19],
-            ]
+            ],
         );
     }
 
@@ -667,7 +670,6 @@ SQL;
      */
     public static function uninstall(Migration $migration)
     {
-
         $table = self::getTable();
         $migration->displayMessage("Uninstalling $table");
         $migration->dropTable($table);

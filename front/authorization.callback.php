@@ -33,7 +33,7 @@ if (!array_key_exists('cookie_refresh', $_GET)) {
     // if `session.cookie_samesite` configuration value is `strict`.
     // Redirecting on self using `http-equiv="refresh"` will get around this limitation.
     $url = htmlspecialchars(
-        $_SERVER['REQUEST_URI'] . (strpos($_SERVER['REQUEST_URI'], '?') !== false ? '&' : '?') . 'cookie_refresh'
+        $_SERVER['REQUEST_URI'] . (strpos($_SERVER['REQUEST_URI'], '?') !== false ? '&' : '?') . 'cookie_refresh',
     );
 
     echo <<<HTML
@@ -56,14 +56,14 @@ $application_id = $_SESSION[PluginOauthimapApplication::getForeignKeyField()] ??
 
 $success = false;
 if (
-    array_key_exists('error', $_GET) && !empty($_GET['error'])
+    array_key_exists('error', $_GET)                && !empty($_GET['error'])
     || array_key_exists('error_description', $_GET) && !empty($_GET['error_description'])
 ) {
     // Got an error, probably user denied access
     Session::addMessageAfterRedirect(
         sprintf(__('Authorization failed with error: %s', 'oauthimap'), $_GET['error_description'] ?? $_GET['error']),
         false,
-        ERROR
+        ERROR,
     );
 } elseif (
     $application_id === null

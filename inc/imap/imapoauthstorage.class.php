@@ -49,6 +49,7 @@ class ImapOauthStorage extends Imap
             } catch (\Laminas\Mail\Storage\Exception\ExceptionInterface $e) {
                 throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
             }
+
             return;
         }
 
@@ -68,7 +69,7 @@ class ImapOauthStorage extends Imap
         $this->protocol = new ImapOauthProtocol($params->application_id);
 
         if (isset($params->novalidatecert)) {
-            $this->protocol->setNoValidateCert((bool)$params->novalidatecert);
+            $this->protocol->setNoValidateCert((bool) $params->novalidatecert);
         }
 
         $this->protocol->connect($host, $port, $ssl);
