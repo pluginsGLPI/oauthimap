@@ -2,188 +2,195 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# Soporte Infraestructura Standby, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-12 13:10+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-10-15 13:49+0000\n"
+"Last-Translator: Soporte Infraestructura Standby, 2023\n"
+"Language-Team: Spanish (Ecuador) (https://app.transifex.com/teclib/teams/28042/es_EC/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language: es_EC\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #: front/authorization.callback.php:64
 #, php-format
 msgid "Authorization failed with error: %s"
-msgstr ""
+msgstr "Autorización fallida con error:%s"
 
 #: inc/application.class.php:323
 msgid "Callback url"
-msgstr ""
+msgstr "URL de devolución de llamada"
 
 #: inc/application.class.php:92 inc/application.class.php:129
 msgid "Client ID"
-msgstr ""
+msgstr "ID de cliente"
 
 #: inc/application.class.php:98
 msgid "Client secret"
-msgstr ""
+msgstr "Secreto de cliente"
 
 #: inc/authorization.class.php:134
 msgid "Connection diagnostic"
-msgstr ""
+msgstr "Diagnóstico de conexión"
 
 #: inc/mailcollectorfeature.class.php:471
 msgid "Connection string"
-msgstr ""
+msgstr "Cadena de conexión"
 
 #: inc/authorization.class.php:103
 msgid "Create an authorization"
-msgstr ""
+msgstr "Crear una autorización"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
-msgstr ""
+msgstr "Crear autorización para otro usuario"
 
 #: inc/authorization.class.php:151
 msgid "Delete"
-msgstr ""
+msgstr "Borrar"
 
 #: inc/application.class.php:180
 msgid "Developer help for this provider"
-msgstr ""
+msgstr "Ayuda para desarrolladores de este proveedor"
 
 #: inc/authorization.class.php:139
 msgid "Diagnose"
-msgstr ""
+msgstr "Diagnosticar"
 
 #: inc/authorization.class.php:322
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
+"El registro de diagnóstico contiene información sensible, como el token de "
+"acceso."
 
 #: inc/authorization.class.php:117 inc/authorization.class.php:174
 #: inc/authorization.class.php:230
 msgid "Email"
-msgstr ""
+msgstr "Correo electrónico"
 
 #: inc/application.class.php:390
 msgid "Invalid provider"
-msgstr ""
+msgstr "Proveedor no válido"
 
 #: inc/mailcollectorfeature.class.php:473
 msgid "Is active ?"
-msgstr ""
+msgstr "Está activo?"
 
 #: inc/mailcollectorfeature.class.php:472
 msgid "Login"
-msgstr ""
+msgstr "Inicio de sesión"
 
 #: inc/mailcollectorfeature.class.php:402
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
-msgstr ""
+msgstr "El receptor de correo \"%s\" ha sido desactivado."
 
 #: inc/mailcollectorfeature.class.php:372
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
-msgstr ""
+msgstr "El receptor de correo \"%s\" ha sido actualizado."
 
 #: inc/mailcollectorfeature.class.php:470
 msgid "Name"
-msgstr ""
+msgstr "Nombre"
 
 #: inc/application.class.php:381
 msgid "Name cannot be empty"
-msgstr ""
+msgstr "El nombre no puede estar vacío"
 
 #: inc/mailcollectorfeature.class.php:467
 msgid "No associated receivers."
-msgstr ""
+msgstr "No hay receptores asociados."
 
 #: inc/authorization.class.php:113
 msgid "No authorizations."
-msgstr ""
+msgstr "No hay autorizaciones."
 
 #: setup.php:88
 msgid "Oauth IMAP"
-msgstr ""
+msgstr "Oauth IMAP"
 
 #: inc/application.class.php:43
 msgid "Oauth IMAP application"
 msgid_plural "Oauth IMAP applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Aplicación IMAP Oauth"
+msgstr[1] "Aplicaciones IMAP Oauth"
+msgstr[2] "Aplicaciones IMAP Oauth"
 
 #: inc/authorization.class.php:57
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Autorización Oauth"
+msgstr[1] "Autorizaciones Oauth"
+msgstr[2] "Autorizaciones Oauth"
 
 #: inc/application.class.php:86 inc/application.class.php:120
 msgid "Oauth provider"
-msgstr ""
+msgstr "Proveedor Oauth"
 
 #: inc/authorization.class.php:309
 msgid "Refresh connection diagnostic"
-msgstr ""
+msgstr "Actualizar diagnóstico de conexión"
 
 #: inc/authorization.class.php:280
 msgid "SSL"
-msgstr ""
+msgstr "SSL"
 
 #: inc/authorization.class.php:281
 msgid "SSL + TLS"
-msgstr ""
+msgstr "SSL + TLS"
 
 #: inc/authorization.class.php:273
 msgid "Security level"
-msgstr ""
+msgstr "Nivel de seguridad"
 
 #: inc/authorization.class.php:245
 msgid "Server host"
-msgstr ""
+msgstr "Servidor"
 
 #: inc/authorization.class.php:256
 msgid "Server port"
-msgstr ""
+msgstr "Puerto del servidor"
 
 #: inc/application.class.php:104 inc/application.class.php:137
 msgid "Tenant ID"
-msgstr ""
+msgstr "ID de inquilino"
 
 #: inc/authorization.class.php:290
 msgid "Timeout"
-msgstr ""
+msgstr "Tiempo de espera"
 
 #: front/authorization.callback.php:76
 msgid "Unable to get authorization code"
-msgstr ""
+msgstr "No se puede obtener el código de autorización"
 
 #: front/authorization.callback.php:78
 msgid "Unable to save authorization code"
-msgstr ""
+msgstr "No se puede guardar el código de autorización"
 
 #: front/authorization.callback.php:74
 msgid "Unable to verify authorization code"
-msgstr ""
+msgstr "No se puede verificar el código de autorización"
 
 #: inc/authorization.class.php:341
 #, php-format
 msgid "Unexpected error: %s"
-msgstr ""
+msgstr "Error inesperado:%s"
 
 #: inc/authorization.class.php:143
 msgid "Update"
-msgstr ""
+msgstr "Actualización"
 
 #: inc/application.class.php:324
 msgid "copy it in the management console of provider"
-msgstr ""
+msgstr "cópielo en la consola de gestión del proveedor"

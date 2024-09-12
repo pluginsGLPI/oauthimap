@@ -2,188 +2,197 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
+# 
+# Translators:
+# feonsu <feonsu@gmail.com>, 2023
+# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2024-09-12 13:10+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
-"Language: \n"
+"PO-Revision-Date: 2020-10-15 13:49+0000\n"
+"Last-Translator: feonsu <feonsu@gmail.com>, 2023\n"
+"Language-Team: Slovak (Slovakia) (https://app.transifex.com/teclib/teams/28042/sk_SK/)\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+"Language: sk_SK\n"
+"Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
 #: front/authorization.callback.php:64
 #, php-format
 msgid "Authorization failed with error: %s"
-msgstr ""
+msgstr "Autorizácia zlyhala s chybou: %s"
 
 #: inc/application.class.php:323
 msgid "Callback url"
-msgstr ""
+msgstr "URL adresa spätného volania"
 
 #: inc/application.class.php:92 inc/application.class.php:129
 msgid "Client ID"
-msgstr ""
+msgstr "ID klienta"
 
 #: inc/application.class.php:98
 msgid "Client secret"
-msgstr ""
+msgstr "Tajný kľúč klienta"
 
 #: inc/authorization.class.php:134
 msgid "Connection diagnostic"
-msgstr ""
+msgstr "Diagnostika pripojenia"
 
 #: inc/mailcollectorfeature.class.php:471
 msgid "Connection string"
-msgstr ""
+msgstr "Reťazec pripojenia"
 
 #: inc/authorization.class.php:103
 msgid "Create an authorization"
-msgstr ""
+msgstr "Vytvoriť autorizáciu"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
-msgstr ""
+msgstr "Vytvoriť autorizáciu pre iného používateľa"
 
 #: inc/authorization.class.php:151
 msgid "Delete"
-msgstr ""
+msgstr "Odstrániť"
 
 #: inc/application.class.php:180
 msgid "Developer help for this provider"
-msgstr ""
+msgstr "Nápoveda vývojára pre tohto poskytovateľa"
 
 #: inc/authorization.class.php:139
 msgid "Diagnose"
-msgstr ""
+msgstr "Diagnostika"
 
 #: inc/authorization.class.php:322
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
+"Diagnostický log obsahuje citlivé informácie, ako napríklad prístupový "
+"token."
 
 #: inc/authorization.class.php:117 inc/authorization.class.php:174
 #: inc/authorization.class.php:230
 msgid "Email"
-msgstr ""
+msgstr "E-mail"
 
 #: inc/application.class.php:390
 msgid "Invalid provider"
-msgstr ""
+msgstr "Neplatný poskytovateľ"
 
 #: inc/mailcollectorfeature.class.php:473
 msgid "Is active ?"
-msgstr ""
+msgstr "Je aktívny?"
 
 #: inc/mailcollectorfeature.class.php:472
 msgid "Login"
-msgstr ""
+msgstr "Prihlásenie"
 
 #: inc/mailcollectorfeature.class.php:402
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
-msgstr ""
+msgstr "E-mailový prijímač \"%s\" bol deaktivovaný."
 
 #: inc/mailcollectorfeature.class.php:372
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
-msgstr ""
+msgstr "E-mailový prijímač \"%s\" bol aktualizovaný."
 
 #: inc/mailcollectorfeature.class.php:470
 msgid "Name"
-msgstr ""
+msgstr "Názov"
 
 #: inc/application.class.php:381
 msgid "Name cannot be empty"
-msgstr ""
+msgstr "Názov nemôže byť prázdny"
 
 #: inc/mailcollectorfeature.class.php:467
 msgid "No associated receivers."
-msgstr ""
+msgstr "Žiadne priradené prijímače."
 
 #: inc/authorization.class.php:113
 msgid "No authorizations."
-msgstr ""
+msgstr "Žiadne autorizácie."
 
 #: setup.php:88
 msgid "Oauth IMAP"
-msgstr ""
+msgstr "Oauth IMAP"
 
 #: inc/application.class.php:43
 msgid "Oauth IMAP application"
 msgid_plural "Oauth IMAP applications"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Oauth IMAP aplikácia"
+msgstr[1] "Oauth IMAP aplikácie"
+msgstr[2] "Oauth IMAP aplikácie"
+msgstr[3] "Oauth IMAP aplikácie"
 
 #: inc/authorization.class.php:57
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Oauth autorizácia"
+msgstr[1] "Oauth autorizácie"
+msgstr[2] "Oauth autorizácie"
+msgstr[3] "Oauth autorizácie"
 
 #: inc/application.class.php:86 inc/application.class.php:120
 msgid "Oauth provider"
-msgstr ""
+msgstr "Oauth poskytovateľ"
 
 #: inc/authorization.class.php:309
 msgid "Refresh connection diagnostic"
-msgstr ""
+msgstr "Obnoviť diagnostiku pripojenia"
 
 #: inc/authorization.class.php:280
 msgid "SSL"
-msgstr ""
+msgstr "SSL"
 
 #: inc/authorization.class.php:281
 msgid "SSL + TLS"
-msgstr ""
+msgstr "SSL + TLS"
 
 #: inc/authorization.class.php:273
 msgid "Security level"
-msgstr ""
+msgstr "Úroveň zabezpečenia"
 
 #: inc/authorization.class.php:245
 msgid "Server host"
-msgstr ""
+msgstr "Názov servera"
 
 #: inc/authorization.class.php:256
 msgid "Server port"
-msgstr ""
+msgstr "Port servera"
 
 #: inc/application.class.php:104 inc/application.class.php:137
 msgid "Tenant ID"
-msgstr ""
+msgstr "ID tenantu"
 
 #: inc/authorization.class.php:290
 msgid "Timeout"
-msgstr ""
+msgstr "Časový limit"
 
 #: front/authorization.callback.php:76
 msgid "Unable to get authorization code"
-msgstr ""
+msgstr "Nepodarilo sa získať autorizačný kód"
 
 #: front/authorization.callback.php:78
 msgid "Unable to save authorization code"
-msgstr ""
+msgstr "Nepodarilo sa uložiť autorizačný kód"
 
 #: front/authorization.callback.php:74
 msgid "Unable to verify authorization code"
-msgstr ""
+msgstr "Nepodarilo sa overiť autorizačný kód"
 
 #: inc/authorization.class.php:341
 #, php-format
 msgid "Unexpected error: %s"
-msgstr ""
+msgstr "Neočakávaná chyba: %s"
 
 #: inc/authorization.class.php:143
 msgid "Update"
-msgstr ""
+msgstr "Aktualizovať"
 
 #: inc/application.class.php:324
 msgid "copy it in the management console of provider"
-msgstr ""
+msgstr "skopírujte ju do konzoly na správu poskytovateľa"
