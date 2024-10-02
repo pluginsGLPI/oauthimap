@@ -8,15 +8,16 @@
 # Cédric Anne, 2021
 # Matheus Rafael, 2023
 # Diego Nobre <diego@koruma.com.br>, 2023
+# Eduardo Mozart de Oliveira <eduardomozart182@gmail.com>, 2024
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-12 13:10+0000\n"
+"POT-Creation-Date: 2024-10-02 01:19+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
-"Last-Translator: Diego Nobre <diego@koruma.com.br>, 2023\n"
+"Last-Translator: Eduardo Mozart de Oliveira <eduardomozart182@gmail.com>, 2024\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/teclib/teams/28042/pt_BR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -121,25 +122,25 @@ msgstr "Sem autorizações."
 
 #: setup.php:88
 msgid "Oauth IMAP"
-msgstr "Oauth IMAP"
+msgstr "OAuth IMAP"
 
 #: inc/application.class.php:43
 msgid "Oauth IMAP application"
 msgid_plural "Oauth IMAP applications"
-msgstr[0] "Aplicação Oauth IMAP"
-msgstr[1] "Aplicações Oauth IMAP"
-msgstr[2] "Aplicações Oauth IMAP"
+msgstr[0] "Aplicação OAuth IMAP"
+msgstr[1] "Aplicações OAuth IMAP"
+msgstr[2] "Aplicações OAuth IMAP"
 
 #: inc/authorization.class.php:57
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] "Autorização Oauth"
 msgstr[1] "Autorizações Oauth"
-msgstr[2] "Autorizações Oauth"
+msgstr[2] "Autorizações OAuth"
 
 #: inc/application.class.php:86 inc/application.class.php:120
 msgid "Oauth provider"
-msgstr "Provedor Oauth"
+msgstr "Provedor OAuth"
 
 #: inc/authorization.class.php:309
 msgid "Refresh connection diagnostic"
