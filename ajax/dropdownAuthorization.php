@@ -41,7 +41,7 @@ $iterator = $DB->request(
     PluginOauthimapAuthorization::getTable(),
     [
         PluginOauthimapApplication::getForeignKeyField() => $_POST['application_id'] ?? null,
-    ]
+    ],
 );
 $authorizations = [
     '-1' => __('Create authorization for another user', 'oauthimap'),
