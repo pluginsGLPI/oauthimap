@@ -651,9 +651,7 @@ CREATE TABLE IF NOT EXISTS `$table` (
   KEY `date_mod` (`date_mod`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
-            /** @phpstan-ignore-next-line  */
-            $method = version_compare(GLPI_VERSION, '10.0.11', '>=') ? 'doQueryOrDie' : 'queryOrDie';
-            $DB->$method($query);
+            $DB->doQuery($query);
         }
 
         // Add display preferences

@@ -585,9 +585,7 @@ CREATE TABLE IF NOT EXISTS `$table` (
   UNIQUE KEY `unicity` (`$application_fkey`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
-            /** @phpstan-ignore-next-line  */
-            $method = version_compare(GLPI_VERSION, '10.0.11', '>=') ? 'doQueryOrDie' : 'queryOrDie';
-            $DB->$method($query);
+            $DB->doQuery($query);
         } else {
             if (!$DB->fieldExists($table, 'refresh_token')) {
                 // V1.3.1: add new refresh_token field
