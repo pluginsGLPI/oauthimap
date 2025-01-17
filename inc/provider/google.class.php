@@ -32,6 +32,7 @@ namespace GlpiPlugin\Oauthimap\Provider;
 
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
+use League\OAuth2\Client\Provider\GoogleUser;
 
 class Google extends \League\OAuth2\Client\Provider\Google implements ProviderInterface
 {
@@ -47,7 +48,7 @@ class Google extends \League\OAuth2\Client\Provider\Google implements ProviderIn
 
     public function getOwnerDetails(AccessToken $token): ?OwnerDetails
     {
-        /* @var \League\OAuth2\Client\Provider\GoogleUser $owner */
+        /** @var GoogleUser $owner */
         $owner = $this->getResourceOwner($token);
 
         $owner_details            = new OwnerDetails();

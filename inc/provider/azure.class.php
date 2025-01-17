@@ -32,6 +32,7 @@ namespace GlpiPlugin\Oauthimap\Provider;
 
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
+use TheNetworg\OAuth2\Client\Provider\AzureResourceOwner;
 
 class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements ProviderInterface
 {
@@ -47,7 +48,7 @@ class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements Provider
 
     public function getOwnerDetails(AccessToken $token): ?OwnerDetails
     {
-        /* @var \TheNetworg\OAuth2\Client\Provider\AzureResourceOwner $owner */
+        /** @var AzureResourceOwner $owner */
         $owner = $this->getResourceOwner($token);
 
         $owner_details = new OwnerDetails();

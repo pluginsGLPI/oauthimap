@@ -47,6 +47,7 @@ class MailCollectorFeature
     {
         switch ($item->getType()) {
             case PluginOauthimapApplication::class:
+                /** @var PluginOauthimapApplication $item */
                 $count = 0;
                 if ($_SESSION['glpishow_count_on_tabs']) {
                     $collectors = MailCollectorFeature::getAssociatedMailCollectors(
@@ -67,6 +68,7 @@ class MailCollectorFeature
     {
         switch ($item->getType()) {
             case PluginOauthimapApplication::class:
+                /** @var PluginOauthimapApplication $item */
                 MailCollectorFeature::showMailCollectorsForApplication($item);
                 break;
         }
@@ -202,7 +204,7 @@ JAVASCRIPT;
      *
      * @param MailCollector $item
      *
-     * @return void
+     * @return boolean
      */
     public static function forceMailCollectorUpdate(MailCollector $item)
     {
