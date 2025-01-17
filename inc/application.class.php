@@ -239,7 +239,6 @@ JAVASCRIPT;
                 }
 
                 return $value;
-                break;
         }
 
         return parent::getSpecificValueToDisplay($field, $values, $options);
@@ -270,7 +269,6 @@ JAVASCRIPT;
                         'value'   => $selected,
                     ],
                 );
-                break;
         }
 
         return parent::getSpecificValueToSelect($field, $name, $values, $options);
@@ -422,7 +420,7 @@ JAVASCRIPT;
     }
 
     // phpcs:ignore PSR1.Methods.CamelCapsMethodName
-    public function post_updateItem($history = 1)
+    public function post_updateItem($history = true)
     {
         if (in_array('is_active', $this->updates) && !$this->fields['is_active']) {
             MailCollectorFeature::postDeactivateApplication($this);
@@ -502,7 +500,7 @@ JAVASCRIPT;
      *
      * @return AbstractProvider|ProviderInterface|null
      */
-    public function getProvider(): ?AbstractProvider
+    public function getProvider()
     {
         /** @var array $CFG_GLPI */
         global $CFG_GLPI;
@@ -653,6 +651,7 @@ CREATE TABLE IF NOT EXISTS `$table` (
   KEY `date_mod` (`date_mod`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
+            /** @phpstan-ignore-next-line  */
             $method = version_compare(GLPI_VERSION, '10.0.11', '>=') ? 'doQueryOrDie' : 'queryOrDie';
             $DB->$method($query);
         }
