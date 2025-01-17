@@ -84,7 +84,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         $iterator = $DB->request(
             self::getTable(),
             [
-                PluginOauthimapApplication::getForeignKeyField() => (string)$item->getID()
+                PluginOauthimapApplication::getForeignKeyField() => (string) $item->getID(),
             ],
         );
 
