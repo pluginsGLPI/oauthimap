@@ -102,7 +102,7 @@ function plugin_version_oauthimap()
                       'function'  => 'openssl_x509_read'
                    ],
                 ]
-             ]
+            ]
         ],
     ];
 }
