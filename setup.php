@@ -97,10 +97,10 @@ function plugin_version_oauthimap()
             ],
             'php'    => [
                 'exts'=> [
-                   'openssl'    => [
-                      'required'  => true,
-                      'function'  => 'openssl_x509_read'
-                   ],
+                    'openssl'    => [
+                        'required'  => true,
+                        'function'  => 'openssl_x509_read'
+                    ],
                 ]
             ]
         ],
