@@ -95,6 +95,14 @@ function plugin_version_oauthimap()
                 'min' => PLUGIN_OAUTHIMAP_MIN_GLPI,
                 'max' => PLUGIN_OAUTHIMAP_MAX_GLPI,
             ],
+            'php'    => [
+                'exts' => [
+                    'openssl'    => [
+                        'required'  => true,
+                        'function'  => 'openssl_x509_read',
+                    ],
+                ],
+            ],
         ],
     ];
 }
