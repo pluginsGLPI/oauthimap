@@ -126,6 +126,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
 
         if ($isTls) {
             $result = $this->requestAndResponse('STARTTLS');
+            /** @phpstan-ignore-next-line  */
             $result = $result && stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod());
             if (!$result) {
                 throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot enable TLS');
@@ -140,7 +141,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         if ($token === null) {
             trigger_error('Unable to get access token', E_USER_WARNING);
 
-            return;
+            return false;
         }
 
         $this->sendRequest(
@@ -168,8 +169,6 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
                 }
             }
         }
-
-        return false;
     }
 
     /**
@@ -177,7 +176,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
      *
      * {@inheritDoc}
      */
-    public function sendRequest($command, $tokens = [], &$tag = null)
+    public function sendRequest($command, $tokens = [], &$tag = '')
     {
         if (!$tag) {
             ++$this->tagCount;
