@@ -45,9 +45,7 @@ class MailCollectorFeature
 {
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
-        switch ($item->getType()) {
-            case PluginOauthimapApplication::class:
-                /** @var PluginOauthimapApplication $item */
+        if ($item instanceof PluginOauthimapApplication) {
                 $count = 0;
                 if ($_SESSION['glpishow_count_on_tabs']) {
                     $collectors = MailCollectorFeature::getAssociatedMailCollectors(
