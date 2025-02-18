@@ -66,9 +66,7 @@ class MailCollectorFeature
 
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
-        switch ($item->getType()) {
-            case PluginOauthimapApplication::class:
-                /** @var PluginOauthimapApplication $item */
+        if ($item instanceof PluginOauthimapApplication) {
                 MailCollectorFeature::showMailCollectorsForApplication($item);
                 break;
         }
