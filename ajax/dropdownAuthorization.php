@@ -38,9 +38,11 @@ Session::checkLoginUser();
 global $DB;
 
 $iterator = $DB->request(
-    PluginOauthimapAuthorization::getTable(),
     [
-        PluginOauthimapApplication::getForeignKeyField() => $_POST['application_id'] ?? null,
+        'FROM'  => PluginOauthimapAuthorization::getTable(),
+        'WHERE' => [
+            PluginOauthimapApplication::getForeignKeyField() => $_POST['application_id'] ?? null,
+        ],
     ],
 );
 $authorizations = [

@@ -46,17 +46,17 @@ class MailCollectorFeature
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         if ($item instanceof PluginOauthimapApplication) {
-                $count = 0;
-                if ($_SESSION['glpishow_count_on_tabs']) {
-                    $collectors = MailCollectorFeature::getAssociatedMailCollectors(
-                        MailCollectorFeature::getMailProtocolTypeIdentifier($item->getID()),
-                        null,
-                        false,
-                    );
-                    $count = count($collectors);
-                }
+            $count = 0;
+            if ($_SESSION['glpishow_count_on_tabs']) {
+                $collectors = MailCollectorFeature::getAssociatedMailCollectors(
+                    MailCollectorFeature::getMailProtocolTypeIdentifier($item->getID()),
+                    null,
+                    false,
+                );
+                $count = count($collectors);
+            }
 
-                return CommonGLPI::createTabEntry(MailCollector::getTypeName(Session::getPluralNumber()), $count);
+            return CommonGLPI::createTabEntry(MailCollector::getTypeName(Session::getPluralNumber()), $count);
         }
 
         return '';
@@ -65,8 +65,7 @@ class MailCollectorFeature
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
         if ($item instanceof PluginOauthimapApplication) {
-                MailCollectorFeature::showMailCollectorsForApplication($item);
-                break;
+            MailCollectorFeature::showMailCollectorsForApplication($item);
         }
 
         return false;
