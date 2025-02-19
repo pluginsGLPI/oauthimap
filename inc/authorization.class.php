@@ -60,7 +60,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         $count = 0;
-        if ($_SESSION['glpishow_count_on_tabs']) {
+        if ($_SESSION['glpishow_count_on_tabs'] && $item instanceof PluginOauthimapApplication) {
             $count = countElementsInTable(
                 $this->getTable(),
                 [
@@ -75,7 +75,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
     public static function displayTabContentForItem(CommonGLPI $item, $tabnum = 1, $withtemplate = 0)
     {
         if (!($item instanceof PluginOauthimapApplication)) {
-            return;
+            return false;
         }
 
         /** @var \DBmysql $DB */
@@ -383,7 +383,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
      *
      * @param array $input
      *
-     * @return bool|array
+     * @return array
      */
     private function prepareInput($input)
     {
@@ -429,6 +429,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         }
 
         // Get user details
+        /** @var AccessToken $token */
         $this->owner_details = $provider->getOwnerDetails($token);
         $email               = $this->owner_details->email;
         if ($email === null) {
@@ -586,8 +587,7 @@ CREATE TABLE IF NOT EXISTS `$table` (
   UNIQUE KEY `unicity` (`$application_fkey`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
-            $method = version_compare(GLPI_VERSION, '10.0.11', '>=') ? 'doQueryOrDie' : 'queryOrDie';
-            $DB->$method($query);
+            $DB->doQuery($query);
         } else {
             if (!$DB->fieldExists($table, 'refresh_token')) {
                 // V1.3.1: add new refresh_token field
