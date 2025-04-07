@@ -330,7 +330,7 @@ JAVASCRIPT;
                 'readonly' => 'readonly',
             ],
         );
-        echo "<i class='input-group-text fa-lg pointer copy_to_clipboard_wrapper' role='button'></i>";
+        echo '<i class="input-group-text fa-lg pointer copy_to_clipboard_wrapper" role="button"></i>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
