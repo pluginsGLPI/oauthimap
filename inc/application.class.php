@@ -322,7 +322,7 @@ JAVASCRIPT;
         echo ' <i class="fa fa-info pointer" title="' . __('copy it in the management console of provider', 'oauthimap') . '"></i>';
         echo '</label>';
         echo '<div class="col-xxl-7 field-container">';
-        echo '<div class='input-group flex-grow-1 copy_to_clipboard_wrapper'>';
+        echo '<div class="input-group flex-grow-1 copy_to_clipboard_wrapper">';
         echo Html::input(
             '',
             [
