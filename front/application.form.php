@@ -30,6 +30,8 @@
 
 include('../../../inc/includes.php');
 
+Session::checkLoginUser();
+
 /** @var array $_UPOST */
 global $_UPOST;
 

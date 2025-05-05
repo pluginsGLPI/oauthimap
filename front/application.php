@@ -30,5 +30,7 @@
 
 include('../../../inc/includes.php');
 
+Session::checkLoginUser();
+
 $dropdown = new PluginOauthimapApplication();
 include(GLPI_ROOT . '/front/dropdown.common.php');

@@ -28,7 +28,8 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
+include("../../../inc/includes.php");
+Session::checkLoginUser();
 
 $dropdown = new PluginOauthimapApplication();
-Html::redirect($dropdown->getSearchURL());
+include(GLPI_ROOT . "/front/dropdown.common.form.php");
