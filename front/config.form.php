@@ -30,5 +30,7 @@
 
 include('../../../inc/includes.php');
 
+Session::checkRight('config', UPDATE);
+
 $dropdown = new PluginOauthimapApplication();
 Html::redirect($dropdown->getSearchURL());

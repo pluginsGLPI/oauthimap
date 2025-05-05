@@ -30,6 +30,8 @@
 
 include('../../../inc/includes.php');
 
+Session::checkRight('config', READ);
+
 /** @var array $_UPOST */
 global $_UPOST;
 
