@@ -126,7 +126,6 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
 
         if ($isTls) {
             $result = $this->requestAndResponse('STARTTLS');
-            /** @phpstan-ignore-next-line  */
             $result = $result && stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod());
             if (!$result) {
                 throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot enable TLS');

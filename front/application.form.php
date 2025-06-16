@@ -28,8 +28,6 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
-
 Session::checkLoginUser();
 
 /** @var array $_UPOST */
@@ -43,7 +41,10 @@ if (isset($_POST['id']) && isset($_POST['request_authorization'])) {
 } else {
     Html::requireJs('clipboard');
 
-    if (array_key_exists('client_secret', $_POST) && array_key_exists('client_secret', $_UPOST)) {
+    if (
+        array_key_exists('client_secret', $_POST)
+        && !empty($_UPOST['client_secret'])
+    ) {
         // Client secret must not be altered.
         $_POST['client_secret'] = $_UPOST['client_secret'];
     }

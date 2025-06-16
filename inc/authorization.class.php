@@ -57,6 +57,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         return _n('Oauth authorization', 'Oauth authorizations', $nb, 'oauthimap');
     }
 
+    public static function getIcon()
+    {
+        return 'ti ti-key';
+    }
+
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
         $count = 0;
@@ -79,7 +84,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
         }
 
         /** @var \DBmysql $DB */
-        global $DB;
+        /** @var array $CFG_GLPI */
+        global $DB, $CFG_GLPI;
 
         $iterator = $DB->request(
             [
@@ -92,7 +98,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         $item->showFormHeader([
             'formtitle' => $item->fields['name'],
-            'target'    => Plugin::getWebDir('oauthimap') . '/front/application.form.php',
+            'target'    => $CFG_GLPI['root_doc'] . '/plugins/oauthimap/front/application.form.php',
         ]);
 
         echo '<div class="row">';
