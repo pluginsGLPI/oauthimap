@@ -48,7 +48,7 @@ class PluginOauthimapApplication extends CommonDropdown
         $menu = [];
         if (Config::canUpdate()) {
             $menu['title'] = self::getMenuName();
-            $menu['page']  = '/' . Plugin::getWebDir('oauthimap', false) . '/front/application.php';
+            $menu['page']  = '/plugins/oauthimap/front/application.php';
             $menu['icon']  = self::getIcon();
         }
         if (count($menu)) {
@@ -63,12 +63,12 @@ class PluginOauthimapApplication extends CommonDropdown
         return 'fas fa-sign-in-alt';
     }
 
-    public static function canCreate()
+    public static function canCreate(): bool
     {
         return static::canUpdate();
     }
 
-    public static function canPurge()
+    public static function canPurge(): bool
     {
         return static::canUpdate();
     }
@@ -207,7 +207,7 @@ JAVASCRIPT;
                     $field_name,
                     [
                         'autocomplete' => 'off',
-                        'value'        => Html::entities_deep((new GLPIKey())->decrypt($field_value)),
+                        'value'        => (new GLPIKey())->decrypt($field_value),
                     ],
                 );
                 break;
@@ -604,7 +604,9 @@ JAVASCRIPT;
      */
     private static function getCallbackUrl(): string
     {
-        return Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
+        /** @var array $CFG_GLPI */
+        global $CFG_GLPI;
+        return $CFG_GLPI['url_base'] . '/plugins/oauthimap/front/authorization.callback.php';
     }
 
     public function cleanDBonPurge()
