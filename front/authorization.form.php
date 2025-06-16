@@ -28,8 +28,6 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
-
 $authorization = new PluginOauthimapAuthorization();
 $application   = new PluginOauthimapApplication();
 
@@ -70,5 +68,5 @@ if (isset($_POST['id']) && isset($_POST['delete'])) {
     );
     Html::footer();
 } else {
-    Html::displayErrorAndDie('lost');
+    throw new \Glpi\Exception\Http\BadRequestHttpException();
 }

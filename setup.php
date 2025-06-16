@@ -28,15 +28,16 @@
  * -------------------------------------------------------------------------
  */
 
-define('PLUGIN_OAUTHIMAP_VERSION', '1.4.4');
+define('PLUGIN_OAUTHIMAP_VERSION', '1.5.0-beta1');
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_OAUTHIMAP_MIN_GLPI', '10.0.11');
+define('PLUGIN_OAUTHIMAP_MIN_GLPI', '11.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_OAUTHIMAP_MAX_GLPI', '10.0.99');
+define('PLUGIN_OAUTHIMAP_MAX_GLPI', '11.0.99');
 
 define('PLUGIN_OAUTHIMAP_ROOT', Plugin::getPhpDir('oauthimap'));
 
+use Glpi\Http\Firewall;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 
 function plugin_init_oauthimap()
@@ -45,6 +46,12 @@ function plugin_init_oauthimap()
     global $PLUGIN_HOOKS;
 
     $PLUGIN_HOOKS['csrf_compliant']['oauthimap'] = true;
+
+    Firewall::addPluginStrategyForLegacyScripts(
+        'oauthimap',
+        '#^/front/authorization.callback.php$#',
+        Firewall::STRATEGY_NO_CHECK,
+    );
 
     if (Plugin::isPluginActive('oauthimap')) {
         // Config page: redirect to dropdown page
