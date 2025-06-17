@@ -28,6 +28,7 @@
  * -------------------------------------------------------------------------
  */
 
+use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Provider\Azure;
 use GlpiPlugin\Oauthimap\Provider\Google;
@@ -287,53 +288,17 @@ JAVASCRIPT;
 
         $documentation_urls_json = json_encode(self::getProvidersDocumentationUrls());
 
-        // Display/hide additionnal params and update documentation link depending on selected provider
-        $additionnal_params_js = <<<JAVASCRIPT
-            (function($) {
-                var documentation_urls = {$documentation_urls_json};
+        $callback_url = self::getCallbackUrl();
 
-                var updateDocumentationLink = function () {
-                    var provider = $('#dropdown_provider{$rand}').val();
-
-                    var url = documentation_urls.hasOwnProperty(provider)
-                        ? documentation_urls[provider]
-                        : null;
-
-                    $('.help-link').attr('href', url).toggle(url !== null);
-                };
-
-                var onProviderChange = function () {
-                    var provider = $.escapeSelector($(this).val()); // escape selector as it contains slashes
-                    $('[data-provider="' + provider + '"]').closest('.form-field').show();
-                    $('[data-provider]:not([data-provider="' + provider + '"])').closest('.form-field').hide();
-
-                    updateDocumentationLink();
-                };
-
-                $('#dropdown_provider{$rand}').change(onProviderChange);
-                onProviderChange.call($('#dropdown_provider{$rand}'));
-            })(jQuery);
-JAVASCRIPT;
-
-        echo '<div class="form-field row col-12 col-sm-6 mb-2">';
-        echo Html::scriptBlock($additionnal_params_js);
-        echo '<label class="col-form-label col-xxl-5 text-xxl-end" for="_callback_url_' . $rand . '">';
-        echo __('Callback url', 'oauthimap');
-        echo ' <i class="fa fa-info pointer" title="' . __('copy it in the management console of provider', 'oauthimap') . '"></i>';
-        echo '</label>';
-        echo '<div class="col-xxl-7 field-container">';
-        echo '<div class="input-group flex-grow-1 copy_to_clipboard_wrapper">';
-        echo Html::input(
-            '',
+        echo TemplateRenderer::getInstance()->render(
+            '@oauthimap/application_form_extra.html.twig',
             [
-                'value'    => self::getCallbackUrl(),
-                'readonly' => 'readonly',
+                'rand'                 => $rand,
+                'callback_url'         => $callback_url,
+                'documentation_urls'   => self::getProvidersDocumentationUrls(),
+                'documentation_urls_json' => $documentation_urls_json,
             ],
         );
-        echo '<i class="input-group-text fa-lg pointer copy_to_clipboard_wrapper" role="button"></i>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
     }
 
     public function prepareInputForAdd($input)
