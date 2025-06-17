@@ -55,7 +55,7 @@ function plugin_init_oauthimap()
 
     if (Plugin::isPluginActive('oauthimap')) {
         // Config page: redirect to dropdown page
-        $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/config.form.php';
+        $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/application.php';
 
         // Menu link
         $PLUGIN_HOOKS['menu_toadd']['oauthimap'] = [
