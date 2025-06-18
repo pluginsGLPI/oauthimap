@@ -570,8 +570,7 @@ JAVASCRIPT;
     private static function getCallbackUrl(): string
     {
         /** @var array $CFG_GLPI */
-        global $CFG_GLPI;
-        return $CFG_GLPI['url_base'] . '/plugins/oauthimap/front/authorization.callback.php';
+        return @Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
     }
 
     public function cleanDBonPurge()
