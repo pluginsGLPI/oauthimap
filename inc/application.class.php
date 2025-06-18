@@ -569,7 +569,7 @@ JAVASCRIPT;
      */
     private static function getCallbackUrl(): string
     {
-        /** @var array $CFG_GLPI */
+        // @phpstan-ignore-next-line : getWebDir() is deprecated, but mandatory for this case
         return @Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
     }
 
