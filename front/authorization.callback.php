@@ -47,8 +47,6 @@ HTML;
     exit;
 }
 
-include('../../../inc/includes.php');
-
 $application   = new PluginOauthimapApplication();
 $authorization = new PluginOauthimapAuthorization();
 
