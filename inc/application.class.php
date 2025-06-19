@@ -61,7 +61,7 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public static function getIcon()
     {
-        return 'fas fa-sign-in-alt';
+        return 'ti ti-login-2';
     }
 
     public static function canCreate(): bool
