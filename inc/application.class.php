@@ -41,7 +41,7 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Oauth IMAP application', 'Oauth IMAP applications', $nb, 'oauthimap');
+        return _n('Oauth IMAP', 'Oauth IMAP', $nb, 'oauthimap');
     }
 
     public static function getMenuContent()
