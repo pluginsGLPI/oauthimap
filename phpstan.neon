@@ -12,7 +12,6 @@ parameters:
         - ../../inc
         - ../../src
     bootstrapFiles:
-       - ../../stubs/glpi_constants.php
-       - ../../vendor/autoload.php
-rules:
-    - GlpiProject\Tools\PHPStan\Rules\GlobalVarTypeRule
+        - ../../stubs/glpi_constants.php
+        - ../../vendor/autoload.php
+
