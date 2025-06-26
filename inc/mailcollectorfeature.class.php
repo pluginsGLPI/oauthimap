@@ -127,7 +127,6 @@ class MailCollectorFeature
     public static function alterMailCollectorForm(): void
     {
         $locator_id  = 'plugin_oauthimap_locator_' . mt_rand();
-        $plugin_path = Plugin::getWebDir('oauthimap');
 
         echo '<span id="' . $locator_id . '" style="display:none;"></span>';
         $javascript = <<<JAVASCRIPT
@@ -157,7 +156,7 @@ class MailCollectorFeature
 
                                 application_field.val(application_id);
                                 auth_field_container.load(
-                                    '{$plugin_path}/ajax/dropdownAuthorization.php',
+                                    '/plugins/oauthimap/ajax/dropdownAuthorization.php',
                                     {
                                         application_id: application_id,
                                         selected: login_field.val()
