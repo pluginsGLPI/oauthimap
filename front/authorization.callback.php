@@ -44,10 +44,8 @@ if (!array_key_exists('cookie_refresh', $_GET)) {
     <body></body>
 </html>
 HTML;
-    exit;
+    return;
 }
-
-include('../../../inc/includes.php');
 
 $application   = new PluginOauthimapApplication();
 $authorization = new PluginOauthimapAuthorization();
