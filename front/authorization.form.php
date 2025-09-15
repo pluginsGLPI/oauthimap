@@ -46,6 +46,9 @@ if (isset($_POST['id']) && isset($_POST['delete'])) {
     }
 
     Html::back();
+} elseif (isset($_POST['id']) && isset($_POST['request_authorization'])) {
+    $application->check($_POST['id'], UPDATE);
+    $application->redirectToAuthorizationUrl();
 } elseif (isset($_REQUEST['id']) && isset($_REQUEST['diagnose'])) {
     $authorization->check($_REQUEST['id'], READ);
 
