@@ -98,7 +98,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         $item->showFormHeader([
             'formtitle' => $item->fields['name'],
-            'target'    => $CFG_GLPI['root_doc'] . '/plugins/oauthimap/front/application.form.php',
+            'target'    => $CFG_GLPI['root_doc'] . '/plugins/oauthimap/front/authorization.form.php',
         ]);
 
         echo '<div class="row">';
