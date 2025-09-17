@@ -89,6 +89,11 @@ function plugin_init_oauthimap()
     }
 }
 
+function plugin_oauthimap_boot()
+{
+    \Glpi\Http\SessionManager::registerPluginStatelessPath('oauthimap', '#^/front/authorization.callback.php$#');
+}
+
 function plugin_version_oauthimap()
 {
     return [
