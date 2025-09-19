@@ -414,7 +414,7 @@ JAVASCRIPT;
      */
     private static function getAssociatedMailCollectors(
         string $protocol_type,
-        string $login = null,
+        ?string $login = null,
         bool $only_active = true
     ) {
         $criteria = [];
