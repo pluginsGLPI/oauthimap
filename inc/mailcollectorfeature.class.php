@@ -41,7 +41,7 @@ use PluginOauthimapApplication;
 use PluginOauthimapAuthorization;
 use Session;
 
-class MailCollectorFeature
+class MailCollectorFeature extends CommonGLPI
 {
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
