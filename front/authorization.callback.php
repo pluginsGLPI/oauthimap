@@ -33,7 +33,7 @@ if (!array_key_exists('cookie_refresh', $_GET)) {
     // if `session.cookie_samesite` configuration value is `strict`.
     // Redirecting on self using `http-equiv="refresh"` will get around this limitation.
     $url = htmlspecialchars(
-        $_SERVER['REQUEST_URI'] . (strpos($_SERVER['REQUEST_URI'], '?') !== false ? '&' : '?') . 'cookie_refresh',
+        $_SERVER['REQUEST_URI'] . (str_contains($_SERVER['REQUEST_URI'], '?') ? '&' : '?') . 'cookie_refresh',
     );
 
     echo <<<HTML
@@ -86,10 +86,6 @@ if (is_callable($callback_callable)) {
 }
 
 // Redirect to application form/list if callback action does not exit yet
-if ($application->getFromDB($application_id)) {
-    $url = $application->getLinkURL();
-} else {
-    $url = $application->getSearchURL(true);
-}
+$url = $application->getFromDB($application_id) ? $application->getLinkURL() : $application->getSearchURL(true);
 
 Html::redirect($url);
