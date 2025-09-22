@@ -27,13 +27,14 @@
  * @link      https://services.glpi-network.com
  * -------------------------------------------------------------------------
  */
-
 use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Provider\Azure;
 use GlpiPlugin\Oauthimap\Provider\Google;
 use GlpiPlugin\Oauthimap\Provider\ProviderInterface;
 use League\OAuth2\Client\Provider\AbstractProvider;
+
+use function Safe\json_encode;
 
 class PluginOauthimapApplication extends CommonDropdown
 {
@@ -222,7 +223,7 @@ JAVASCRIPT;
                 );
                 break;
             default:
-                throw new \RuntimeException(sprintf('Unknown type %s.', $field_type));
+                throw new RuntimeException(sprintf('Unknown type %s.', $field_type));
         }
     }
 
@@ -404,7 +405,7 @@ JAVASCRIPT;
     public function redirectToAuthorizationUrl(?callable $callback_callable = null, array $callback_params = []): void
     {
         if (!$this->areCredentialsValid()) {
-            throw new \RuntimeException('Invalid credentials.');
+            throw new RuntimeException('Invalid credentials.');
         }
 
         $provider = $this->getProvider();
@@ -472,17 +473,17 @@ JAVASCRIPT;
         global $CFG_GLPI;
 
         if (!$this->areCredentialsValid()) {
-            throw new \RuntimeException('Invalid credentials.');
+            throw new RuntimeException('Invalid credentials.');
         }
 
         if (!is_a($this->fields['provider'], ProviderInterface::class, true)) {
-            throw new \RuntimeException(sprintf('Unknown provider %s.', $this->fields['provider']));
+            throw new RuntimeException(sprintf('Unknown provider %s.', $this->fields['provider']));
         }
 
         $params = [
             'clientId'     => $this->fields['client_id'],
             'clientSecret' => (new GLPIKey())->decrypt($this->fields['client_secret']),
-            'redirectUri'  => $this->getCallbackUrl(),
+            'redirectUri'  => self::getCallbackUrl(),
             'scope'        => self::getProviderScopes($this->fields['provider']),
         ];
 
@@ -587,7 +588,7 @@ JAVASCRIPT;
      */
     public static function install(Migration $migration)
     {
-        /** @var \DBmysql $DB */
+        /** @var DBmysql $DB */
         global $DB;
 
         $default_charset   = DBConnection::getDefaultCharset();

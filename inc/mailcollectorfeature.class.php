@@ -36,10 +36,11 @@ use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
 use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 use Html;
 use MailCollector;
-use Plugin;
 use PluginOauthimapApplication;
 use PluginOauthimapAuthorization;
 use Session;
+
+use function Safe\preg_replace;
 
 class MailCollectorFeature extends CommonGLPI
 {
@@ -89,9 +90,7 @@ class MailCollectorFeature extends CommonGLPI
 
         foreach ($values as $value) {
             $id             = $value['id'];
-            $protocol_class = function () use ($id) {
-                return new ImapOauthProtocol($id);
-            };
+            $protocol_class = (fn() => new ImapOauthProtocol($id));
             $storage_class = function (array $params) use ($id) {
                 $params['application_id'] = $id;
 
@@ -210,7 +209,7 @@ JAVASCRIPT;
             return true;
         }
 
-        if (!($item->input['plugin_oauthimap_applications_id'] > 0)) {
+        if ($item->input['plugin_oauthimap_applications_id'] <= 0) {
             // No application selected => mail collector does not use Oauth.
             // Return true to continue update.
             return true;
@@ -249,7 +248,7 @@ JAVASCRIPT;
         $applications_id   = $item->input['plugin_oauthimap_applications_id'];
         $authorizations_id = $item->input['plugin_oauthimap_authorizations_id'];
 
-        if (!($applications_id > 0)) {
+        if ($applications_id <= 0) {
             // No application selected => mail collector does not use Oauth.
             return;
         }

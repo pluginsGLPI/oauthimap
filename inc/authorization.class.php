@@ -27,12 +27,14 @@
  * @link      https://services.glpi-network.com
  * -------------------------------------------------------------------------
  */
-
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
 use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
 use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
+
+use function Safe\json_encode;
+use function Safe\json_decode;
 
 class PluginOauthimapAuthorization extends CommonDBChild
 {
@@ -336,7 +338,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             if ($protocol->login($user, '')) {
                 new ImapOauthStorage($protocol); // Will automatically send 'select INBOX'.
             }
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             $error = $e;
         }
         echo '<div style="font-family:monospace; white-space:pre-wrap; word-break:break-all;">';
@@ -425,7 +427,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         // Get token
         try {
             $token = $provider->getAccessToken('authorization_code', ['code' => $code]);
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             trigger_error(
                 sprintf('Error during authorization code fetching: %s', $e->getMessage()),
                 E_USER_WARNING,
@@ -488,7 +490,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         try {
             $token = new AccessToken(json_decode((new GLPIKey())->decrypt($self->fields['token']), true));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return null; // Field value may be corrupted
         }
 
@@ -528,7 +530,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
     {
         try {
             $token = new AccessToken(json_decode((new GLPIKey())->decrypt($this->fields['token']), true));
-        } catch (\Throwable $e) {
+        } catch (Throwable $e) {
             return null; // Field value may be corrupted
         }
 
@@ -563,7 +565,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
      */
     public static function install(Migration $migration)
     {
-        /** @var \DBmysql $DB */
+        /** @var DBmysql $DB */
         global $DB;
 
         $default_charset   = DBConnection::getDefaultCharset();
@@ -575,7 +577,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         if (!$DB->tableExists($table)) {
             $migration->displayMessage("Installing $table");
-
             $query = <<<SQL
 CREATE TABLE IF NOT EXISTS `$table` (
   `id` int {$default_key_sign} NOT NULL AUTO_INCREMENT,
@@ -594,35 +595,32 @@ CREATE TABLE IF NOT EXISTS `$table` (
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
             $DB->doQuery($query);
-        } else {
-            if (!$DB->fieldExists($table, 'refresh_token')) {
-                // V1.3.1: add new refresh_token field
-                $migration->addField(
-                    $table,
-                    'refresh_token',
-                    'text',
-                    [
-                        'after'     => 'token',
-                        'nodefault' => true,
-                    ],
-                );
-
-                $iterator = $DB->request(['FROM' => $table]);
-                foreach ($iterator as $row) {
-                    $token_fields = json_decode((new GLPIKey())->decrypt($row['token']), true);
-                    if (isset($token_fields['refresh_token'])) {
-                        $migration->addPostQuery(
-                            $DB->buildUpdate(
-                                $table,
-                                [
-                                    'refresh_token' => (new GLPIKey())->encrypt($token_fields['refresh_token']),
-                                ],
-                                [
-                                    'id' => $row['id'],
-                                ],
-                            ),
-                        );
-                    }
+        } elseif (!$DB->fieldExists($table, 'refresh_token')) {
+            // V1.3.1: add new refresh_token field
+            $migration->addField(
+                $table,
+                'refresh_token',
+                'text',
+                [
+                    'after'     => 'token',
+                    'nodefault' => true,
+                ],
+            );
+            $iterator = $DB->request(['FROM' => $table]);
+            foreach ($iterator as $row) {
+                $token_fields = json_decode((new GLPIKey())->decrypt($row['token']), true);
+                if (isset($token_fields['refresh_token'])) {
+                    $migration->addPostQuery(
+                        $DB->buildUpdate(
+                            $table,
+                            [
+                                'refresh_token' => (new GLPIKey())->encrypt($token_fields['refresh_token']),
+                            ],
+                            [
+                                'id' => $row['id'],
+                            ],
+                        ),
+                    );
                 }
             }
         }
