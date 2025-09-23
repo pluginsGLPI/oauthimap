@@ -66,11 +66,6 @@ if (is_callable($callback_callable)) {
     call_user_func_array($callback_callable, [$success, $authorization, $callback_params]);
 }
 
-// Redirect to application form/list if callback action does not exit yet
-if ($application->getFromDB($application_id)) {
-    $url = $application->getLinkURL();
-} else {
-    $url = $application->getSearchURL(true);
-}
+$url = $application->getFromDB($application_id) ? $application->getLinkURL() : $application->getSearchURL(true);
 
 Html::redirect($url);
