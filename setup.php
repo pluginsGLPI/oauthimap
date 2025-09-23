@@ -60,7 +60,7 @@ use function Safe\define;
  * -------------------------------------------------------------------------
  */
 
-define('PLUGIN_OAUTHIMAP_VERSION', '1.5.0-beta4');
+define('PLUGIN_OAUTHIMAP_VERSION', '1.5.0-beta5');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_OAUTHIMAP_MIN_GLPI', '11.0.0');
