@@ -28,13 +28,12 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
 header('Content-Type: text/html; charset=UTF-8');
 Html::header_nocache();
 
 Session::checkLoginUser();
 
-/** @var \DBmysql $DB */
+/** @var DBmysql $DB */
 global $DB;
 
 $iterator = $DB->request(
