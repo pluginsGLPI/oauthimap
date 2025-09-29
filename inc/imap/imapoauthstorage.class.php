@@ -31,8 +31,8 @@
 namespace GlpiPlugin\Oauthimap\Imap;
 
 use Laminas\Mail\Storage\Exception\ExceptionInterface;
-use Laminas\Mail\Storage\Exception\RuntimeException;
 use Laminas\Mail\Storage\Exception\InvalidArgumentException;
+use Laminas\Mail\Storage\Exception\RuntimeException;
 use Laminas\Mail\Storage\Imap;
 
 class ImapOauthStorage extends Imap

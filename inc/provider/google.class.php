@@ -31,8 +31,8 @@
 namespace GlpiPlugin\Oauthimap\Provider;
 
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
-use League\OAuth2\Client\Token\AccessToken;
 use League\OAuth2\Client\Provider\GoogleUser;
+use League\OAuth2\Client\Token\AccessToken;
 
 class Google extends \League\OAuth2\Client\Provider\Google implements ProviderInterface
 {

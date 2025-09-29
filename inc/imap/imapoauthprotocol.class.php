@@ -30,13 +30,13 @@
 
 namespace GlpiPlugin\Oauthimap\Imap;
 
-use Laminas\Mail\Protocol\Exception\RuntimeException;
 use Glpi\Mail\Protocol\ProtocolInterface;
+use Laminas\Mail\Protocol\Exception\RuntimeException;
 use Laminas\Mail\Protocol\Imap;
 use PluginOauthimapAuthorization;
 
-use function Safe\preg_match;
 use function Safe\fwrite;
+use function Safe\preg_match;
 
 class ImapOauthProtocol extends Imap implements ProtocolInterface
 {

@@ -27,14 +27,14 @@
  * @link      https://services.glpi-network.com
  * -------------------------------------------------------------------------
  */
+use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
+use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
 use League\OAuth2\Client\Token\AccessToken;
-use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
-use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 
-use function Safe\json_encode;
 use function Safe\json_decode;
+use function Safe\json_encode;
 
 class PluginOauthimapAuthorization extends CommonDBChild
 {
@@ -56,7 +56,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Oauth authorization', 'Oauth authorizations', $nb, 'oauthimap');
+        return _sn('Oauth authorization', 'Oauth authorizations', $nb, 'oauthimap');
     }
 
     public static function getIcon()
@@ -108,7 +108,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
         echo Html::hidden('id', ['value' => $item->getID()]);
         echo '<button type="submit" class="btn btn-primary" name="request_authorization" value="1">';
-        echo '<i class="fas fa-plus"></i> ' . __('Create an authorization', 'oauthimap');
+        echo '<i class="fas fa-plus"></i> ' . __s('Create an authorization', 'oauthimap');
         echo '</button>';
         echo '</div>';
         echo '</div>';
@@ -118,11 +118,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<table class="table table-striped table-hover my-4">';
         if ($iterator->count() === 0) {
-            echo '<tbody><tr><th>' . __('No authorizations.', 'oauthimap') . '</th></tr></tbody>';
+            echo '<tbody><tr><th>' . __s('No authorizations.', 'oauthimap') . '</th></tr></tbody>';
         } else {
             echo '<thead>';
             echo '<tr>';
-            echo '<th>' . __('Email', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Email', 'oauthimap') . '</th>';
             echo '<th></th>';
             echo '</tr>';
             echo '</thead>';
@@ -139,16 +139,16 @@ class PluginOauthimapAuthorization extends CommonDBChild
                     $modal_id,
                     self::getFormURLWithID($row['id']) . '&diagnose',
                     [
-                        'title'  => __('Connection diagnostic', 'oauthimap'),
+                        'title'  => __s('Connection diagnostic', 'oauthimap'),
                         'height' => 650,
                     ],
                 );
                 echo '<a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#' . $modal_id . '">';
-                echo '<i class="fas fa-bug"></i> ' . __('Diagnose', 'oauthimap');
+                echo '<i class="fas fa-bug"></i> ' . __s('Diagnose', 'oauthimap');
                 echo '</a>';
                 echo ' ';
                 echo '<a class="btn btn-primary btn-sm" href="' . self::getFormURLWithID($row['id']) . '">';
-                echo '<i class="fas fa-edit"></i> ' . __('Update', 'oauthimap');
+                echo '<i class="fas fa-edit"></i> ' . __s('Update', 'oauthimap');
                 echo '</a>';
                 echo ' ';
                 echo '<form method="POST" action="' . self::getFormURL() . '" style="display:inline-block;">';
@@ -156,7 +156,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 echo Html::hidden('id', ['value' => $row['id']]);
                 echo '<button type="submit" class="btn btn-primary btn-sm" name="delete" value="1">';
                 echo '<i class="fas fa-trash-alt"></i> ';
-                echo __('Delete', 'oauthimap');
+                echo __s('Delete', 'oauthimap');
                 echo '</button>';
                 echo '</form>';
                 echo '</td>';
@@ -179,10 +179,10 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<tr class="tab_bg_1">';
         echo '<td>';
-        echo __('Email', 'oauthimap');
+        echo __s('Email', 'oauthimap');
         echo ' ';
         echo Html::showToolTip(
-            __('This email address corresponds to the "user" field of the SASL XOAUTH2 authentication query.'),
+            __s('This email address corresponds to the "user" field of the SASL XOAUTH2 authentication query.'),
             ['display' => false],
         );
         echo '</td>';
@@ -235,7 +235,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<tr class="tab_bg_1">';
         echo '<td>';
-        echo __('Email', 'oauthimap');
+        echo __s('Email', 'oauthimap');
         echo '</td>';
         echo '<td colspan="3">';
         echo Html::input(
@@ -250,7 +250,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<tr class="tab_bg_1">';
         echo '<td>';
-        echo __('Server host', 'oauthimap');
+        echo __s('Server host', 'oauthimap');
         echo '</td>';
         echo '<td>';
         echo Html::input(
@@ -261,7 +261,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         );
         echo '</td>';
         echo '<td>';
-        echo __('Server port', 'oauthimap');
+        echo __s('Server port', 'oauthimap');
         echo '</td>';
         echo '<td>';
         echo Html::input(
@@ -278,15 +278,15 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<tr class="tab_bg_1">';
         echo '<td>';
-        echo __('Security level', 'oauthimap');
+        echo __s('Security level', 'oauthimap');
         echo '</td>';
         echo '<td>';
         echo Html::select(
             'ssl',
             [
                 ''    => '',
-                'SSL' => __('SSL', 'oauthimap'),
-                'TLS' => __('SSL + TLS', 'oauthimap'),
+                'SSL' => __s('SSL', 'oauthimap'),
+                'TLS' => __s('SSL + TLS', 'oauthimap'),
             ],
             [
                 'selected' => $ssl,
@@ -295,7 +295,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         );
         echo '</td>';
         echo '<td>';
-        echo __('Timeout', 'oauthimap');
+        echo __s('Timeout', 'oauthimap');
         echo '</td>';
         echo '<td>';
         echo Html::input(
@@ -314,7 +314,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo '<tr class="tab_bg_2">';
         echo '<td class="center" colspan="8">';
         echo Html::submit(
-            __('Refresh connection diagnostic', 'oauthimap'),
+            __s('Refresh connection diagnostic', 'oauthimap'),
             [
                 'name'  => 'diagnose',
                 'class' => 'btn btn-secondary',
@@ -327,7 +327,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo '<td colspan="8">';
         echo '<div style="color:red; font-weight:bold; background:rgba(127, 127, 127, 0.2); padding:5px; margin-top:10px;">';
         echo '<i class="fa fa-exclamation-triangle"></i>';
-        echo __('Diagnostic log contains sensitive information, such as the access token.', 'oauthimap');
+        echo __s('Diagnostic log contains sensitive information, such as the access token.', 'oauthimap');
         echo '</div>';
         $protocol = new ImapOauthProtocol($application->fields['id']);
         $protocol->enableDiagnostic();
@@ -346,7 +346,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo '</pre>';
         if ($error !== null) {
             echo '<div style="color:red; font-weight:bold;">';
-            echo sprintf(__('Unexpected error: %s', 'oauthimap'), $error->getMessage());
+            echo sprintf(__s('Unexpected error: %s', 'oauthimap'), $error->getMessage());
             echo '</div>';
         }
         echo '</td>';

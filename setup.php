@@ -127,7 +127,7 @@ function plugin_oauthimap_boot()
 function plugin_version_oauthimap()
 {
     return [
-        'name'         => __('OAuth IMAP', 'oauthimap'),
+        'name'         => __s('OAuth IMAP', 'oauthimap'),
         'version'      => PLUGIN_OAUTHIMAP_VERSION,
         'author'       => 'Teclib\'',
         'license'      => 'GPL v3+',

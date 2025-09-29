@@ -40,7 +40,7 @@ if (
 ) {
     // Got an error, probably user denied access
     Session::addMessageAfterRedirect(
-        sprintf(__('Authorization failed with error: %s', 'oauthimap'), $_GET['error_description'] ?? $_GET['error']),
+        sprintf(__s('Authorization failed with error: %s', 'oauthimap'), $_GET['error_description'] ?? $_GET['error']),
         false,
         ERROR,
     );
@@ -50,11 +50,11 @@ if (
     || !array_key_exists('oauth2state', $_SESSION)
     || $_GET['state'] !== $_SESSION['oauth2state']
 ) {
-    Session::addMessageAfterRedirect(__('Unable to verify authorization code', 'oauthimap'), false, ERROR);
+    Session::addMessageAfterRedirect(__s('Unable to verify authorization code', 'oauthimap'), false, ERROR);
 } elseif (!array_key_exists('code', $_GET)) {
-    Session::addMessageAfterRedirect(__('Unable to get authorization code', 'oauthimap'), false, ERROR);
+    Session::addMessageAfterRedirect(__s('Unable to get authorization code', 'oauthimap'), false, ERROR);
 } elseif (!$authorization->createFromCode($application_id, $_GET['code'])) {
-    Session::addMessageAfterRedirect(__('Unable to save authorization code', 'oauthimap'), false, ERROR);
+    Session::addMessageAfterRedirect(__s('Unable to save authorization code', 'oauthimap'), false, ERROR);
 } else {
     $success = true;
 }

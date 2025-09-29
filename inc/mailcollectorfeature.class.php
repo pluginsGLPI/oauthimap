@@ -364,7 +364,7 @@ JAVASCRIPT;
                 );
                 Session::addMessageAfterRedirect(
                     sprintf(
-                        __('Mail receiver "%s" has been updated.', 'oauthimap'),
+                        __s('Mail receiver "%s" has been updated.', 'oauthimap'),
                         $mailcollector->getName(),
                     ),
                 );
@@ -394,7 +394,7 @@ JAVASCRIPT;
             );
             Session::addMessageAfterRedirect(
                 sprintf(
-                    __('Mail receiver "%s" has been deactivated.', 'oauthimap'),
+                    __s('Mail receiver "%s" has been deactivated.', 'oauthimap'),
                     $mailcollector->getName(),
                 ),
             );
@@ -459,13 +459,13 @@ JAVASCRIPT;
 
         echo '<table class="tab_cadre_fixehov">';
         if (count($collectors) === 0) {
-            echo '<tr><th>' . __('No associated receivers.', 'oauthimap') . '</th></tr>';
+            echo '<tr><th>' . __s('No associated receivers.', 'oauthimap') . '</th></tr>';
         } else {
             echo '<tr>';
-            echo '<th>' . __('Name', 'oauthimap') . '</th>';
-            echo '<th>' . __('Connection string', 'oauthimap') . '</th>';
-            echo '<th>' . __('Login', 'oauthimap') . '</th>';
-            echo '<th>' . __('Is active ?', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Name', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Connection string', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Login', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Is active ?', 'oauthimap') . '</th>';
             echo '</tr>';
 
             foreach ($collectors as $row) {

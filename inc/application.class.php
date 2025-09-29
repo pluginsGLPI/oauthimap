@@ -42,7 +42,7 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public static function getTypeName($nb = 0)
     {
-        return _n('OAuth IMAP', 'OAuth IMAP', $nb, 'oauthimap');
+        return _sn('OAuth IMAP', 'OAuth IMAP', $nb, 'oauthimap');
     }
 
     public static function getMenuContent()
@@ -80,30 +80,30 @@ class PluginOauthimapApplication extends CommonDropdown
         return [
             [
                 'name'  => 'is_active',
-                'label' => __('Active'),
+                'label' => __s('Active'),
                 'type'  => 'bool',
             ],
             [
                 'name'  => 'provider',
-                'label' => __('Oauth provider', 'oauthimap'),
+                'label' => __s('Oauth provider', 'oauthimap'),
                 'type'  => 'oauth_provider',
                 'list'  => true,
             ],
             [
                 'name'  => 'client_id',
-                'label' => __('Client ID', 'oauthimap'),
+                'label' => __s('Client ID', 'oauthimap'),
                 'type'  => 'text',
                 'list'  => true,
             ],
             [
                 'name'  => 'client_secret',
-                'label' => __('Client secret', 'oauthimap'),
+                'label' => __s('Client secret', 'oauthimap'),
                 'type'  => 'secured_field',
                 'list'  => false,
             ],
             [
                 'name'     => 'tenant_id',
-                'label'    => __('Tenant ID', 'oauthimap'),
+                'label'    => __s('Tenant ID', 'oauthimap'),
                 'type'     => 'additionnal_param',
                 'list'     => false,
                 'provider' => Azure::class,
@@ -119,7 +119,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'         => '5',
             'table'      => $this->getTable(),
             'field'      => 'provider',
-            'name'       => __('Oauth provider', 'oauthimap'),
+            'name'       => __s('Oauth provider', 'oauthimap'),
             'searchtype' => ['equals', 'notequals'],
             'datatype'   => 'specific',
         ];
@@ -128,7 +128,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'       => '6',
             'table'    => $this->getTable(),
             'field'    => 'client_id',
-            'name'     => __('Client ID', 'oauthimap'),
+            'name'     => __s('Client ID', 'oauthimap'),
             'datatype' => 'text',
         ];
 
@@ -136,7 +136,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'       => '7',
             'table'    => $this->getTable(),
             'field'    => 'tenant_id',
-            'name'     => __('Tenant ID', 'oauthimap'),
+            'name'     => __s('Tenant ID', 'oauthimap'),
             'datatype' => 'text',
         ];
 
@@ -179,7 +179,7 @@ class PluginOauthimapApplication extends CommonDropdown
                     ],
                 );
 
-                echo '<a href="" target="_blank" class="help-link" title="' . __('Developer help for this provider', 'oauthimap') . '">';
+                echo '<a href="" target="_blank" class="help-link" title="' . __s('Developer help for this provider', 'oauthimap') . '">';
                 echo '<i class="fa fa-question-circle fa-2x" style="color: #FF9700; vertical-align: middle;"></i>';
                 echo '</a>';
 
@@ -343,7 +343,7 @@ JAVASCRIPT;
     private function prepareInput($input)
     {
         if (array_key_exists('name', $input) && empty(trim($input['name']))) {
-            Session::addMessageAfterRedirect(__('Name cannot be empty', 'oauthimap'), false, ERROR);
+            Session::addMessageAfterRedirect(__s('Name cannot be empty', 'oauthimap'), false, ERROR);
 
             return false;
         }
@@ -352,7 +352,7 @@ JAVASCRIPT;
             array_key_exists('provider', $input)
             && !in_array($input['provider'], self::getSupportedProviders())
         ) {
-            Session::addMessageAfterRedirect(__('Invalid provider', 'oauthimap'), false, ERROR);
+            Session::addMessageAfterRedirect(__s('Invalid provider', 'oauthimap'), false, ERROR);
 
             return false;
         }

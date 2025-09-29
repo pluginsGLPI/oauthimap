@@ -45,7 +45,7 @@ $iterator = $DB->request(
     ],
 );
 $authorizations = [
-    '-1' => __('Create authorization for another user', 'oauthimap'),
+    '-1' => __s('Create authorization for another user', 'oauthimap'),
 ];
 $value = -1;
 foreach ($iterator as $row) {
