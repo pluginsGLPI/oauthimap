@@ -40,7 +40,7 @@ if (
 ) {
     // Got an error, probably user denied access
     Session::addMessageAfterRedirect(
-        sprintf(__s('Authorization failed with error: %s', 'oauthimap'), $_GET['error_description'] ?? $_GET['error']),
+        sprintf(__s('Authorization failed with error: %s', 'oauthimap'), htmlspecialchars($_GET['error_description'] ?? $_GET['error'])),
         false,
         ERROR,
     );

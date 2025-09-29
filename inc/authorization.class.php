@@ -342,7 +342,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             $error = $e;
         }
         echo '<div style="font-family:monospace; white-space:pre-wrap; word-break:break-all;">';
-        echo $protocol->getDiagnosticLog();
+        echo htmlspecialchars($protocol->getDiagnosticLog());
         echo '</pre>';
         if ($error !== null) {
             echo '<div style="color:red; font-weight:bold;">';
