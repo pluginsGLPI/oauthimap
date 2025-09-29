@@ -30,6 +30,9 @@
 
 namespace GlpiPlugin\Oauthimap\Imap;
 
+use Laminas\Mail\Storage\Exception\ExceptionInterface;
+use Laminas\Mail\Storage\Exception\InvalidArgumentException;
+use Laminas\Mail\Storage\Exception\RuntimeException;
 use Laminas\Mail\Storage\Imap;
 
 class ImapOauthStorage extends Imap
@@ -46,25 +49,25 @@ class ImapOauthStorage extends Imap
             $this->protocol = $params;
             try {
                 $this->selectFolder('INBOX');
-            } catch (\Laminas\Mail\Storage\Exception\ExceptionInterface $e) {
-                throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
+            } catch (ExceptionInterface $e) {
+                throw new RuntimeException('cannot select INBOX, is this a valid transport?', 0, $e);
             }
 
             return;
         }
 
         if (!isset($params->application_id)) {
-            throw new \Laminas\Mail\Storage\Exception\InvalidArgumentException('Oauth credentials must be defined');
+            throw new InvalidArgumentException('Oauth credentials must be defined');
         }
 
         if (!isset($params->user)) {
-            throw new \Laminas\Mail\Storage\Exception\InvalidArgumentException('need at least user in params');
+            throw new InvalidArgumentException('need at least user in params');
         }
 
-        $host     = isset($params->host) ? $params->host : 'localhost';
+        $host     = $params->host ?? 'localhost';
         $password = ''; // No password used in Oauth process
-        $port     = isset($params->port) ? $params->port : null;
-        $ssl      = isset($params->ssl) ? $params->ssl : false;
+        $port     = $params->port ?? null;
+        $ssl      = $params->ssl ?? false;
 
         $this->protocol = new ImapOauthProtocol($params->application_id);
 
@@ -74,8 +77,8 @@ class ImapOauthStorage extends Imap
 
         $this->protocol->connect($host, $port, $ssl);
         if (!$this->protocol->login($params->user, $password)) {
-            throw new \Laminas\Mail\Storage\Exception\RuntimeException('cannot login, user or password wrong');
+            throw new RuntimeException('cannot login, user or password wrong');
         }
-        $this->selectFolder(isset($params->folder) ? $params->folder : 'INBOX');
+        $this->selectFolder($params->folder ?? 'INBOX');
     }
 }

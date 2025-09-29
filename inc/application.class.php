@@ -27,12 +27,14 @@
  * @link      https://services.glpi-network.com
  * -------------------------------------------------------------------------
  */
-
+use Glpi\Application\View\TemplateRenderer;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Provider\Azure;
 use GlpiPlugin\Oauthimap\Provider\Google;
 use GlpiPlugin\Oauthimap\Provider\ProviderInterface;
 use League\OAuth2\Client\Provider\AbstractProvider;
+
+use function Safe\json_encode;
 
 class PluginOauthimapApplication extends CommonDropdown
 {
@@ -40,7 +42,7 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public static function getTypeName($nb = 0)
     {
-        return _n('Oauth IMAP application', 'Oauth IMAP applications', $nb, 'oauthimap');
+        return _sn('OAuth IMAP', 'OAuth IMAP', $nb, 'oauthimap');
     }
 
     public static function getMenuContent()
@@ -48,7 +50,7 @@ class PluginOauthimapApplication extends CommonDropdown
         $menu = [];
         if (Config::canUpdate()) {
             $menu['title'] = self::getMenuName();
-            $menu['page']  = '/' . Plugin::getWebDir('oauthimap', false) . '/front/application.php';
+            $menu['page']  = '/plugins/oauthimap/front/application.php';
             $menu['icon']  = self::getIcon();
         }
         if (count($menu)) {
@@ -60,15 +62,15 @@ class PluginOauthimapApplication extends CommonDropdown
 
     public static function getIcon()
     {
-        return 'fas fa-sign-in-alt';
+        return 'ti ti-login-2';
     }
 
-    public static function canCreate()
+    public static function canCreate(): bool
     {
         return static::canUpdate();
     }
 
-    public static function canPurge()
+    public static function canPurge(): bool
     {
         return static::canUpdate();
     }
@@ -78,30 +80,30 @@ class PluginOauthimapApplication extends CommonDropdown
         return [
             [
                 'name'  => 'is_active',
-                'label' => __('Active'),
+                'label' => __s('Active'),
                 'type'  => 'bool',
             ],
             [
                 'name'  => 'provider',
-                'label' => __('Oauth provider', 'oauthimap'),
+                'label' => __s('Oauth provider', 'oauthimap'),
                 'type'  => 'oauth_provider',
                 'list'  => true,
             ],
             [
                 'name'  => 'client_id',
-                'label' => __('Client ID', 'oauthimap'),
+                'label' => __s('Client ID', 'oauthimap'),
                 'type'  => 'text',
                 'list'  => true,
             ],
             [
                 'name'  => 'client_secret',
-                'label' => __('Client secret', 'oauthimap'),
+                'label' => __s('Client secret', 'oauthimap'),
                 'type'  => 'secured_field',
                 'list'  => false,
             ],
             [
                 'name'     => 'tenant_id',
-                'label'    => __('Tenant ID', 'oauthimap'),
+                'label'    => __s('Tenant ID', 'oauthimap'),
                 'type'     => 'additionnal_param',
                 'list'     => false,
                 'provider' => Azure::class,
@@ -117,7 +119,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'         => '5',
             'table'      => $this->getTable(),
             'field'      => 'provider',
-            'name'       => __('Oauth provider', 'oauthimap'),
+            'name'       => __s('Oauth provider', 'oauthimap'),
             'searchtype' => ['equals', 'notequals'],
             'datatype'   => 'specific',
         ];
@@ -126,7 +128,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'       => '6',
             'table'    => $this->getTable(),
             'field'    => 'client_id',
-            'name'     => __('Client ID', 'oauthimap'),
+            'name'     => __s('Client ID', 'oauthimap'),
             'datatype' => 'text',
         ];
 
@@ -134,7 +136,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'       => '7',
             'table'    => $this->getTable(),
             'field'    => 'tenant_id',
-            'name'     => __('Tenant ID', 'oauthimap'),
+            'name'     => __s('Tenant ID', 'oauthimap'),
             'datatype' => 'text',
         ];
 
@@ -177,7 +179,7 @@ class PluginOauthimapApplication extends CommonDropdown
                     ],
                 );
 
-                echo '<a href="" target="_blank" class="help-link" title="' . __('Developer help for this provider', 'oauthimap') . '">';
+                echo '<a href="" target="_blank" class="help-link" title="' . __s('Developer help for this provider', 'oauthimap') . '">';
                 echo '<i class="fa fa-question-circle fa-2x" style="color: #FF9700; vertical-align: middle;"></i>';
                 echo '</a>';
 
@@ -207,7 +209,7 @@ JAVASCRIPT;
                     $field_name,
                     [
                         'autocomplete' => 'off',
-                        'value'        => Html::entities_deep((new GLPIKey())->decrypt($field_value)),
+                        'value'        => (new GLPIKey())->decrypt($field_value),
                     ],
                 );
                 break;
@@ -221,7 +223,7 @@ JAVASCRIPT;
                 );
                 break;
             default:
-                throw new \RuntimeException(sprintf('Unknown type %s.', $field_type));
+                throw new RuntimeException(sprintf('Unknown type %s.', $field_type));
         }
     }
 
@@ -287,53 +289,17 @@ JAVASCRIPT;
 
         $documentation_urls_json = json_encode(self::getProvidersDocumentationUrls());
 
-        // Display/hide additionnal params and update documentation link depending on selected provider
-        $additionnal_params_js = <<<JAVASCRIPT
-            (function($) {
-                var documentation_urls = {$documentation_urls_json};
+        $callback_url = self::getCallbackUrl();
 
-                var updateDocumentationLink = function () {
-                    var provider = $('#dropdown_provider{$rand}').val();
-
-                    var url = documentation_urls.hasOwnProperty(provider)
-                        ? documentation_urls[provider]
-                        : null;
-
-                    $('.help-link').attr('href', url).toggle(url !== null);
-                };
-
-                var onProviderChange = function () {
-                    var provider = $.escapeSelector($(this).val()); // escape selector as it contains slashes
-                    $('[data-provider="' + provider + '"]').closest('.form-field').show();
-                    $('[data-provider]:not([data-provider="' + provider + '"])').closest('.form-field').hide();
-
-                    updateDocumentationLink();
-                };
-
-                $('#dropdown_provider{$rand}').change(onProviderChange);
-                onProviderChange.call($('#dropdown_provider{$rand}'));
-            })(jQuery);
-JAVASCRIPT;
-
-        echo '<div class="form-field row col-12 col-sm-6 mb-2">';
-        echo Html::scriptBlock($additionnal_params_js);
-        echo '<label class="col-form-label col-xxl-5 text-xxl-end" for="_callback_url_' . $rand . '">';
-        echo __('Callback url', 'oauthimap');
-        echo ' <i class="fa fa-info pointer" title="' . __('copy it in the management console of provider', 'oauthimap') . '"></i>';
-        echo '</label>';
-        echo '<div class="col-xxl-7 field-container">';
-        echo '<div class="input-group flex-grow-1 copy_to_clipboard_wrapper">';
-        echo Html::input(
-            '',
+        echo TemplateRenderer::getInstance()->render(
+            '@oauthimap/application_form_extra.html.twig',
             [
-                'value'    => self::getCallbackUrl(),
-                'readonly' => 'readonly',
+                'rand'                 => $rand,
+                'callback_url'         => $callback_url,
+                'documentation_urls'   => self::getProvidersDocumentationUrls(),
+                'documentation_urls_json' => $documentation_urls_json,
             ],
         );
-        echo '<i class="input-group-text fa-lg pointer copy_to_clipboard_wrapper" role="button"></i>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
     }
 
     public function prepareInputForAdd($input)
@@ -377,7 +343,7 @@ JAVASCRIPT;
     private function prepareInput($input)
     {
         if (array_key_exists('name', $input) && empty(trim($input['name']))) {
-            Session::addMessageAfterRedirect(__('Name cannot be empty', 'oauthimap'), false, ERROR);
+            Session::addMessageAfterRedirect(__s('Name cannot be empty', 'oauthimap'), false, ERROR);
 
             return false;
         }
@@ -386,7 +352,7 @@ JAVASCRIPT;
             array_key_exists('provider', $input)
             && !in_array($input['provider'], self::getSupportedProviders())
         ) {
-            Session::addMessageAfterRedirect(__('Invalid provider', 'oauthimap'), false, ERROR);
+            Session::addMessageAfterRedirect(__s('Invalid provider', 'oauthimap'), false, ERROR);
 
             return false;
         }
@@ -439,7 +405,7 @@ JAVASCRIPT;
     public function redirectToAuthorizationUrl(?callable $callback_callable = null, array $callback_params = []): void
     {
         if (!$this->areCredentialsValid()) {
-            throw new \RuntimeException('Invalid credentials.');
+            throw new RuntimeException('Invalid credentials.');
         }
 
         $provider = $this->getProvider();
@@ -507,17 +473,17 @@ JAVASCRIPT;
         global $CFG_GLPI;
 
         if (!$this->areCredentialsValid()) {
-            throw new \RuntimeException('Invalid credentials.');
+            throw new RuntimeException('Invalid credentials.');
         }
 
         if (!is_a($this->fields['provider'], ProviderInterface::class, true)) {
-            throw new \RuntimeException(sprintf('Unknown provider %s.', $this->fields['provider']));
+            throw new RuntimeException(sprintf('Unknown provider %s.', $this->fields['provider']));
         }
 
         $params = [
             'clientId'     => $this->fields['client_id'],
             'clientSecret' => (new GLPIKey())->decrypt($this->fields['client_secret']),
-            'redirectUri'  => $this->getCallbackUrl(),
+            'redirectUri'  => self::getCallbackUrl(),
             'scope'        => self::getProviderScopes($this->fields['provider']),
         ];
 
@@ -604,7 +570,8 @@ JAVASCRIPT;
      */
     private static function getCallbackUrl(): string
     {
-        return Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
+        // @phpstan-ignore-next-line : getWebDir() is deprecated, but mandatory for this case
+        return @Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
     }
 
     public function cleanDBonPurge()
@@ -621,7 +588,7 @@ JAVASCRIPT;
      */
     public static function install(Migration $migration)
     {
-        /** @var \DBmysql $DB */
+        /** @var DBmysql $DB */
         global $DB;
 
         $default_charset   = DBConnection::getDefaultCharset();

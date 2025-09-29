@@ -28,13 +28,12 @@
  * -------------------------------------------------------------------------
  */
 
-include('../../../inc/includes.php');
 header('Content-Type: text/html; charset=UTF-8');
 Html::header_nocache();
 
 Session::checkLoginUser();
 
-/** @var \DBmysql $DB */
+/** @var DBmysql $DB */
 global $DB;
 
 $iterator = $DB->request(
@@ -46,7 +45,7 @@ $iterator = $DB->request(
     ],
 );
 $authorizations = [
-    '-1' => __('Create authorization for another user', 'oauthimap'),
+    '-1' => __s('Create authorization for another user', 'oauthimap'),
 ];
 $value = -1;
 foreach ($iterator as $row) {

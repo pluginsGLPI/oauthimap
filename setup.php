@@ -28,15 +28,20 @@
  * -------------------------------------------------------------------------
  */
 
-define('PLUGIN_OAUTHIMAP_VERSION', '1.4.4');
+use Glpi\Http\SessionManager;
+
+use function Safe\define;
+
+define('PLUGIN_OAUTHIMAP_VERSION', '1.5.0');
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_OAUTHIMAP_MIN_GLPI', '10.0.11');
+define('PLUGIN_OAUTHIMAP_MIN_GLPI', '11.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_OAUTHIMAP_MAX_GLPI', '10.0.99');
+define('PLUGIN_OAUTHIMAP_MAX_GLPI', '11.0.99');
 
 define('PLUGIN_OAUTHIMAP_ROOT', Plugin::getPhpDir('oauthimap'));
 
+use Glpi\Http\Firewall;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 
 function plugin_init_oauthimap()
@@ -46,9 +51,15 @@ function plugin_init_oauthimap()
 
     $PLUGIN_HOOKS['csrf_compliant']['oauthimap'] = true;
 
+    Firewall::addPluginStrategyForLegacyScripts(
+        'oauthimap',
+        '#^/front/authorization.callback.php$#',
+        Firewall::STRATEGY_NO_CHECK,
+    );
+
     if (Plugin::isPluginActive('oauthimap')) {
         // Config page: redirect to dropdown page
-        $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/config.form.php';
+        $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/application.php';
 
         // Menu link
         $PLUGIN_HOOKS['menu_toadd']['oauthimap'] = [
@@ -67,9 +78,7 @@ function plugin_init_oauthimap()
         $PLUGIN_HOOKS['post_item_form']['oauthimap'] = [PluginOauthimapHook::class, 'postItemForm'];
 
         // MailCollector hooks
-        $PLUGIN_HOOKS['mail_server_protocols']['oauthimap'] = function (array $additionnal_protocols) {
-            return array_merge($additionnal_protocols, MailCollectorFeature::getMailProtocols());
-        };
+        $PLUGIN_HOOKS['mail_server_protocols']['oauthimap'] = (fn(array $additionnal_protocols) => array_merge($additionnal_protocols, MailCollectorFeature::getMailProtocols()));
         $PLUGIN_HOOKS['pre_item_update']['oauthimap'] = [
             'MailCollector' => [MailCollectorFeature::class, 'forceMailCollectorUpdate'],
         ];
@@ -82,10 +91,15 @@ function plugin_init_oauthimap()
     }
 }
 
+function plugin_oauthimap_boot()
+{
+    SessionManager::registerPluginStatelessPath('oauthimap', '#/front/authorization\.callback\.php#');
+}
+
 function plugin_version_oauthimap()
 {
     return [
-        'name'         => __('Oauth IMAP', 'oauthimap'),
+        'name'         => __s('OAuth IMAP', 'oauthimap'),
         'version'      => PLUGIN_OAUTHIMAP_VERSION,
         'author'       => 'Teclib\'',
         'license'      => 'GPL v3+',

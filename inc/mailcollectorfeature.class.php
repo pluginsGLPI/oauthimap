@@ -36,12 +36,13 @@ use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
 use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 use Html;
 use MailCollector;
-use Plugin;
 use PluginOauthimapApplication;
 use PluginOauthimapAuthorization;
 use Session;
 
-class MailCollectorFeature
+use function Safe\preg_replace;
+
+class MailCollectorFeature extends CommonGLPI
 {
     public function getTabNameForItem(CommonGLPI $item, $withtemplate = 0)
     {
@@ -89,9 +90,7 @@ class MailCollectorFeature
 
         foreach ($values as $value) {
             $id             = $value['id'];
-            $protocol_class = function () use ($id) {
-                return new ImapOauthProtocol($id);
-            };
+            $protocol_class = (fn() => new ImapOauthProtocol($id));
             $storage_class = function (array $params) use ($id) {
                 $params['application_id'] = $id;
 
@@ -127,7 +126,6 @@ class MailCollectorFeature
     public static function alterMailCollectorForm(): void
     {
         $locator_id  = 'plugin_oauthimap_locator_' . mt_rand();
-        $plugin_path = Plugin::getWebDir('oauthimap');
 
         echo '<span id="' . $locator_id . '" style="display:none;"></span>';
         $javascript = <<<JAVASCRIPT
@@ -157,7 +155,7 @@ class MailCollectorFeature
 
                                 application_field.val(application_id);
                                 auth_field_container.load(
-                                    '{$plugin_path}/ajax/dropdownAuthorization.php',
+                                    '/plugins/oauthimap/ajax/dropdownAuthorization.php',
                                     {
                                         application_id: application_id,
                                         selected: login_field.val()
@@ -211,7 +209,7 @@ JAVASCRIPT;
             return true;
         }
 
-        if (!($item->input['plugin_oauthimap_applications_id'] > 0)) {
+        if ($item->input['plugin_oauthimap_applications_id'] <= 0) {
             // No application selected => mail collector does not use Oauth.
             // Return true to continue update.
             return true;
@@ -250,7 +248,7 @@ JAVASCRIPT;
         $applications_id   = $item->input['plugin_oauthimap_applications_id'];
         $authorizations_id = $item->input['plugin_oauthimap_authorizations_id'];
 
-        if (!($applications_id > 0)) {
+        if ($applications_id <= 0) {
             // No application selected => mail collector does not use Oauth.
             return;
         }
@@ -366,7 +364,7 @@ JAVASCRIPT;
                 );
                 Session::addMessageAfterRedirect(
                     sprintf(
-                        __('Mail receiver "%s" has been updated.', 'oauthimap'),
+                        __s('Mail receiver "%s" has been updated.', 'oauthimap'),
                         $mailcollector->getName(),
                     ),
                 );
@@ -396,7 +394,7 @@ JAVASCRIPT;
             );
             Session::addMessageAfterRedirect(
                 sprintf(
-                    __('Mail receiver "%s" has been deactivated.', 'oauthimap'),
+                    __s('Mail receiver "%s" has been deactivated.', 'oauthimap'),
                     $mailcollector->getName(),
                 ),
             );
@@ -461,13 +459,13 @@ JAVASCRIPT;
 
         echo '<table class="tab_cadre_fixehov">';
         if (count($collectors) === 0) {
-            echo '<tr><th>' . __('No associated receivers.', 'oauthimap') . '</th></tr>';
+            echo '<tr><th>' . __s('No associated receivers.', 'oauthimap') . '</th></tr>';
         } else {
             echo '<tr>';
-            echo '<th>' . __('Name', 'oauthimap') . '</th>';
-            echo '<th>' . __('Connection string', 'oauthimap') . '</th>';
-            echo '<th>' . __('Login', 'oauthimap') . '</th>';
-            echo '<th>' . __('Is active ?', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Name', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Connection string', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Login', 'oauthimap') . '</th>';
+            echo '<th>' . __s('Is active ?', 'oauthimap') . '</th>';
             echo '</tr>';
 
             foreach ($collectors as $row) {

@@ -31,8 +31,12 @@
 namespace GlpiPlugin\Oauthimap\Imap;
 
 use Glpi\Mail\Protocol\ProtocolInterface;
+use Laminas\Mail\Protocol\Exception\RuntimeException;
 use Laminas\Mail\Protocol\Imap;
 use PluginOauthimapAuthorization;
+
+use function Safe\fwrite;
+use function Safe\preg_match;
 
 class ImapOauthProtocol extends Imap implements ProtocolInterface
 {
@@ -121,15 +125,14 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         $this->socket = $this->setupSocket($transport, $host, $port, $this->timeout);
 
         if (!$this->assumedNextLine('* OK')) {
-            throw new \Laminas\Mail\Protocol\Exception\RuntimeException('host doesn\'t allow connection');
+            throw new RuntimeException('host doesn\'t allow connection');
         }
 
         if ($isTls) {
             $result = $this->requestAndResponse('STARTTLS');
-            /** @phpstan-ignore-next-line  */
             $result = $result && stream_socket_enable_crypto($this->socket, true, $this->getCryptoMethod());
             if (!$result) {
-                throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot enable TLS');
+                throw new RuntimeException('cannot enable TLS');
             }
         }
     }
@@ -164,7 +167,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
                 ) {
                     return false;
                 }
-                if (preg_match('/^OK /i', $response)) {
+                if (preg_match('/^OK /i', $response) !== 0) {
                     return true;
                 }
             }
@@ -188,12 +191,10 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         foreach ($tokens as $token) {
             if (is_array($token)) {
                 $tosend = $line . ' ' . $token[0] . "\r\n";
-                if (fwrite($this->socket, $tosend) === false) {
-                    throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot write - connection closed?');
-                }
+                fwrite($this->socket, $tosend);
                 $this->addToDiagnosticLog($tosend, self::DIAGNOSTIC_PREFIX_SENT);
                 if (!$this->assumedNextLine('+ ')) {
-                    throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot send literal string');
+                    throw new RuntimeException('cannot send literal string');
                 }
                 $line = $token[1];
             } else {
@@ -202,9 +203,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         }
 
         $tosend = $line . "\r\n";
-        if (fwrite($this->socket, $line . "\r\n") === false) {
-            throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot write - connection closed?');
-        }
+        fwrite($this->socket, $line . "\r\n");
         $this->addToDiagnosticLog($tosend, self::DIAGNOSTIC_PREFIX_SENT);
     }
 
@@ -217,7 +216,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
     {
         $line = fgets($this->socket);
         if ($line === false) {
-            throw new \Laminas\Mail\Protocol\Exception\RuntimeException('cannot read - connection closed?');
+            throw new RuntimeException('cannot read - connection closed?');
         }
         $this->addToDiagnosticLog($line, self::DIAGNOSTIC_PREFIX_RECEIVED);
 
