@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-09-12 13:10+0000\n"
+"POT-Creation-Date: 2025-09-30 01:26+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: feonsu <feonsu@gmail.com>, 2023\n"
 "Language-Team: Slovak (Slovakia) (https://app.transifex.com/teclib/teams/28042/sk_SK/)\n"
@@ -21,114 +21,77 @@ msgstr ""
 "Language: sk_SK\n"
 "Plural-Forms: nplurals=4; plural=(n % 1 == 0 && n == 1 ? 0 : n % 1 == 0 && n >= 2 && n <= 4 ? 1 : n % 1 != 0 ? 2: 3);\n"
 
-#: front/authorization.callback.php:64
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Autorizácia zlyhala s chybou: %s"
-
-#: inc/application.class.php:323
+#: templates/application_form_extra.html.twig
 msgid "Callback url"
 msgstr "URL adresa spätného volania"
 
-#: inc/application.class.php:92 inc/application.class.php:129
+#: setup.php:102 inc/application.class.php:45
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: inc/application.class.php:88 inc/application.class.php:122
+msgid "Oauth provider"
+msgstr "Oauth poskytovateľ"
+
+#: inc/application.class.php:94 inc/application.class.php:131
 msgid "Client ID"
 msgstr "ID klienta"
 
-#: inc/application.class.php:98
+#: inc/application.class.php:100
 msgid "Client secret"
 msgstr "Tajný kľúč klienta"
 
-#: inc/authorization.class.php:134
-msgid "Connection diagnostic"
-msgstr "Diagnostika pripojenia"
+#: inc/application.class.php:106 inc/application.class.php:139
+msgid "Tenant ID"
+msgstr "ID tenantu"
 
-#: inc/mailcollectorfeature.class.php:471
-msgid "Connection string"
-msgstr "Reťazec pripojenia"
-
-#: inc/authorization.class.php:103
-msgid "Create an authorization"
-msgstr "Vytvoriť autorizáciu"
-
-#: ajax/dropdownAuthorization.php:49
-msgid "Create authorization for another user"
-msgstr "Vytvoriť autorizáciu pre iného používateľa"
-
-#: inc/authorization.class.php:151
-msgid "Delete"
-msgstr "Odstrániť"
-
-#: inc/application.class.php:180
+#: inc/application.class.php:182
 msgid "Developer help for this provider"
 msgstr "Nápoveda vývojára pre tohto poskytovateľa"
 
-#: inc/authorization.class.php:139
-msgid "Diagnose"
-msgstr "Diagnostika"
+#: inc/application.class.php:346
+msgid "Name cannot be empty"
+msgstr "Názov nemôže byť prázdny"
 
-#: inc/authorization.class.php:322
-msgid ""
-"Diagnostic log contains sensitive information, such as the access token."
-msgstr ""
-"Diagnostický log obsahuje citlivé informácie, ako napríklad prístupový "
-"token."
-
-#: inc/authorization.class.php:117 inc/authorization.class.php:174
-#: inc/authorization.class.php:230
-msgid "Email"
-msgstr "E-mail"
-
-#: inc/application.class.php:390
+#: inc/application.class.php:355
 msgid "Invalid provider"
 msgstr "Neplatný poskytovateľ"
 
-#: inc/mailcollectorfeature.class.php:473
-msgid "Is active ?"
-msgstr "Je aktívny?"
-
-#: inc/mailcollectorfeature.class.php:472
-msgid "Login"
-msgstr "Prihlásenie"
-
-#: inc/mailcollectorfeature.class.php:402
-#, php-format
-msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "E-mailový prijímač \"%s\" bol deaktivovaný."
-
-#: inc/mailcollectorfeature.class.php:372
+#: inc/mailcollectorfeature.class.php:367
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
 msgstr "E-mailový prijímač \"%s\" bol aktualizovaný."
 
-#: inc/mailcollectorfeature.class.php:470
-msgid "Name"
-msgstr "Názov"
+#: inc/mailcollectorfeature.class.php:397
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr "E-mailový prijímač \"%s\" bol deaktivovaný."
 
-#: inc/application.class.php:381
-msgid "Name cannot be empty"
-msgstr "Názov nemôže byť prázdny"
-
-#: inc/mailcollectorfeature.class.php:467
+#: inc/mailcollectorfeature.class.php:462
 msgid "No associated receivers."
 msgstr "Žiadne priradené prijímače."
 
-#: inc/authorization.class.php:113
-msgid "No authorizations."
-msgstr "Žiadne autorizácie."
+#: inc/mailcollectorfeature.class.php:465
+msgid "Name"
+msgstr "Názov"
 
-#: setup.php:88
-msgid "Oauth IMAP"
-msgstr "Oauth IMAP"
+#: inc/mailcollectorfeature.class.php:466
+msgid "Connection string"
+msgstr "Reťazec pripojenia"
 
-#: inc/application.class.php:43
-msgid "Oauth IMAP application"
-msgid_plural "Oauth IMAP applications"
-msgstr[0] "Oauth IMAP aplikácia"
-msgstr[1] "Oauth IMAP aplikácie"
-msgstr[2] "Oauth IMAP aplikácie"
-msgstr[3] "Oauth IMAP aplikácie"
+#: inc/mailcollectorfeature.class.php:467
+msgid "Login"
+msgstr "Prihlásenie"
 
-#: inc/authorization.class.php:57
+#: inc/mailcollectorfeature.class.php:468
+msgid "Is active ?"
+msgstr "Je aktívny?"
+
+#: inc/authorization.class.php:59
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] "Oauth autorizácia"
@@ -136,63 +99,92 @@ msgstr[1] "Oauth autorizácie"
 msgstr[2] "Oauth autorizácie"
 msgstr[3] "Oauth autorizácie"
 
-#: inc/application.class.php:86 inc/application.class.php:120
-msgid "Oauth provider"
-msgstr "Oauth poskytovateľ"
+#: inc/authorization.class.php:111
+msgid "Create an authorization"
+msgstr "Vytvoriť autorizáciu"
 
-#: inc/authorization.class.php:309
-msgid "Refresh connection diagnostic"
-msgstr "Obnoviť diagnostiku pripojenia"
+#: inc/authorization.class.php:121
+msgid "No authorizations."
+msgstr "Žiadne autorizácie."
 
-#: inc/authorization.class.php:280
-msgid "SSL"
-msgstr "SSL"
+#: inc/authorization.class.php:125 inc/authorization.class.php:182
+#: inc/authorization.class.php:238
+msgid "Email"
+msgstr "E-mail"
 
-#: inc/authorization.class.php:281
-msgid "SSL + TLS"
-msgstr "SSL + TLS"
+#: inc/authorization.class.php:142
+msgid "Connection diagnostic"
+msgstr "Diagnostika pripojenia"
 
-#: inc/authorization.class.php:273
-msgid "Security level"
-msgstr "Úroveň zabezpečenia"
+#: inc/authorization.class.php:147
+msgid "Diagnose"
+msgstr "Diagnostika"
 
-#: inc/authorization.class.php:245
+#: inc/authorization.class.php:151
+msgid "Update"
+msgstr "Aktualizovať"
+
+#: inc/authorization.class.php:159
+msgid "Delete"
+msgstr "Odstrániť"
+
+#: inc/authorization.class.php:253
 msgid "Server host"
 msgstr "Názov servera"
 
-#: inc/authorization.class.php:256
+#: inc/authorization.class.php:264
 msgid "Server port"
 msgstr "Port servera"
 
-#: inc/application.class.php:104 inc/application.class.php:137
-msgid "Tenant ID"
-msgstr "ID tenantu"
+#: inc/authorization.class.php:281
+msgid "Security level"
+msgstr "Úroveň zabezpečenia"
 
-#: inc/authorization.class.php:290
+#: inc/authorization.class.php:288
+msgid "SSL"
+msgstr "SSL"
+
+#: inc/authorization.class.php:289
+msgid "SSL + TLS"
+msgstr "SSL + TLS"
+
+#: inc/authorization.class.php:298
 msgid "Timeout"
 msgstr "Časový limit"
 
-#: front/authorization.callback.php:76
-msgid "Unable to get authorization code"
-msgstr "Nepodarilo sa získať autorizačný kód"
+#: inc/authorization.class.php:317
+msgid "Refresh connection diagnostic"
+msgstr "Obnoviť diagnostiku pripojenia"
 
-#: front/authorization.callback.php:78
-msgid "Unable to save authorization code"
-msgstr "Nepodarilo sa uložiť autorizačný kód"
+#: inc/authorization.class.php:330
+msgid ""
+"Diagnostic log contains sensitive information, such as the access token."
+msgstr ""
+"Diagnostický log obsahuje citlivé informácie, ako napríklad prístupový "
+"token."
 
-#: front/authorization.callback.php:74
-msgid "Unable to verify authorization code"
-msgstr "Nepodarilo sa overiť autorizačný kód"
-
-#: inc/authorization.class.php:341
+#: inc/authorization.class.php:349
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Neočakávaná chyba: %s"
 
-#: inc/authorization.class.php:143
-msgid "Update"
-msgstr "Aktualizovať"
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Autorizácia zlyhala s chybou: %s"
 
-#: inc/application.class.php:324
-msgid "copy it in the management console of provider"
-msgstr "skopírujte ju do konzoly na správu poskytovateľa"
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Nepodarilo sa overiť autorizačný kód"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Nepodarilo sa získať autorizačný kód"
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "Nepodarilo sa uložiť autorizačný kód"
+
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Vytvoriť autorizáciu pre iného používateľa"
