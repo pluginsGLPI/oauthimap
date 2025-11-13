@@ -56,6 +56,8 @@ class Azure extends \TheNetworg\OAuth2\Client\Provider\Azure implements Provider
             $owner_details->email = $email;
         } elseif (($upn = $owner->claim('upn')) !== null) {
             $owner_details->email = $upn;
+        } elseif (($preferred_username = $owner->claim('preferred_username')) !== null) {
+            $owner_details->email = $preferred_username;
         }
         $owner_details->firstname = $owner->getFirstName();
         $owner_details->lastname  = $owner->getLastName();

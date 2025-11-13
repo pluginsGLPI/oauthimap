@@ -534,7 +534,7 @@ JAVASCRIPT;
         switch ($provider) {
             case Azure::class:
                 $scopes = [
-                    'openid', 'email', // required to be able to fetch owner details
+                    'openid', 'profile', 'email', // required to be able to fetch owner details
                     'offline_access',
                     'https://outlook.office.com/IMAP.AccessAsUser.All',
                 ];
