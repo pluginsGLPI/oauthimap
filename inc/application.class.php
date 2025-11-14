@@ -534,9 +534,11 @@ JAVASCRIPT;
         switch ($provider) {
             case Azure::class:
                 $scopes = [
-                    'openid', 'profile', 'email', // required to be able to fetch owner details
-                    'offline_access',
-                    'https://outlook.office.com/IMAP.AccessAsUser.All',
+                    'openid', // OpenID Connect authentication
+                    'profile', // Required to get 'preferred_username' claim when 'email' is not available
+                    'email', // Required to get user email address
+                    'offline_access', // Required to get refresh token
+                    'https://outlook.office.com/IMAP.AccessAsUser.All', // IMAP access
                 ];
                 break;
             case Google::class:
