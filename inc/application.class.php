@@ -91,7 +91,7 @@ class PluginOauthimapApplication extends CommonDropdown
             ],
             [
                 'name'  => 'client_id',
-                'label' => __s('Client ID', 'oauthimap'),
+                'label' => __('Client ID', 'oauthimap'),
                 'type'  => 'text',
                 'list'  => true,
             ],
@@ -128,7 +128,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'       => '6',
             'table'    => $this->getTable(),
             'field'    => 'client_id',
-            'name'     => __s('Client ID', 'oauthimap'),
+            'name'     => __('Client ID', 'oauthimap'),
             'datatype' => 'text',
         ];
 
