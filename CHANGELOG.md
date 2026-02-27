@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [1.5.0] - 2025-09-29
 
+## Fixed
+- Fix missing icon and fix escape HTML special chars
+
+## [1.5.0] - 2025-09-29
+
 ### Added
 
 - GLPI 11 compatibility
