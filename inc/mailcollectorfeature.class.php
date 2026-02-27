@@ -57,7 +57,7 @@ class MailCollectorFeature extends CommonGLPI
                 $count = count($collectors);
             }
 
-            return CommonGLPI::createTabEntry(MailCollector::getTypeName(Session::getPluralNumber()), $count);
+            return CommonGLPI::createTabEntry(MailCollector::getTypeName(Session::getPluralNumber()), $count, MailCollector::class, MailCollector::getIcon());
         }
 
         return '';
