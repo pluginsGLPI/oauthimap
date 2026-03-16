@@ -22,7 +22,7 @@ It permits emails fetching from G Suite and Azure AD mailboxes.
    <homepage>https://github.com/pluginsGLPI/oauthimap/</homepage>
    <download>https://github.com/pluginsGLPI/oauthimap/releases</download>
    <issues>https://github.com/pluginsGLPI/oauthimap/issues</issues>
-   <readme>https://glpi-plugins.readthedocs.io/en/latest/oauthimap/index.html</readme>
+   <readme>https://help.glpi-project.org/doc-plugins/oauthimap</readme>
    <authors>
       <author>TECLIB'</author>
    </authors>
