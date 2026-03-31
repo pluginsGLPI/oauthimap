@@ -208,6 +208,7 @@ JAVASCRIPT;
                 echo Html::input(
                     $field_name,
                     [
+                        'type'         => 'password',
                         'autocomplete' => 'off',
                         'value'        => (new GLPIKey())->decrypt($field_value),
                     ],
