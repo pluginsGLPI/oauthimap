@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-14 03:32+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Peter Rundqvist, 2025\n"
 "Language-Team: Swedish (Sweden) (https://app.transifex.com/teclib/teams/28042/sv_SE/)\n"
@@ -25,39 +25,32 @@ msgstr ""
 msgid "Callback url"
 msgstr "Callback-URL"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Skapa auktorisering för en annan användare"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
 msgstr[0] "OAuth IMAP"
 msgstr[1] "OAuth IMAP"
 
-#: inc/application.class.php:88 inc/application.class.php:122
-msgid "Oauth provider"
-msgstr "OAuth-leverantör"
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Auktorisering misslyckades. Felbeskrivning: %s"
 
-#: inc/application.class.php:94 inc/application.class.php:131
-msgid "Client ID"
-msgstr "Klient-ID"
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Det gick inte att verifiera auktoriseringskoden"
 
-#: inc/application.class.php:100
-msgid "Client secret"
-msgstr "Klienthemlighet"
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Det gick inte att hämta auktoriseringskoden"
 
-#: inc/application.class.php:106 inc/application.class.php:139
-msgid "Tenant ID"
-msgstr "Tenant-ID"
-
-#: inc/application.class.php:182
-msgid "Developer help for this provider"
-msgstr "Hjälp för utvecklare för denna leverantör"
-
-#: inc/application.class.php:346
-msgid "Name cannot be empty"
-msgstr "Namnet får inte vara tomt"
-
-#: inc/application.class.php:355
-msgid "Invalid provider"
-msgstr "Ogiltig leverantör"
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "Det gick inte att spara auktoriseringskoden"
 
 #: inc/mailcollectorfeature.class.php:367
 #, php-format
@@ -164,23 +157,30 @@ msgstr ""
 msgid "Unexpected error: %s"
 msgstr "Oväntat fel: %s"
 
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Auktorisering misslyckades. Felbeskrivning: %s"
+#: inc/application.class.php:88 inc/application.class.php:122
+msgid "Oauth provider"
+msgstr "OAuth-leverantör"
 
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "Det gick inte att verifiera auktoriseringskoden"
+#: inc/application.class.php:94 inc/application.class.php:131
+msgid "Client ID"
+msgstr "Klient-ID"
 
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "Det gick inte att hämta auktoriseringskoden"
+#: inc/application.class.php:100
+msgid "Client secret"
+msgstr "Klienthemlighet"
 
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "Det gick inte att spara auktoriseringskoden"
+#: inc/application.class.php:106 inc/application.class.php:139
+msgid "Tenant ID"
+msgstr "Tenant-ID"
 
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Skapa auktorisering för en annan användare"
+#: inc/application.class.php:182
+msgid "Developer help for this provider"
+msgstr "Hjälp för utvecklare för denna leverantör"
+
+#: inc/application.class.php:347
+msgid "Name cannot be empty"
+msgstr "Namnet får inte vara tomt"
+
+#: inc/application.class.php:356
+msgid "Invalid provider"
+msgstr "Ogiltig leverantör"

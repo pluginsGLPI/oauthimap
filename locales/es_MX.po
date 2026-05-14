@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-26 02:00+0000\n"
+"POT-Creation-Date: 2026-05-14 03:32+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Edwin Elias Alvarez <sistemas@cyalimentos.com>, 2026\n"
 "Language-Team: Spanish (Mexico) (https://app.transifex.com/teclib/teams/28042/es_MX/)\n"
@@ -26,6 +26,10 @@ msgstr ""
 msgid "Callback url"
 msgstr "URL de redirección"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Crear autorización para otra cuenta"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
@@ -33,33 +37,22 @@ msgstr[0] "OAuth IMAP"
 msgstr[1] "OAuth IMAP"
 msgstr[2] "OAuth IMAP"
 
-#: inc/application.class.php:88 inc/application.class.php:122
-msgid "Oauth provider"
-msgstr "Proveedor"
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "La autorización falló con error: %s"
 
-#: inc/application.class.php:94 inc/application.class.php:131
-msgid "Client ID"
-msgstr "Id. de aplicación - cliente"
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "No se puede verificar el código de autorización"
 
-#: inc/application.class.php:100
-msgid "Client secret"
-msgstr "Frase secreta de cliente"
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "No se puede obtener el código de autorización"
 
-#: inc/application.class.php:106 inc/application.class.php:139
-msgid "Tenant ID"
-msgstr "Id. de directorio"
-
-#: inc/application.class.php:182
-msgid "Developer help for this provider"
-msgstr "Ayuda para desarrolladores de este proveedor"
-
-#: inc/application.class.php:346
-msgid "Name cannot be empty"
-msgstr "El campo nombre no puede estar vacío"
-
-#: inc/application.class.php:355
-msgid "Invalid provider"
-msgstr "Proveedor no válido"
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "No se puede guardar el código de autorización"
 
 #: inc/mailcollectorfeature.class.php:367
 #, php-format
@@ -167,23 +160,30 @@ msgstr ""
 msgid "Unexpected error: %s"
 msgstr "Error inesperado: %s"
 
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "La autorización falló con error: %s"
+#: inc/application.class.php:88 inc/application.class.php:122
+msgid "Oauth provider"
+msgstr "Proveedor"
 
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "No se puede verificar el código de autorización"
+#: inc/application.class.php:94 inc/application.class.php:131
+msgid "Client ID"
+msgstr "Id. de aplicación - cliente"
 
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "No se puede obtener el código de autorización"
+#: inc/application.class.php:100
+msgid "Client secret"
+msgstr "Frase secreta de cliente"
 
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "No se puede guardar el código de autorización"
+#: inc/application.class.php:106 inc/application.class.php:139
+msgid "Tenant ID"
+msgstr "Id. de directorio"
 
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Crear autorización para otra cuenta"
+#: inc/application.class.php:182
+msgid "Developer help for this provider"
+msgstr "Ayuda para desarrolladores de este proveedor"
+
+#: inc/application.class.php:347
+msgid "Name cannot be empty"
+msgstr "El campo nombre no puede estar vacío"
+
+#: inc/application.class.php:356
+msgid "Invalid provider"
+msgstr "Proveedor no válido"
