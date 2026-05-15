@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-15 03:35+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Eduardo Mozart de Oliveira <eduardomozart182@gmail.com>, 2024\n"
 "Language-Team: Portuguese (Brazil) (https://app.transifex.com/teclib/teams/28042/pt_BR/)\n"
@@ -29,12 +29,33 @@ msgstr ""
 msgid "Callback url"
 msgstr "URL de callback"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Criar autorização para outro usuário"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Falha na autorização com erro: %s"
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Não é possível verificar o código de autorização"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Incapaz de obter código de autorização"
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "Incapaz de salvar código de autorização"
 
 #: inc/application.class.php:88 inc/application.class.php:122
 msgid "Oauth provider"
@@ -56,11 +77,11 @@ msgstr "ID do Cliente"
 msgid "Developer help for this provider"
 msgstr "Ajuda do desenvolvedor para este provedor"
 
-#: inc/application.class.php:346
+#: inc/application.class.php:347
 msgid "Name cannot be empty"
 msgstr "O nome não pode ser vazio"
 
-#: inc/application.class.php:355
+#: inc/application.class.php:356
 msgid "Invalid provider"
 msgstr "Provedor inválido"
 
@@ -169,24 +190,3 @@ msgstr ""
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Erro inesperado: %s"
-
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Falha na autorização com erro: %s"
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "Não é possível verificar o código de autorização"
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "Incapaz de obter código de autorização"
-
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "Incapaz de salvar código de autorização"
-
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Criar autorização para outro usuário"

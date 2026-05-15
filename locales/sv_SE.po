@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-15 03:35+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Peter Rundqvist, 2025\n"
 "Language-Team: Swedish (Sweden) (https://app.transifex.com/teclib/teams/28042/sv_SE/)\n"
@@ -25,11 +25,32 @@ msgstr ""
 msgid "Callback url"
 msgstr "Callback-URL"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Skapa auktorisering för en annan användare"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
 msgstr[0] "OAuth IMAP"
 msgstr[1] "OAuth IMAP"
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Auktorisering misslyckades. Felbeskrivning: %s"
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Det gick inte att verifiera auktoriseringskoden"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Det gick inte att hämta auktoriseringskoden"
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "Det gick inte att spara auktoriseringskoden"
 
 #: inc/application.class.php:88 inc/application.class.php:122
 msgid "Oauth provider"
@@ -51,11 +72,11 @@ msgstr "Tenant-ID"
 msgid "Developer help for this provider"
 msgstr "Hjälp för utvecklare för denna leverantör"
 
-#: inc/application.class.php:346
+#: inc/application.class.php:347
 msgid "Name cannot be empty"
 msgstr "Namnet får inte vara tomt"
 
-#: inc/application.class.php:355
+#: inc/application.class.php:356
 msgid "Invalid provider"
 msgstr "Ogiltig leverantör"
 
@@ -163,24 +184,3 @@ msgstr ""
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Oväntat fel: %s"
-
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Auktorisering misslyckades. Felbeskrivning: %s"
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "Det gick inte att verifiera auktoriseringskoden"
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "Det gick inte att hämta auktoriseringskoden"
-
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "Det gick inte att spara auktoriseringskoden"
-
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Skapa auktorisering för en annan användare"

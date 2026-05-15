@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-15 03:35+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Cédric Anne, 2021\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/teclib/teams/28042/en_GB/)\n"
@@ -25,11 +25,32 @@ msgstr ""
 msgid "Callback url"
 msgstr "Callback url"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Create authorization for another user"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
 msgstr[0] ""
 msgstr[1] ""
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Authorization failed with error: %s"
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Unable to verify authorization code"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Unable to get authorization code"
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "Unable to save authorization code"
 
 #: inc/application.class.php:88 inc/application.class.php:122
 msgid "Oauth provider"
@@ -51,11 +72,11 @@ msgstr "Tenant ID"
 msgid "Developer help for this provider"
 msgstr "Developer help for this provider"
 
-#: inc/application.class.php:346
+#: inc/application.class.php:347
 msgid "Name cannot be empty"
 msgstr "Name cannot be empty"
 
-#: inc/application.class.php:355
+#: inc/application.class.php:356
 msgid "Invalid provider"
 msgstr "Invalid provider"
 
@@ -162,24 +183,3 @@ msgstr ""
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Unexpected error: %s"
-
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Authorization failed with error: %s"
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "Unable to verify authorization code"
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "Unable to get authorization code"
-
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "Unable to save authorization code"
-
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Create authorization for another user"

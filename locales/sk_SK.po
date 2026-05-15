@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-15 03:35+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: feonsu <feonsu@gmail.com>, 2023\n"
 "Language-Team: Slovak (Slovakia) (https://app.transifex.com/teclib/teams/28042/sk_SK/)\n"
@@ -25,6 +25,10 @@ msgstr ""
 msgid "Callback url"
 msgstr "URL adresa spätného volania"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Vytvoriť autorizáciu pre iného používateľa"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
@@ -32,6 +36,23 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Autorizácia zlyhala s chybou: %s"
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Nepodarilo sa overiť autorizačný kód"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Nepodarilo sa získať autorizačný kód"
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "Nepodarilo sa uložiť autorizačný kód"
 
 #: inc/application.class.php:88 inc/application.class.php:122
 msgid "Oauth provider"
@@ -53,11 +74,11 @@ msgstr "ID tenantu"
 msgid "Developer help for this provider"
 msgstr "Nápoveda vývojára pre tohto poskytovateľa"
 
-#: inc/application.class.php:346
+#: inc/application.class.php:347
 msgid "Name cannot be empty"
 msgstr "Názov nemôže byť prázdny"
 
-#: inc/application.class.php:355
+#: inc/application.class.php:356
 msgid "Invalid provider"
 msgstr "Neplatný poskytovateľ"
 
@@ -167,24 +188,3 @@ msgstr ""
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Neočakávaná chyba: %s"
-
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Autorizácia zlyhala s chybou: %s"
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "Nepodarilo sa overiť autorizačný kód"
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "Nepodarilo sa získať autorizačný kód"
-
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "Nepodarilo sa uložiť autorizačný kód"
-
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Vytvoriť autorizáciu pre iného používateľa"
