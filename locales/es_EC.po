@@ -4,16 +4,16 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Jairo Cervantes, 2023
+# Soporte Infraestructura Standby, 2023
 # 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-15 03:35+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
-"Last-Translator: Jairo Cervantes, 2023\n"
+"Last-Translator: Soporte Infraestructura Standby, 2023\n"
 "Language-Team: Spanish (Ecuador) (https://app.transifex.com/teclib/teams/28042/es_EC/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -25,12 +25,33 @@ msgstr ""
 msgid "Callback url"
 msgstr "URL de devolución de llamada"
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr "Crear autorización para otro usuario"
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Autorización fallida con error:%s"
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "No se puede verificar el código de autorización"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "No se puede obtener el código de autorización"
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr "No se puede guardar el código de autorización"
 
 #: inc/application.class.php:88 inc/application.class.php:122
 msgid "Oauth provider"
@@ -52,11 +73,11 @@ msgstr "ID de inquilino"
 msgid "Developer help for this provider"
 msgstr "Ayuda para desarrolladores de este proveedor"
 
-#: inc/application.class.php:346
+#: inc/application.class.php:347
 msgid "Name cannot be empty"
 msgstr "El nombre no puede estar vacío"
 
-#: inc/application.class.php:355
+#: inc/application.class.php:356
 msgid "Invalid provider"
 msgstr "Proveedor no válido"
 
@@ -165,24 +186,3 @@ msgstr ""
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Error inesperado:%s"
-
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Autorización fallida con error:%s"
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "No se puede verificar el código de autorización"
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "No se puede obtener el código de autorización"
-
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr "No se puede guardar el código de autorización"
-
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
-msgstr "Crear autorización para otro usuario"

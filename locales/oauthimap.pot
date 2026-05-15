@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-02-02 02:23+0000\n"
+"POT-Creation-Date: 2026-05-15 03:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -22,11 +22,32 @@ msgstr ""
 msgid "Callback url"
 msgstr ""
 
+#: ajax/dropdownAuthorization.php:48
+msgid "Create authorization for another user"
+msgstr ""
+
 #: setup.php:102 inc/application.class.php:45
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
 msgstr[0] ""
 msgstr[1] ""
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr ""
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr ""
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr ""
+
+#: front/authorization.process.php:57
+msgid "Unable to save authorization code"
+msgstr ""
 
 #: inc/application.class.php:88 inc/application.class.php:122
 msgid "Oauth provider"
@@ -48,11 +69,11 @@ msgstr ""
 msgid "Developer help for this provider"
 msgstr ""
 
-#: inc/application.class.php:346
+#: inc/application.class.php:347
 msgid "Name cannot be empty"
 msgstr ""
 
-#: inc/application.class.php:355
+#: inc/application.class.php:356
 msgid "Invalid provider"
 msgstr ""
 
@@ -157,25 +178,4 @@ msgstr ""
 #: inc/authorization.class.php:349
 #, php-format
 msgid "Unexpected error: %s"
-msgstr ""
-
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr ""
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr ""
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr ""
-
-#: front/authorization.process.php:57
-msgid "Unable to save authorization code"
-msgstr ""
-
-#: ajax/dropdownAuthorization.php:48
-msgid "Create authorization for another user"
 msgstr ""
