@@ -131,7 +131,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             foreach ($iterator as $row) {
                 echo '<tr>';
 
-                echo '<td>' . $row['email'] . '</td>';
+                echo '<td>' . htmlspecialchars($row['email'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</td>';
 
                 echo '<td>';
                 $modal_id = 'plugin_oauthimap_authorization_diagnostic_' . mt_rand();
