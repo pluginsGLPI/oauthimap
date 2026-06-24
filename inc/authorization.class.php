@@ -627,8 +627,15 @@ SQL;
      */
     public static function uninstall(Migration $migration)
     {
+        /** @var DBmysql $DB */
+        global $DB;
+
         $table = self::getTable();
         $migration->displayMessage("Uninstalling $table");
         $migration->dropTable($table);
+
+        $DB->delete('glpi_displaypreferences', [
+            'itemtype'      => self::class,
+        ]);
     }
 }

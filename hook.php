@@ -67,6 +67,8 @@ function plugin_oauthimap_uninstall()
         }
     }
 
+
+
     return true;
 }
 
