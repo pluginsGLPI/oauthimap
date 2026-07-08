@@ -54,7 +54,11 @@ if (
 } elseif (!array_key_exists('code', $_GET)) {
     Session::addMessageAfterRedirect(__s('Unable to get authorization code', 'oauthimap'), false, ERROR);
 } elseif (!$authorization->createFromCode($application_id, $_GET['code'])) {
-    Session::addMessageAfterRedirect(__s('Unable to save authorization code', 'oauthimap'), false, ERROR);
+    Session::addMessageAfterRedirect(
+        htmlspecialchars($authorization->getLastError() ?? __('Unable to save authorization code', 'oauthimap')),
+        false,
+        ERROR,
+    );
 } else {
     $success = true;
 }
