@@ -31,6 +31,8 @@ use GlpiPlugin\Oauthimap\Imap\ImapOauthProtocol;
 use GlpiPlugin\Oauthimap\Imap\ImapOauthStorage;
 use GlpiPlugin\Oauthimap\MailCollectorFeature;
 use GlpiPlugin\Oauthimap\Oauth\OwnerDetails;
+use GlpiPlugin\Oauthimap\Provider\ProviderInterface;
+use League\OAuth2\Client\Provider\AbstractProvider;
 use League\OAuth2\Client\Token\AccessToken;
 
 use function Safe\json_decode;
@@ -53,6 +55,22 @@ class PluginOauthimapAuthorization extends CommonDBChild
      * @var OwnerDetails
      */
     private $owner_details;
+
+    /**
+     * Detail of the last error encountered in createFromCode(), if any.
+     * @var string|null
+     */
+    private $error = null;
+
+    /**
+     * Get detail of the last error encountered in createFromCode().
+     *
+     * @return string|null
+     */
+    public function getLastError(): ?string
+    {
+        return $this->error;
+    }
 
     public static function getTypeName($nb = 0)
     {
@@ -410,19 +428,21 @@ class PluginOauthimapAuthorization extends CommonDBChild
     /**
      * Create an authorization based on authorizarion code.
      *
-     * @param int    $application_id
-     * @param string $code
+     * @param int                                        $application_id
+     * @param string                                     $code
+     * @param (AbstractProvider&ProviderInterface)|null $provider Injected provider, mainly for testing purposes.
      *
      * @return bool
      */
-    public function createFromCode(int $application_id, string $code): bool
+    public function createFromCode(int $application_id, string $code, ?AbstractProvider $provider = null): bool
     {
+        $this->error = null;
         $application = new PluginOauthimapApplication();
         if (!$application->getFromDB($application_id)) {
             return false;
         }
 
-        $provider = $application->getProvider();
+        $provider ??= $application->getProvider();
 
         // Get token
         try {
@@ -433,6 +453,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 E_USER_WARNING,
             );
 
+            $this->error = sprintf(__('Unable to obtain access token from provider: %s', 'oauthimap'), $e->getMessage());
+
             return false;
         }
 
@@ -442,6 +464,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
         $email               = $this->owner_details->email;
         if ($email === null) {
             trigger_error('Unable to get user email', E_USER_WARNING);
+
+            $this->error = __('The authenticated account does not expose an email address', 'oauthimap');
 
             return false;
         }
