@@ -436,6 +436,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
      */
     public function createFromCode(int $application_id, string $code, ?AbstractProvider $provider = null): bool
     {
+        $this->error = null;
         $application = new PluginOauthimapApplication();
         if (!$application->getFromDB($application_id)) {
             return false;
