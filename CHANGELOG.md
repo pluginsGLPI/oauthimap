@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
+- Fixed hardcoded absolute path in `dropdownAuthorization.php` AJAX call, which broke the OAuth authorization dropdown on GLPI installations hosted in a subdirectory (not domain root).
 - Show the specific OAuth authorization error instead of a generic message
 
 ## [1.5.3] - 2026-06-24
