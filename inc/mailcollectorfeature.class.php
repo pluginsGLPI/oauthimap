@@ -155,7 +155,7 @@ class MailCollectorFeature extends CommonGLPI
 
                                 application_field.val(application_id);
                                 auth_field_container.load(
-                                    '/plugins/oauthimap/ajax/dropdownAuthorization.php',
+                                    CFG_GLPI['root_doc'] + '/plugins/oauthimap/ajax/dropdownAuthorization.php',
                                     {
                                         application_id: application_id,
                                         selected: login_field.val()
