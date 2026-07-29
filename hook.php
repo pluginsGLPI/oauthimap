@@ -76,6 +76,7 @@ function plugin_oauthimap_install()
             }
         }
     }
+
     $migration->executeMigration();
 
     return true;

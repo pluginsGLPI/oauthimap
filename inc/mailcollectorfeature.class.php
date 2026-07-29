@@ -120,8 +120,6 @@ class MailCollectorFeature extends CommonGLPI
 
     /**
      * Alter MailCollector form in order to handle IMAP Oauth connections.
-     *
-     * @return void
      */
     public static function alterMailCollectorForm(): void
     {
@@ -195,7 +193,6 @@ JAVASCRIPT;
     /**
      * Force mailcollector update if oauth fields should trigger an authorization request.
      *
-     * @param MailCollector $item
      *
      * @return boolean
      */
@@ -214,6 +211,7 @@ JAVASCRIPT;
             // Return true to continue update.
             return true;
         }
+
         if ($item->input['plugin_oauthimap_authorizations_id'] > 0) {
             // Existing authorization selected => no need to trigger authorization request.
             // Return true to continue update.
@@ -231,9 +229,7 @@ JAVASCRIPT;
     /**
      * Handle authorization process after creation/update of a mail collector.
      *
-     * @param MailCollector $item
      *
-     * @return void
      */
     public static function handleMailCollectorSaving(MailCollector $item): void
     {
@@ -255,6 +251,7 @@ JAVASCRIPT;
 
         $application = new PluginOauthimapApplication();
         $application->getFromDB($applications_id);
+
         $authorization = new PluginOauthimapAuthorization();
 
         if ($authorizations_id > 0 && $authorization->getFromDB($authorizations_id)) {
@@ -269,7 +266,7 @@ JAVASCRIPT;
         } else {
             // Create new authorization
             $application->redirectToAuthorizationUrl(
-                [self::class, 'updateMailCollectorOnAuthorizationCallback'],
+                self::updateMailCollectorOnAuthorizationCallback(...),
                 [
                     MailCollector::getForeignKeyField() => $item->getID(),
                 ],
@@ -280,16 +277,12 @@ JAVASCRIPT;
     /**
      * Update login field of mail collector on authorization callback.
      *
-     * @param bool                         $success
-     * @param PluginOauthimapAuthorization $authorization
-     * @param array                        $params
      *
-     * @return void
      */
     public static function updateMailCollectorOnAuthorizationCallback(
         bool $success,
         PluginOauthimapAuthorization $authorization,
-        array $params = []
+        array $params = [],
     ): void {
         $mailcollector = new MailCollector();
         $redirect      = $mailcollector->getSearchURL();
@@ -313,9 +306,7 @@ JAVASCRIPT;
     /**
      * Deactivate mail collectors linked to the application.
      *
-     * @param PluginOauthimapApplication $application
      *
-     * @return void
      */
     public static function postDeactivateApplication(PluginOauthimapApplication $application): void
     {
@@ -327,9 +318,7 @@ JAVASCRIPT;
     /**
      * Deactivate mail collectors linked to the authorization.
      *
-     * @param PluginOauthimapAuthorization $authorization
      *
-     * @return void
      */
     public static function postPurgeAuthorization(PluginOauthimapAuthorization $authorization): void
     {
@@ -343,9 +332,7 @@ JAVASCRIPT;
     /**
      * Update mail collectors linked to the authorization.
      *
-     * @param PluginOauthimapAuthorization $authorization
      *
-     * @return void
      */
     public static function postUpdateAuthorization(PluginOauthimapAuthorization $authorization): void
     {
@@ -375,9 +362,7 @@ JAVASCRIPT;
     /**
      * Deactivate mail collectors using given protocol type and given login.
      *
-     * @param string $protocol_type
      * @param string $login
-     *
      * @return void
      */
     private static function deactivateMailCollectors(string $protocol_type, ?string $login = null)
@@ -404,21 +389,20 @@ JAVASCRIPT;
     /**
      * Return mail collectors using given protocol type and given login.
      *
-     * @param string $protocol_type
      * @param string $login
-     * @param bool   $only_active
      *
      * @return array
      */
     private static function getAssociatedMailCollectors(
         string $protocol_type,
         ?string $login = null,
-        bool $only_active = true
+        bool $only_active = true,
     ) {
         $criteria = [];
         if ($only_active) {
             $criteria['is_active'] = 1;
         }
+
         if ($login !== null) {
             $criteria['login'] = $login;
         }
@@ -445,9 +429,7 @@ JAVASCRIPT;
     /**
      * Display "mail collectors" tab of application page.
      *
-     * @param PluginOauthimapApplication $application
      *
-     * @return void
      */
     public static function showMailCollectorsForApplication(PluginOauthimapApplication $application): void
     {
@@ -476,12 +458,13 @@ JAVASCRIPT;
 
                 echo '<tr class="tab_bg_2">';
                 echo '<td>' . $name . '</td>';
-                echo '<td>' . $row['host'] . '</td>';
-                echo '<td>' . $row['login'] . '</td>';
+                echo '<td>' . htmlspecialchars($row['host'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</td>';
+                echo '<td>' . htmlspecialchars($row['login'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</td>';
                 echo '<td>' . Dropdown::getYesNo($row['is_active']) . '</td>';
                 echo '</tr>';
             }
         }
+
         echo '</table>';
         echo '</div>';
     }

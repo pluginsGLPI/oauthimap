@@ -48,6 +48,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     // From CommonDBChild
     public static $itemtype = 'PluginOauthimapApplication';
+
     public static $items_id = 'plugin_oauthimap_applications_id';
 
     /**
@@ -60,12 +61,10 @@ class PluginOauthimapAuthorization extends CommonDBChild
      * Detail of the last error encountered in createFromCode(), if any.
      * @var string|null
      */
-    private $error = null;
+    private $error;
 
     /**
      * Get detail of the last error encountered in createFromCode().
-     *
-     * @return string|null
      */
     public function getLastError(): ?string
     {
@@ -181,8 +180,10 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
                 echo '</tr>';
             }
+
             echo '</tbody>';
         }
+
         echo '</table>';
 
         return true;
@@ -223,7 +224,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
     /**
      * Displays diagnostic form.
      *
-     * @param array $params
      *
      * @return void
      */
@@ -238,9 +238,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         }
 
         $user    = $params['user'] ?? $this->fields['email'];
-        $host    = $params['host'] ?? $provider->getDefaultHost();
-        $port    = (int) ($params['port'] ?? $provider->getDefaultPort());
-        $ssl     = $params['ssl'] ?? $provider->getDefaultSslFlag();
+        // Host/port/ssl are never taken from user input: the diagnostic must only ever connect
+        // to the provider's own IMAP endpoint, not an arbitrary attacker-supplied target.
+        $host    = $provider->getDefaultHost();
+        $port    = $provider->getDefaultPort();
+        $ssl     = $provider->getDefaultSslFlag();
         $timeout = (int) ($params['timeout'] ?? 2); // 2 seconds timeout by default
 
         echo '<form method="post" action="' . $this->getFormURL() . '">';
@@ -274,7 +276,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo Html::input(
             'host',
             [
-                'value' => $host,
+                'disabled' => 'disabled',
+                'value'    => $host,
             ],
         );
         echo '</td>';
@@ -285,10 +288,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo Html::input(
             'port',
             [
-                'type'  => 'integer',
-                'min'   => 1,
-                'value' => $port,
-                'size'  => 5,
+                'type'     => 'integer',
+                'min'      => 1,
+                'disabled' => 'disabled',
+                'value'    => $port,
+                'size'     => 5,
             ],
         );
         echo '</td>';
@@ -308,6 +312,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
             ],
             [
                 'selected' => $ssl,
+                'disabled' => 'disabled',
                 'class'    => 'form-select',
             ],
         );
@@ -350,23 +355,26 @@ class PluginOauthimapAuthorization extends CommonDBChild
         $protocol = new ImapOauthProtocol($application->fields['id']);
         $protocol->enableDiagnostic();
         $protocol->setTimeout($timeout);
+
         $error = null;
         try {
             $protocol->connect($host, $port, $ssl);
             if ($protocol->login($user, '')) {
                 new ImapOauthStorage($protocol); // Will automatically send 'select INBOX'.
             }
-        } catch (Throwable $e) {
-            $error = $e;
+        } catch (Throwable $throwable) {
+            $error = $throwable;
         }
+
         echo '<div style="font-family:monospace; white-space:pre-wrap; word-break:break-all;">';
         echo htmlspecialchars($protocol->getDiagnosticLog());
         echo '</pre>';
-        if ($error !== null) {
+        if ($error instanceof Throwable) {
             echo '<div style="color:red; font-weight:bold;">';
             echo sprintf(__s('Unexpected error: %s', 'oauthimap'), $error->getMessage());
             echo '</div>';
         }
+
         echo '</td>';
         echo '</tr>';
 
@@ -428,11 +436,8 @@ class PluginOauthimapAuthorization extends CommonDBChild
     /**
      * Create an authorization based on authorizarion code.
      *
-     * @param int                                        $application_id
-     * @param string                                     $code
      * @param (AbstractProvider&ProviderInterface)|null $provider Injected provider, mainly for testing purposes.
      *
-     * @return bool
      */
     public function createFromCode(int $application_id, string $code, ?AbstractProvider $provider = null): bool
     {
@@ -447,13 +452,13 @@ class PluginOauthimapAuthorization extends CommonDBChild
         // Get token
         try {
             $token = $provider->getAccessToken('authorization_code', ['code' => $code]);
-        } catch (Throwable $e) {
+        } catch (Throwable $throwable) {
             trigger_error(
-                sprintf('Error during authorization code fetching: %s', $e->getMessage()),
+                sprintf('Error during authorization code fetching: %s', $throwable->getMessage()),
                 E_USER_WARNING,
             );
 
-            $this->error = sprintf(__('Unable to obtain access token from provider: %s', 'oauthimap'), $e->getMessage());
+            $this->error = sprintf(__('Unable to obtain access token from provider: %s', 'oauthimap'), $throwable->getMessage());
 
             return false;
         }
@@ -497,8 +502,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
      *
      * @param int    $application_id
      * @param string $email
-     *
-     * @return string|null
      */
     public static function getAccessTokenForApplicationAndEmail($application_id, $email): ?string
     {
@@ -514,7 +517,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         try {
             $token = new AccessToken(json_decode((new GLPIKey())->decrypt($self->fields['token']), true));
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return null; // Field value may be corrupted
         }
 
@@ -547,14 +550,12 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     /**
      * Get existing access token.
-     *
-     * @return AccessToken|null
      */
     public function getAccessToken(): ?AccessToken
     {
         try {
             $token = new AccessToken(json_decode((new GLPIKey())->decrypt($this->fields['token']), true));
-        } catch (Throwable $e) {
+        } catch (Throwable) {
             return null; // Field value may be corrupted
         }
 
@@ -563,8 +564,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
     /**
      * Returns owner details fetched when creating authorization.
-     *
-     * @return OwnerDetails|null
      */
     public function getOwnerDetails(): ?OwnerDetails
     {
@@ -600,11 +599,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
         $application_fkey = PluginOauthimapApplication::getForeignKeyField();
 
         if (!$DB->tableExists($table)) {
-            $migration->displayMessage("Installing $table");
+            $migration->displayMessage('Installing ' . $table);
             $query = <<<SQL
-CREATE TABLE IF NOT EXISTS `$table` (
+CREATE TABLE IF NOT EXISTS `{$table}` (
   `id` int {$default_key_sign} NOT NULL AUTO_INCREMENT,
-  `$application_fkey` int {$default_key_sign} NOT NULL DEFAULT '0',
+  `{$application_fkey}` int {$default_key_sign} NOT NULL DEFAULT '0',
   `code` text,
   `token` text,
   `refresh_token` text,
@@ -612,10 +611,10 @@ CREATE TABLE IF NOT EXISTS `$table` (
   `date_creation` timestamp NULL DEFAULT NULL,
   `date_mod` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
-  KEY `$application_fkey` (`$application_fkey`),
+  KEY `{$application_fkey}` (`{$application_fkey}`),
   KEY `date_creation` (`date_creation`),
   KEY `date_mod` (`date_mod`),
-  UNIQUE KEY `unicity` (`$application_fkey`,`email`)
+  UNIQUE KEY `unicity` (`{$application_fkey}`,`email`)
 ) ENGINE=InnoDB DEFAULT CHARSET={$default_charset} COLLATE={$default_collation} ROW_FORMAT=DYNAMIC;
 SQL;
             $DB->doQuery($query);
@@ -659,7 +658,7 @@ SQL;
         global $DB;
 
         $table = self::getTable();
-        $migration->displayMessage("Uninstalling $table");
+        $migration->displayMessage('Uninstalling ' . $table);
         $migration->dropTable($table);
 
         $DB->delete('glpi_displaypreferences', [

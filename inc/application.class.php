@@ -53,7 +53,8 @@ class PluginOauthimapApplication extends CommonDropdown
             $menu['page']  = '/plugins/oauthimap/front/application.php';
             $menu['icon']  = self::getIcon();
         }
-        if (count($menu)) {
+
+        if ($menu !== []) {
             return $menu;
         }
 
@@ -169,6 +170,7 @@ class PluginOauthimapApplication extends CommonDropdown
                     $values[$provider_class] = $provider_class::getName();
                     $icons[$provider_class]  = $provider_class::getIcon();
                 }
+
                 Dropdown::showFromArray(
                     $field_name,
                     $values,
@@ -186,7 +188,7 @@ class PluginOauthimapApplication extends CommonDropdown
                 $json_icons = json_encode($icons);
                 $js         = <<<JAVASCRIPT
                     $(function() {
-                        var icons = $json_icons;
+                        var icons = {$json_icons};
                         var displayOptionIcon = function(item) {
                             if (!item.id || !icons[item.id]) {
                                 return item.text;
@@ -234,14 +236,13 @@ JAVASCRIPT;
             $values = [$field => $values];
         }
 
-        switch ($field) {
-            case 'provider':
-                $value = $values[$field];
-                if (in_array($value, self::getSupportedProviders())) {
-                    return '<i class="fab fa-lg ' . $value::getIcon() . '"></i> ' . $value::getName();
-                }
+        if ($field === 'provider') {
+            $value = $values[$field];
+            if (in_array($value, self::getSupportedProviders())) {
+                return '<i class="fab fa-lg ' . $value::getIcon() . '"></i> ' . $value::getName();
+            }
 
-                return $value;
+            return $value;
         }
 
         return parent::getSpecificValueToDisplay($field, $values, $options);
@@ -253,25 +254,24 @@ JAVASCRIPT;
             $values = [$field => $values];
         }
 
-        switch ($field) {
-            case 'provider':
-                $selected = '';
-                $elements = ['' => Dropdown::EMPTY_VALUE];
-                foreach (self::getSupportedProviders() as $class) {
-                    $elements[$class] = $class::getName();
-                    if ($class === $values[$field]) {
-                        $selected = $class;
-                    }
+        if ($field === 'provider') {
+            $selected = '';
+            $elements = ['' => Dropdown::EMPTY_VALUE];
+            foreach (self::getSupportedProviders() as $class) {
+                $elements[$class] = $class::getName();
+                if ($class === $values[$field]) {
+                    $selected = $class;
                 }
+            }
 
-                return Dropdown::showFromArray(
-                    $name,
-                    $elements,
-                    [
-                        'display' => false,
-                        'value'   => $selected,
-                    ],
-                );
+            return Dropdown::showFromArray(
+                $name,
+                $elements,
+                [
+                    'display' => false,
+                    'value'   => $selected,
+                ],
+            );
         }
 
         return parent::getSpecificValueToSelect($field, $name, $values, $options);
@@ -280,9 +280,7 @@ JAVASCRIPT;
     /**
      * Displays form extra fields/scripts.
      *
-     * @param int $id
      *
-     * @return void
      */
     public static function showFormExtra(int $id): void
     {
@@ -343,7 +341,7 @@ JAVASCRIPT;
      */
     private function prepareInput($input)
     {
-        if (array_key_exists('name', $input) && empty(trim($input['name']))) {
+        if (array_key_exists('name', $input) && in_array(trim($input['name']), ['', '0'], true)) {
             Session::addMessageAfterRedirect(__s('Name cannot be empty', 'oauthimap'), false, ERROR);
 
             return false;
@@ -400,8 +398,6 @@ JAVASCRIPT;
      *
      * @param callable|null $callback_callable   Callable to call on authorization callback
      * @param array         $callback_params     Parameters to pass to callable
-     *
-     * @return void
      */
     public function redirectToAuthorizationUrl(?callable $callback_callable = null, array $callback_params = []): void
     {
@@ -412,7 +408,7 @@ JAVASCRIPT;
         $provider = $this->getProvider();
 
         $options = [
-            'scope' => self::getProviderScopes($this->fields['provider']),
+            'scope' => $this->getProviderScopes($this->fields['provider']),
         ];
         switch ($this->fields['provider']) {
             case Azure::class:
@@ -436,8 +432,6 @@ JAVASCRIPT;
 
     /**
      * Check if credentials are valid (i.e. all fields are correclty set).
-     *
-     * @return bool
      */
     private function areCredentialsValid(): bool
     {
@@ -452,8 +446,6 @@ JAVASCRIPT;
 
     /**
      * Get list of supported providers classnames.
-     *
-     * @return array
      */
     private static function getSupportedProviders(): array
     {
@@ -485,21 +477,21 @@ JAVASCRIPT;
             'clientId'     => $this->fields['client_id'],
             'clientSecret' => (new GLPIKey())->decrypt($this->fields['client_secret']),
             'redirectUri'  => self::getCallbackUrl(),
-            'scope'        => self::getProviderScopes($this->fields['provider']),
+            'scope'        => $this->getProviderScopes($this->fields['provider']),
         ];
 
         if (!empty($CFG_GLPI['proxy_name'])) {
             // Connection using proxy
-            $params['proxy'] = !empty($CFG_GLPI['proxy_user'])
+            $params['proxy'] = empty($CFG_GLPI['proxy_user'])
                 ? sprintf(
-                    '%s:%s@%s:%s',
-                    rawurlencode($CFG_GLPI['proxy_user']),
-                    rawurlencode((new GLPIKey())->decrypt($CFG_GLPI['proxy_passwd'])),
+                    '%s:%s',
                     $CFG_GLPI['proxy_name'],
                     $CFG_GLPI['proxy_port'],
                 )
                 : sprintf(
-                    '%s:%s',
+                    '%s:%s@%s:%s',
+                    rawurlencode($CFG_GLPI['proxy_user']),
+                    rawurlencode((string) (new GLPIKey())->decrypt($CFG_GLPI['proxy_passwd'])),
                     $CFG_GLPI['proxy_name'],
                     $CFG_GLPI['proxy_port'],
                 );
@@ -512,6 +504,7 @@ JAVASCRIPT;
                 if (!empty($this->fields['tenant_id'])) {
                     $params['tenant'] = $this->fields['tenant_id'];
                 }
+
                 break;
             case Google::class:
                 $params['accessType'] = 'offline';
@@ -525,36 +518,27 @@ JAVASCRIPT;
      * Get required scopes for given provider.
      *
      * @param string $provider Provider classname
-     *
-     * @return array
      */
-    private static function getProviderScopes(string $provider): array
+    private function getProviderScopes(string $provider): array
     {
         $scopes = [];
 
-        switch ($provider) {
-            case Azure::class:
-                $scopes = [
-                    'openid', 'email', // required to be able to fetch owner details
-                    'offline_access',
-                    'https://outlook.office.com/IMAP.AccessAsUser.All',
-                ];
-                break;
-            case Google::class:
-                $scopes = [
-                    'https://mail.google.com/',
-                ];
-                break;
-        }
-
-        return $scopes;
+        return match ($provider) {
+            Azure::class => [
+                'openid', 'email', // required to be able to fetch owner details
+                'offline_access',
+                'https://outlook.office.com/IMAP.AccessAsUser.All',
+            ],
+            Google::class => [
+                'https://mail.google.com/',
+            ],
+            default => $scopes,
+        };
     }
 
     /**
      * Get documentation URLs.
      * Keys are providers classnames, values are URL.
-     *
-     * @return array
      */
     private static function getProvidersDocumentationUrls(): array
     {
@@ -566,8 +550,6 @@ JAVASCRIPT;
 
     /**
      * Get callback URL used during authorization process.
-     *
-     * @return string
      */
     private static function getCallbackUrl(): string
     {
@@ -599,10 +581,10 @@ JAVASCRIPT;
         $table = self::getTable();
 
         if (!$DB->tableExists($table)) {
-            $migration->displayMessage("Installing $table");
+            $migration->displayMessage('Installing ' . $table);
 
             $query = <<<SQL
-CREATE TABLE IF NOT EXISTS `$table` (
+CREATE TABLE IF NOT EXISTS `{$table}` (
   `id` int {$default_key_sign} NOT NULL AUTO_INCREMENT,
   `name` varchar(255) DEFAULT NULL,
   `is_active` tinyint NOT NULL DEFAULT '0',
@@ -640,7 +622,7 @@ SQL;
         global $DB;
 
         $table = self::getTable();
-        $migration->displayMessage("Uninstalling $table");
+        $migration->displayMessage('Uninstalling ' . $table);
         $migration->dropTable($table);
 
         $DB->delete('glpi_displaypreferences', [

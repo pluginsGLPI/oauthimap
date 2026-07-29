@@ -75,18 +75,18 @@ function plugin_init_oauthimap()
         ];
 
         // Plugin hooks
-        $PLUGIN_HOOKS['post_item_form']['oauthimap'] = [PluginOauthimapHook::class, 'postItemForm'];
+        $PLUGIN_HOOKS['post_item_form']['oauthimap'] = PluginOauthimapHook::postItemForm(...);
 
         // MailCollector hooks
         $PLUGIN_HOOKS['mail_server_protocols']['oauthimap'] = (fn(array $additionnal_protocols) => array_merge($additionnal_protocols, MailCollectorFeature::getMailProtocols()));
         $PLUGIN_HOOKS['pre_item_update']['oauthimap'] = [
-            'MailCollector' => [MailCollectorFeature::class, 'forceMailCollectorUpdate'],
+            'MailCollector' => MailCollectorFeature::forceMailCollectorUpdate(...),
         ];
         $PLUGIN_HOOKS['item_add']['oauthimap'] = [
-            'MailCollector' => [MailCollectorFeature::class, 'handleMailCollectorSaving'],
+            'MailCollector' => MailCollectorFeature::handleMailCollectorSaving(...),
         ];
         $PLUGIN_HOOKS['item_update']['oauthimap'] = [
-            'MailCollector' => [MailCollectorFeature::class, 'handleMailCollectorSaving'],
+            'MailCollector' => MailCollectorFeature::handleMailCollectorSaving(...),
         ];
     }
 }
@@ -101,7 +101,7 @@ function plugin_version_oauthimap()
     return [
         'name'         => __s('OAuth IMAP', 'oauthimap'),
         'version'      => PLUGIN_OAUTHIMAP_VERSION,
-        'author'       => 'Teclib\'',
+        'author'       => "Teclib'",
         'license'      => 'GPL v3+',
         'homepage'     => 'https://www.teclib-edition.com',
         'requirements' => [

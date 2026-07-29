@@ -79,6 +79,7 @@ class ImapOauthStorage extends Imap
         if (!$this->protocol->login($params->user, $password)) {
             throw new RuntimeException('cannot login, user or password wrong');
         }
+
         $this->selectFolder($params->folder ?? 'INBOX');
     }
 }

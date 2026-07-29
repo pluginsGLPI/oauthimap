@@ -55,13 +55,6 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
     private const DIAGNOSTIC_PREFIX_RECEIVED = '<<< ';
 
     /**
-     * ID of PluginOauthimapApplication to use.
-     *
-     * @var int
-     */
-    private $application_id;
-
-    /**
      * Indicates whether diagnostic is enabled.
      *
      * @var boolean
@@ -85,9 +78,11 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
     /**
      * @param  int   $application_id   ID of PluginOauthimapApplication to use
      */
-    public function __construct($application_id)
-    {
-        $this->application_id = $application_id;
+    public function __construct(/**
+     * ID of PluginOauthimapApplication to use.
+     */
+        private $application_id,
+    ) {
         parent::__construct();
     }
 
@@ -111,6 +106,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
                 if (!$port) {
                     $port = 993;
                 }
+
                 break;
             case 'tls':
                 $isTls = true;
@@ -125,7 +121,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         $this->socket = $this->setupSocket($transport, $host, $port, $this->timeout);
 
         if (!$this->assumedNextLine('* OK')) {
-            throw new RuntimeException('host doesn\'t allow connection');
+            throw new RuntimeException("host doesn't allow connection");
         }
 
         if ($isTls) {
@@ -167,6 +163,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
                 ) {
                     return false;
                 }
+
                 if (preg_match('/^OK /i', $response) !== 0) {
                     return true;
                 }
@@ -196,6 +193,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
                 if (!$this->assumedNextLine('+ ')) {
                     throw new RuntimeException('cannot send literal string');
                 }
+
                 $line = $token[1];
             } else {
                 $line .= ' ' . $token;
@@ -218,6 +216,7 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         if ($line === false) {
             throw new RuntimeException('cannot read - connection closed?');
         }
+
         $this->addToDiagnosticLog($line, self::DIAGNOSTIC_PREFIX_RECEIVED);
 
         return $line;
@@ -225,8 +224,6 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
 
     /**
      * Enable diagnostic.
-     *
-     * @return void
      */
     public function enableDiagnostic(): void
     {
@@ -235,8 +232,6 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
 
     /**
      * Get the diagnostic log.
-     *
-     * @return string
      */
     public function getDiagnosticLog(): string
     {
@@ -246,8 +241,6 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
     /**
      * Add line to diagnostic log.
      *
-     * @param string $line
-     * @param string $prefix
      *
      * @return void
      */
@@ -256,15 +249,14 @@ class ImapOauthProtocol extends Imap implements ProtocolInterface
         if (!$this->diagnostic_enabled) {
             return;
         }
+
         $this->diagnostic_log[] = $prefix . $line;
     }
 
     /**
      * Defines socket timeout.
      *
-     * @param int $timeout
      *
-     * @return void
      */
     public function setTimeout(int $timeout): void
     {

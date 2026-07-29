@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Show the specific OAuth authorization error instead of a generic message
+- Ignore the connection host/port/security level entered on the authorization diagnostic form and always use the provider's own values
+- Escape mail collector host and login when displayed on the application's "Mail collectors" tab
 
 ## [1.5.3] - 2026-06-24
 

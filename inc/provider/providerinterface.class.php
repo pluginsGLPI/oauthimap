@@ -37,45 +37,33 @@ interface ProviderInterface
 {
     /**
      * Return provider name.
-     *
-     * @return string
      */
     public static function getName(): string;
 
     /**
      * Return provider icon (Font-Awesome identifier).
-     *
-     * @return string
      */
     public static function getIcon(): string;
 
     /**
      * Return token owner details.
      *
-     * @param AccessToken $token
      *
-     * @return OwnerDetails|null
      */
     public function getOwnerDetails(AccessToken $token): ?OwnerDetails;
 
     /**
      * Returns default host for IMAP connection.
-     *
-     * @return string
      */
     public function getDefaultHost(): string;
 
     /**
      * Returns default port for IMAP connection.
-     *
-     * @return int|null
      */
     public function getDefaultPort(): ?int;
 
     /**
      * Returns default SSL flag ('SSL', 'TLS' or null) for IMAP connection.
-     *
-     * @return string|null
      */
     public function getDefaultSslFlag(): ?string;
 }
