@@ -35,9 +35,7 @@ class PluginOauthimapHook
     /**
      * Handle post_item_form hook.
      *
-     * @param array $params
      *
-     * @return void
      */
     public static function postItemForm(array $params): void
     {
@@ -47,7 +45,7 @@ class PluginOauthimapHook
             return;
         }
 
-        switch (get_class($item)) {
+        switch ($item::class) {
             case MailCollector::class:
                 MailCollectorFeature::alterMailCollectorForm();
                 break;

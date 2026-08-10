@@ -5,12 +5,15 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## [Unreleased]
+## [1.5.4] - 2026-08-04
 
 ### Fixed
 
 - Fix issue described in #141
 - Use CFG_GLPI root_doc for dropdownAuthorization AJAX path
+- Show the specific OAuth authorization error instead of a generic message
+- Ignore the connection host/port/security level entered on the authorization diagnostic form and always use the provider's own values
+- Escape mail collector host and login when displayed on the application's "Mail collectors" tab
 
 ## [1.5.3] - 2026-06-24
 
