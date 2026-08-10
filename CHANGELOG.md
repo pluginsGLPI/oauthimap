@@ -9,7 +9,8 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Fixed
 
-- Show the specific OAuth authorization error instead of a generic message
+- Fix issue described in #141
+- Use CFG_GLPI root_doc for dropdownAuthorization AJAX path
 
 ## [1.5.3] - 2026-06-24
 
