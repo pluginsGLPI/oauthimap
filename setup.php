@@ -35,9 +35,9 @@ use function Safe\define;
 define('PLUGIN_OAUTHIMAP_VERSION', '1.5.4');
 
 // Minimal GLPI version, inclusive
-define('PLUGIN_OAUTHIMAP_MIN_GLPI', '11.0.0');
+define('PLUGIN_OAUTHIMAP_MIN_GLPI', '12.0.0');
 // Maximum GLPI version, exclusive
-define('PLUGIN_OAUTHIMAP_MAX_GLPI', '11.0.99');
+define('PLUGIN_OAUTHIMAP_MAX_GLPI', '12.0.99');
 
 define('PLUGIN_OAUTHIMAP_ROOT', Plugin::getPhpDir('oauthimap'));
 
