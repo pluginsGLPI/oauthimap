@@ -43,6 +43,11 @@ class PluginOauthimapAuthorization extends CommonDBChild
     // From CommonGlpi
     protected bool $displaylist = false;
 
+    protected static function itemTypeRequiresReauthentication(): bool
+    {
+        return true;
+    }
+
     // From CommonDBTM
     public bool $dohistory = true;
 
