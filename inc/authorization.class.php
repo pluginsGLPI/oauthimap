@@ -489,9 +489,9 @@ class PluginOauthimapAuthorization extends CommonDBChild
         );
         if ($exists) {
             return $this->update(['id' => $this->fields['id']] + $input);
-        } else {
-            return $this->add($input);
         }
+
+        return $this->add($input);
     }
 
     /**
