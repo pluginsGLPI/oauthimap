@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-07-10 03:24+0000\n"
+"POT-Creation-Date: 2026-09-04 03:17+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Cédric Anne, 2021\n"
 "Language-Team: French (France) (https://app.transifex.com/teclib/teams/28042/fr_FR/)\n"
@@ -24,6 +24,13 @@ msgstr ""
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
 msgstr "Url de retour"
+
+#: setup.php:102 inc/application.class.php:45
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: front/authorization.process.php:43
 #, php-format
@@ -42,153 +49,146 @@ msgstr "Impossible d'obtenir le code d'autorisation"
 msgid "Unable to save authorization code"
 msgstr "Impossible de sauvegarder le code d'autorisation"
 
-#: inc/application.class.php:45 setup.php:102
-msgid "OAuth IMAP"
-msgid_plural "OAuth IMAP"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-
-#: inc/application.class.php:88 inc/application.class.php:122
-msgid "Oauth provider"
-msgstr "Fournisseur Oauth"
-
-#: inc/application.class.php:94 inc/application.class.php:131
-msgid "Client ID"
-msgstr "ID d'application (client)"
-
-#: inc/application.class.php:100
-msgid "Client secret"
-msgstr "Secret client"
-
-#: inc/application.class.php:106 inc/application.class.php:139
-msgid "Tenant ID"
-msgstr "ID de l'annuaire (locataire)"
-
-#: inc/application.class.php:182
-msgid "Developer help for this provider"
-msgstr "Aide développeur pour ce fournisseur"
-
-#: inc/application.class.php:347
-msgid "Name cannot be empty"
-msgstr "Le nom ne peut être vide"
-
-#: inc/application.class.php:356
-msgid "Invalid provider"
-msgstr "Fournisseur invalide"
-
-#: inc/authorization.class.php:77
+#: inc/authorization.class.php:76
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] "Autorisation Oauth"
 msgstr[1] "Autorisations Oauth"
 msgstr[2] "Autorisations Oauth"
 
-#: inc/authorization.class.php:129
+#: inc/authorization.class.php:128
 msgid "Create an authorization"
 msgstr "Créer une autorisation"
 
-#: inc/authorization.class.php:139
+#: inc/authorization.class.php:138
 msgid "No authorizations."
 msgstr "Aucune autorisation."
 
-#: inc/authorization.class.php:143 inc/authorization.class.php:200
-#: inc/authorization.class.php:256
+#: inc/authorization.class.php:142 inc/authorization.class.php:201
+#: inc/authorization.class.php:258
 msgid "Email"
 msgstr "E-mail"
 
-#: inc/authorization.class.php:160
+#: inc/authorization.class.php:159
 msgid "Connection diagnostic"
 msgstr "Diagnostic de la connexion"
 
-#: inc/authorization.class.php:165
+#: inc/authorization.class.php:164
 msgid "Diagnose"
 msgstr "Diagnostiquer"
 
-#: inc/authorization.class.php:169
+#: inc/authorization.class.php:168
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: inc/authorization.class.php:177
+#: inc/authorization.class.php:176
 msgid "Delete"
 msgstr "Supprimer"
 
-#: inc/authorization.class.php:271
+#: inc/authorization.class.php:273
 msgid "Server host"
 msgstr "Hôte du serveur"
 
-#: inc/authorization.class.php:282
+#: inc/authorization.class.php:285
 msgid "Server port"
 msgstr "Port du serveur"
 
-#: inc/authorization.class.php:299
+#: inc/authorization.class.php:303
 msgid "Security level"
 msgstr "Niveau de sécurité"
 
-#: inc/authorization.class.php:306
+#: inc/authorization.class.php:310
 msgid "SSL"
 msgstr "SSL"
 
-#: inc/authorization.class.php:307
+#: inc/authorization.class.php:311
 msgid "SSL + TLS"
 msgstr "SSL + TLS"
 
-#: inc/authorization.class.php:316
+#: inc/authorization.class.php:321
 msgid "Timeout"
 msgstr "Délai d'attente max."
 
-#: inc/authorization.class.php:335
+#: inc/authorization.class.php:340
 msgid "Refresh connection diagnostic"
 msgstr "Actualiser le diagnostic"
 
-#: inc/authorization.class.php:348
+#: inc/authorization.class.php:353
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
 "Le journal de diagnostic contient des informations sensibles, telles que le "
 "jeton d'accès."
 
-#: inc/authorization.class.php:367
+#: inc/authorization.class.php:374
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Erreur inattendue : %s"
 
-#: inc/authorization.class.php:456
+#: inc/authorization.class.php:461
 #, php-format
 msgid "Unable to obtain access token from provider: %s"
 msgstr ""
 
-#: inc/authorization.class.php:468
+#: inc/authorization.class.php:473
 msgid "The authenticated account does not expose an email address"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:367
+#: inc/application.class.php:89 inc/application.class.php:123
+msgid "Oauth provider"
+msgstr "Fournisseur Oauth"
+
+#: inc/application.class.php:95 inc/application.class.php:132
+msgid "Client ID"
+msgstr "ID d'application (client)"
+
+#: inc/application.class.php:101
+msgid "Client secret"
+msgstr "Secret client"
+
+#: inc/application.class.php:107 inc/application.class.php:140
+msgid "Tenant ID"
+msgstr "ID de l'annuaire (locataire)"
+
+#: inc/application.class.php:184
+msgid "Developer help for this provider"
+msgstr "Aide développeur pour ce fournisseur"
+
+#: inc/application.class.php:345
+msgid "Name cannot be empty"
+msgstr "Le nom ne peut être vide"
+
+#: inc/application.class.php:354
+msgid "Invalid provider"
+msgstr "Fournisseur invalide"
+
+#: inc/mailcollectorfeature.class.php:354
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
 msgstr "Le collecteur mail \"%s\" a été mis à jour."
 
-#: inc/mailcollectorfeature.class.php:397
+#: inc/mailcollectorfeature.class.php:382
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
 msgstr "Le collecteur mail \"%s\" a été désactivé."
 
-#: inc/mailcollectorfeature.class.php:462
+#: inc/mailcollectorfeature.class.php:444
 msgid "No associated receivers."
 msgstr "Aucun collecteur associé."
 
-#: inc/mailcollectorfeature.class.php:465
+#: inc/mailcollectorfeature.class.php:447
 msgid "Name"
 msgstr "Nom"
 
-#: inc/mailcollectorfeature.class.php:466
+#: inc/mailcollectorfeature.class.php:448
 msgid "Connection string"
 msgstr "Chaîne de connexion"
 
-#: inc/mailcollectorfeature.class.php:467
+#: inc/mailcollectorfeature.class.php:449
 msgid "Login"
 msgstr "Identifiant"
 
-#: inc/mailcollectorfeature.class.php:468
+#: inc/mailcollectorfeature.class.php:450
 msgid "Is active ?"
 msgstr "Est actif ?"
 
