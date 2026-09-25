@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 03:17+0000\n"
+"POT-Creation-Date: 2026-09-24 03:32+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Cédric Anne, 2021\n"
 "Language-Team: English (United Kingdom) (https://app.transifex.com/teclib/teams/28042/en_GB/)\n"
@@ -24,12 +24,6 @@ msgstr ""
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
 msgstr "Callback url"
-
-#: setup.php:102 inc/application.class.php:45
-msgid "OAuth IMAP"
-msgid_plural "OAuth IMAP"
-msgstr[0] ""
-msgstr[1] ""
 
 #: front/authorization.process.php:43
 #, php-format
@@ -47,6 +41,70 @@ msgstr "Unable to get authorization code"
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
 msgstr "Unable to save authorization code"
+
+#: inc/application.class.php:45 setup.php:102
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/application.class.php:89 inc/application.class.php:123
+msgid "Oauth provider"
+msgstr "Oauth provider"
+
+#: inc/application.class.php:95 inc/application.class.php:132
+msgid "Client ID"
+msgstr "Client ID"
+
+#: inc/application.class.php:101
+msgid "Client secret"
+msgstr "Client secret"
+
+#: inc/application.class.php:107 inc/application.class.php:140
+msgid "Tenant ID"
+msgstr "Tenant ID"
+
+#: inc/application.class.php:184
+msgid "Developer help for this provider"
+msgstr "Developer help for this provider"
+
+#: inc/application.class.php:345
+msgid "Name cannot be empty"
+msgstr "Name cannot be empty"
+
+#: inc/application.class.php:354
+msgid "Invalid provider"
+msgstr "Invalid provider"
+
+#: inc/mailcollectorfeature.class.php:354
+#, php-format
+msgid "Mail receiver \"%s\" has been updated."
+msgstr "Mail receiver \"%s\" has been updated."
+
+#: inc/mailcollectorfeature.class.php:382
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr "Mail receiver \"%s\" has been deactivated."
+
+#: inc/mailcollectorfeature.class.php:444
+msgid "No associated receivers."
+msgstr "No associated receivers."
+
+#: inc/mailcollectorfeature.class.php:447
+msgid "Name"
+msgstr "Name"
+
+#: inc/mailcollectorfeature.class.php:448
+msgid "Connection string"
+msgstr "Connection string"
+
+#: inc/mailcollectorfeature.class.php:449
+msgid "Login"
+msgstr "Login"
+
+#: inc/mailcollectorfeature.class.php:450
+msgid "Is active ?"
+msgstr "Is active ?"
 
 #: inc/authorization.class.php:76
 msgid "Oauth authorization"
@@ -130,64 +188,6 @@ msgstr ""
 #: inc/authorization.class.php:473
 msgid "The authenticated account does not expose an email address"
 msgstr ""
-
-#: inc/application.class.php:89 inc/application.class.php:123
-msgid "Oauth provider"
-msgstr "Oauth provider"
-
-#: inc/application.class.php:95 inc/application.class.php:132
-msgid "Client ID"
-msgstr "Client ID"
-
-#: inc/application.class.php:101
-msgid "Client secret"
-msgstr "Client secret"
-
-#: inc/application.class.php:107 inc/application.class.php:140
-msgid "Tenant ID"
-msgstr "Tenant ID"
-
-#: inc/application.class.php:184
-msgid "Developer help for this provider"
-msgstr "Developer help for this provider"
-
-#: inc/application.class.php:345
-msgid "Name cannot be empty"
-msgstr "Name cannot be empty"
-
-#: inc/application.class.php:354
-msgid "Invalid provider"
-msgstr "Invalid provider"
-
-#: inc/mailcollectorfeature.class.php:354
-#, php-format
-msgid "Mail receiver \"%s\" has been updated."
-msgstr "Mail receiver \"%s\" has been updated."
-
-#: inc/mailcollectorfeature.class.php:382
-#, php-format
-msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "Mail receiver \"%s\" has been deactivated."
-
-#: inc/mailcollectorfeature.class.php:444
-msgid "No associated receivers."
-msgstr "No associated receivers."
-
-#: inc/mailcollectorfeature.class.php:447
-msgid "Name"
-msgstr "Name"
-
-#: inc/mailcollectorfeature.class.php:448
-msgid "Connection string"
-msgstr "Connection string"
-
-#: inc/mailcollectorfeature.class.php:449
-msgid "Login"
-msgstr "Login"
-
-#: inc/mailcollectorfeature.class.php:450
-msgid "Is active ?"
-msgstr "Is active ?"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"

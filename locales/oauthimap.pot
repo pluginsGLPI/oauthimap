@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-14 03:46+0000\n"
+"POT-Creation-Date: 2026-09-25 03:49+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -21,12 +21,6 @@ msgstr ""
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
 msgstr ""
-
-#: setup.php:102 inc/application.class.php:45
-msgid "OAuth IMAP"
-msgid_plural "OAuth IMAP"
-msgstr[0] ""
-msgstr[1] ""
 
 #: front/authorization.process.php:43
 #, php-format
@@ -43,6 +37,70 @@ msgstr ""
 
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
+msgstr ""
+
+#: inc/application.class.php:45 setup.php:102
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] ""
+msgstr[1] ""
+
+#: inc/application.class.php:89 inc/application.class.php:123
+msgid "Oauth provider"
+msgstr ""
+
+#: inc/application.class.php:95 inc/application.class.php:132
+msgid "Client ID"
+msgstr ""
+
+#: inc/application.class.php:101
+msgid "Client secret"
+msgstr ""
+
+#: inc/application.class.php:107 inc/application.class.php:140
+msgid "Tenant ID"
+msgstr ""
+
+#: inc/application.class.php:184
+msgid "Developer help for this provider"
+msgstr ""
+
+#: inc/application.class.php:345
+msgid "Name cannot be empty"
+msgstr ""
+
+#: inc/application.class.php:354
+msgid "Invalid provider"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:354
+#, php-format
+msgid "Mail receiver \"%s\" has been updated."
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:382
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:444
+msgid "No associated receivers."
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:447
+msgid "Name"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:448
+msgid "Connection string"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:449
+msgid "Login"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:450
+msgid "Is active ?"
 msgstr ""
 
 #: inc/authorization.class.php:76
@@ -125,64 +183,6 @@ msgstr ""
 
 #: inc/authorization.class.php:473
 msgid "The authenticated account does not expose an email address"
-msgstr ""
-
-#: inc/application.class.php:89 inc/application.class.php:123
-msgid "Oauth provider"
-msgstr ""
-
-#: inc/application.class.php:95 inc/application.class.php:132
-msgid "Client ID"
-msgstr ""
-
-#: inc/application.class.php:101
-msgid "Client secret"
-msgstr ""
-
-#: inc/application.class.php:107 inc/application.class.php:140
-msgid "Tenant ID"
-msgstr ""
-
-#: inc/application.class.php:184
-msgid "Developer help for this provider"
-msgstr ""
-
-#: inc/application.class.php:345
-msgid "Name cannot be empty"
-msgstr ""
-
-#: inc/application.class.php:354
-msgid "Invalid provider"
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:354
-#, php-format
-msgid "Mail receiver \"%s\" has been updated."
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:382
-#, php-format
-msgid "Mail receiver \"%s\" has been deactivated."
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:444
-msgid "No associated receivers."
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:447
-msgid "Name"
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:448
-msgid "Connection string"
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:449
-msgid "Login"
-msgstr ""
-
-#: inc/mailcollectorfeature.class.php:450
-msgid "Is active ?"
 msgstr ""
 
 #: ajax/dropdownAuthorization.php:49
