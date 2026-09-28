@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- Fix mail collector login field not synced with the selected OAuth authorization on form load
+
 ## [1.5.4] - 2026-08-04
 
 ### Fixed
