@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-04 03:17+0000\n"
+"POT-Creation-Date: 2026-09-24 03:32+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Peter Rundqvist, 2025\n"
 "Language-Team: Swedish (Sweden) (https://app.transifex.com/teclib/teams/28042/sv_SE/)\n"
@@ -24,12 +24,6 @@ msgstr ""
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
 msgstr "Callback-URL"
-
-#: setup.php:102 inc/application.class.php:45
-msgid "OAuth IMAP"
-msgid_plural "OAuth IMAP"
-msgstr[0] "OAuth IMAP"
-msgstr[1] "OAuth IMAP"
 
 #: front/authorization.process.php:43
 #, php-format
@@ -47,6 +41,70 @@ msgstr "Det gick inte att hämta auktoriseringskoden"
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
 msgstr "Det gick inte att spara auktoriseringskoden"
+
+#: inc/application.class.php:45 setup.php:102
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] "OAuth IMAP"
+msgstr[1] "OAuth IMAP"
+
+#: inc/application.class.php:89 inc/application.class.php:123
+msgid "Oauth provider"
+msgstr "OAuth-leverantör"
+
+#: inc/application.class.php:95 inc/application.class.php:132
+msgid "Client ID"
+msgstr "Klient-ID"
+
+#: inc/application.class.php:101
+msgid "Client secret"
+msgstr "Klienthemlighet"
+
+#: inc/application.class.php:107 inc/application.class.php:140
+msgid "Tenant ID"
+msgstr "Tenant-ID"
+
+#: inc/application.class.php:184
+msgid "Developer help for this provider"
+msgstr "Hjälp för utvecklare för denna leverantör"
+
+#: inc/application.class.php:345
+msgid "Name cannot be empty"
+msgstr "Namnet får inte vara tomt"
+
+#: inc/application.class.php:354
+msgid "Invalid provider"
+msgstr "Ogiltig leverantör"
+
+#: inc/mailcollectorfeature.class.php:354
+#, php-format
+msgid "Mail receiver \"%s\" has been updated."
+msgstr "Ärendemottagaren \"%s\" uppdaterades."
+
+#: inc/mailcollectorfeature.class.php:382
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr "Ärendemottagaren \"%s\" inaktiverades."
+
+#: inc/mailcollectorfeature.class.php:444
+msgid "No associated receivers."
+msgstr "Hittade inga mottagare."
+
+#: inc/mailcollectorfeature.class.php:447
+msgid "Name"
+msgstr "Namn"
+
+#: inc/mailcollectorfeature.class.php:448
+msgid "Connection string"
+msgstr "Anslutningssträng"
+
+#: inc/mailcollectorfeature.class.php:449
+msgid "Login"
+msgstr "Inloggning"
+
+#: inc/mailcollectorfeature.class.php:450
+msgid "Is active ?"
+msgstr "Aktiv?"
 
 #: inc/authorization.class.php:76
 msgid "Oauth authorization"
@@ -131,64 +189,6 @@ msgstr ""
 #: inc/authorization.class.php:473
 msgid "The authenticated account does not expose an email address"
 msgstr ""
-
-#: inc/application.class.php:89 inc/application.class.php:123
-msgid "Oauth provider"
-msgstr "OAuth-leverantör"
-
-#: inc/application.class.php:95 inc/application.class.php:132
-msgid "Client ID"
-msgstr "Klient-ID"
-
-#: inc/application.class.php:101
-msgid "Client secret"
-msgstr "Klienthemlighet"
-
-#: inc/application.class.php:107 inc/application.class.php:140
-msgid "Tenant ID"
-msgstr "Tenant-ID"
-
-#: inc/application.class.php:184
-msgid "Developer help for this provider"
-msgstr "Hjälp för utvecklare för denna leverantör"
-
-#: inc/application.class.php:345
-msgid "Name cannot be empty"
-msgstr "Namnet får inte vara tomt"
-
-#: inc/application.class.php:354
-msgid "Invalid provider"
-msgstr "Ogiltig leverantör"
-
-#: inc/mailcollectorfeature.class.php:354
-#, php-format
-msgid "Mail receiver \"%s\" has been updated."
-msgstr "Ärendemottagaren \"%s\" uppdaterades."
-
-#: inc/mailcollectorfeature.class.php:382
-#, php-format
-msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "Ärendemottagaren \"%s\" inaktiverades."
-
-#: inc/mailcollectorfeature.class.php:444
-msgid "No associated receivers."
-msgstr "Hittade inga mottagare."
-
-#: inc/mailcollectorfeature.class.php:447
-msgid "Name"
-msgstr "Namn"
-
-#: inc/mailcollectorfeature.class.php:448
-msgid "Connection string"
-msgstr "Anslutningssträng"
-
-#: inc/mailcollectorfeature.class.php:449
-msgid "Login"
-msgstr "Inloggning"
-
-#: inc/mailcollectorfeature.class.php:450
-msgid "Is active ?"
-msgstr "Aktiv?"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
