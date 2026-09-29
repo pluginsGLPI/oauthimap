@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Added
 
 - GLPI 12 compatibility
+- Sudo mode
 
 ## [1.5.4] - 2026-08-04
 
