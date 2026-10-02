@@ -145,6 +145,17 @@ class MailCollectorFeature
                     login_field.parent().append('<div id="auth_field_container" style="display:none;"></div>');
                     var auth_field_container = $('#auth_field_container');
 
+                    // Sync login field value onto the value carried by the authorization select
+                    // (dropdown option selected by the user, or the one pre-selected on load).
+                    var sync_login_from_auth_select = function () {
+                        var select = auth_field_container.find('select');
+                        if (select.val() == -1) {
+                            login_field.val('');
+                        } else {
+                            login_field.val(select.find('option:selected').text());
+                        }
+                    };
+
                     server_type_field.on(
                         'change',
                         function (evt) {
@@ -161,7 +172,8 @@ class MailCollectorFeature
                                     {
                                         application_id: application_id,
                                         selected: login_field.val()
-                                    }
+                                    },
+                                    sync_login_from_auth_select
                                 );
                             } else {
                                 password_field.closest('tr').show();
@@ -177,13 +189,7 @@ class MailCollectorFeature
                     auth_field_container.on(
                         'change',
                         'select',
-                        function (evt) {
-                            if ($(this).val() == -1) {
-                                login_field.val('');
-                            } else {
-                                login_field.val($(this).find('option:selected').text());
-                            }
-                        }
+                        sync_login_from_auth_select
                     );
 
                     server_type_field.trigger('change');

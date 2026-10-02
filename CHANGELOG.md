@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Restore missing include in ajax/dropdownAuthorization.php
+- Fix mail collector login field not synced with the selected OAuth authorization on form load
 
 ## [1.4.5] - 2026-06-24
 
