@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-28 04:06+0000\n"
+"POT-Creation-Date: 2026-10-05 04:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -73,33 +73,33 @@ msgstr ""
 msgid "Invalid provider"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:354
+#: inc/mailcollectorfeature.class.php:360
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:382
+#: inc/mailcollectorfeature.class.php:388
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:444
+#: inc/mailcollectorfeature.class.php:450
 msgid "No associated receivers."
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:447
+#: inc/mailcollectorfeature.class.php:453
 msgid "Name"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:448
+#: inc/mailcollectorfeature.class.php:454
 msgid "Connection string"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:449
+#: inc/mailcollectorfeature.class.php:455
 msgid "Login"
 msgstr ""
 
-#: inc/mailcollectorfeature.class.php:450
+#: inc/mailcollectorfeature.class.php:456
 msgid "Is active ?"
 msgstr ""
 

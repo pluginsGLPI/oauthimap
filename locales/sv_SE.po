@@ -3,17 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Peter Rundqvist, 2025
-# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 03:32+0000\n"
+"POT-Creation-Date: 2026-10-05 04:29+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
-"Last-Translator: Peter Rundqvist, 2025\n"
 "Language-Team: Swedish (Sweden) (https://app.transifex.com/teclib/teams/28042/sv_SE/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -23,163 +19,161 @@ msgstr ""
 
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
-msgstr "Callback-URL"
+msgstr ""
 
 #: front/authorization.process.php:43
 #, php-format
 msgid "Authorization failed with error: %s"
-msgstr "Auktorisering misslyckades. Felbeskrivning: %s"
+msgstr ""
 
 #: front/authorization.process.php:53
 msgid "Unable to verify authorization code"
-msgstr "Det gick inte att verifiera auktoriseringskoden"
+msgstr ""
 
 #: front/authorization.process.php:55
 msgid "Unable to get authorization code"
-msgstr "Det gick inte att hämta auktoriseringskoden"
+msgstr ""
 
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
-msgstr "Det gick inte att spara auktoriseringskoden"
+msgstr ""
 
 #: inc/application.class.php:45 setup.php:102
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
-msgstr[0] "OAuth IMAP"
-msgstr[1] "OAuth IMAP"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/application.class.php:89 inc/application.class.php:123
 msgid "Oauth provider"
-msgstr "OAuth-leverantör"
+msgstr ""
 
 #: inc/application.class.php:95 inc/application.class.php:132
 msgid "Client ID"
-msgstr "Klient-ID"
+msgstr ""
 
 #: inc/application.class.php:101
 msgid "Client secret"
-msgstr "Klienthemlighet"
+msgstr ""
 
 #: inc/application.class.php:107 inc/application.class.php:140
 msgid "Tenant ID"
-msgstr "Tenant-ID"
+msgstr ""
 
 #: inc/application.class.php:184
 msgid "Developer help for this provider"
-msgstr "Hjälp för utvecklare för denna leverantör"
+msgstr ""
 
 #: inc/application.class.php:345
 msgid "Name cannot be empty"
-msgstr "Namnet får inte vara tomt"
+msgstr ""
 
 #: inc/application.class.php:354
 msgid "Invalid provider"
-msgstr "Ogiltig leverantör"
+msgstr ""
 
-#: inc/mailcollectorfeature.class.php:354
+#: inc/mailcollectorfeature.class.php:360
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
-msgstr "Ärendemottagaren \"%s\" uppdaterades."
+msgstr ""
 
-#: inc/mailcollectorfeature.class.php:382
+#: inc/mailcollectorfeature.class.php:388
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "Ärendemottagaren \"%s\" inaktiverades."
-
-#: inc/mailcollectorfeature.class.php:444
-msgid "No associated receivers."
-msgstr "Hittade inga mottagare."
-
-#: inc/mailcollectorfeature.class.php:447
-msgid "Name"
-msgstr "Namn"
-
-#: inc/mailcollectorfeature.class.php:448
-msgid "Connection string"
-msgstr "Anslutningssträng"
-
-#: inc/mailcollectorfeature.class.php:449
-msgid "Login"
-msgstr "Inloggning"
+msgstr ""
 
 #: inc/mailcollectorfeature.class.php:450
+msgid "No associated receivers."
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:453
+msgid "Name"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:454
+msgid "Connection string"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:455
+msgid "Login"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:456
 msgid "Is active ?"
-msgstr "Aktiv?"
+msgstr ""
 
 #: inc/authorization.class.php:76
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
-msgstr[0] "OAuth-auktorisering"
-msgstr[1] "OAuth-auktoriseringar"
+msgstr[0] ""
+msgstr[1] ""
 
 #: inc/authorization.class.php:128
 msgid "Create an authorization"
-msgstr "Skapa auktorisation"
+msgstr ""
 
 #: inc/authorization.class.php:138
 msgid "No authorizations."
-msgstr "Inga auktorisationer."
+msgstr ""
 
 #: inc/authorization.class.php:142 inc/authorization.class.php:201
 #: inc/authorization.class.php:258
 msgid "Email"
-msgstr "E-post"
+msgstr ""
 
 #: inc/authorization.class.php:159
 msgid "Connection diagnostic"
-msgstr "Anslutningsdiagnostik"
+msgstr ""
 
 #: inc/authorization.class.php:164
 msgid "Diagnose"
-msgstr "Diagnostisera"
+msgstr ""
 
 #: inc/authorization.class.php:168
 msgid "Update"
-msgstr "Uppdatera"
+msgstr ""
 
 #: inc/authorization.class.php:176
 msgid "Delete"
-msgstr "Ta bort"
+msgstr ""
 
 #: inc/authorization.class.php:273
 msgid "Server host"
-msgstr "Värd"
+msgstr ""
 
 #: inc/authorization.class.php:285
 msgid "Server port"
-msgstr "Port"
+msgstr ""
 
 #: inc/authorization.class.php:303
 msgid "Security level"
-msgstr "Säkerhet"
+msgstr ""
 
 #: inc/authorization.class.php:310
 msgid "SSL"
-msgstr "SSL"
+msgstr ""
 
 #: inc/authorization.class.php:311
 msgid "SSL + TLS"
-msgstr "SSL + TLS"
+msgstr ""
 
 #: inc/authorization.class.php:321
 msgid "Timeout"
-msgstr "Timeout"
+msgstr ""
 
 #: inc/authorization.class.php:340
 msgid "Refresh connection diagnostic"
-msgstr "Uppdatera"
+msgstr ""
 
 #: inc/authorization.class.php:353
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
-"Diagnostikloggen innehåller känslig information som till exempel "
-"åtkomsttoken."
 
 #: inc/authorization.class.php:374
 #, php-format
 msgid "Unexpected error: %s"
-msgstr "Oväntat fel: %s"
+msgstr ""
 
 #: inc/authorization.class.php:461
 #, php-format
@@ -192,4 +186,4 @@ msgstr ""
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
-msgstr "Skapa auktorisering för en annan användare"
+msgstr ""

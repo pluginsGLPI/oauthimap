@@ -3,18 +3,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
-# Translators:
-# Cédric Anne, 2021
-# EpicIT33, 2026
-# 
 #, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-25 03:49+0000\n"
+"POT-Creation-Date: 2026-10-05 04:29+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
-"Last-Translator: EpicIT33, 2026\n"
 "Language-Team: French (France) (https://app.transifex.com/teclib/teams/28042/fr_FR/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -24,175 +19,173 @@ msgstr ""
 
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
-msgstr "Url de retour"
+msgstr ""
 
 #: front/authorization.process.php:43
 #, php-format
 msgid "Authorization failed with error: %s"
-msgstr "L'autorisation a échouée avec l'erreur: %s"
+msgstr ""
 
 #: front/authorization.process.php:53
 msgid "Unable to verify authorization code"
-msgstr "Impossible de vérifier le code d'autorisation"
+msgstr ""
 
 #: front/authorization.process.php:55
 msgid "Unable to get authorization code"
-msgstr "Impossible d'obtenir le code d'autorisation"
+msgstr ""
 
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
-msgstr "Impossible de sauvegarder le code d'autorisation"
+msgstr ""
 
 #: inc/application.class.php:45 setup.php:102
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
-msgstr[0] "Oauth IMAP"
-msgstr[1] "Oauth IMAP"
-msgstr[2] "Oauth IMAP"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: inc/application.class.php:89 inc/application.class.php:123
 msgid "Oauth provider"
-msgstr "Fournisseur Oauth"
+msgstr ""
 
 #: inc/application.class.php:95 inc/application.class.php:132
 msgid "Client ID"
-msgstr "ID d'application (client)"
+msgstr ""
 
 #: inc/application.class.php:101
 msgid "Client secret"
-msgstr "Secret client"
+msgstr ""
 
 #: inc/application.class.php:107 inc/application.class.php:140
 msgid "Tenant ID"
-msgstr "ID de l'annuaire (locataire)"
+msgstr ""
 
 #: inc/application.class.php:184
 msgid "Developer help for this provider"
-msgstr "Aide développeur pour ce fournisseur"
+msgstr ""
 
 #: inc/application.class.php:345
 msgid "Name cannot be empty"
-msgstr "Le nom ne peut être vide"
+msgstr ""
 
 #: inc/application.class.php:354
 msgid "Invalid provider"
-msgstr "Fournisseur invalide"
+msgstr ""
 
-#: inc/mailcollectorfeature.class.php:354
+#: inc/mailcollectorfeature.class.php:360
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
-msgstr "Le collecteur mail \"%s\" a été mis à jour."
+msgstr ""
 
-#: inc/mailcollectorfeature.class.php:382
+#: inc/mailcollectorfeature.class.php:388
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "Le collecteur mail \"%s\" a été désactivé."
-
-#: inc/mailcollectorfeature.class.php:444
-msgid "No associated receivers."
-msgstr "Aucun collecteur associé."
-
-#: inc/mailcollectorfeature.class.php:447
-msgid "Name"
-msgstr "Nom"
-
-#: inc/mailcollectorfeature.class.php:448
-msgid "Connection string"
-msgstr "Chaîne de connexion"
-
-#: inc/mailcollectorfeature.class.php:449
-msgid "Login"
-msgstr "Identifiant"
+msgstr ""
 
 #: inc/mailcollectorfeature.class.php:450
+msgid "No associated receivers."
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:453
+msgid "Name"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:454
+msgid "Connection string"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:455
+msgid "Login"
+msgstr ""
+
+#: inc/mailcollectorfeature.class.php:456
 msgid "Is active ?"
-msgstr "Est actif ?"
+msgstr ""
 
 #: inc/authorization.class.php:76
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
-msgstr[0] "Autorisation Oauth"
-msgstr[1] "Autorisations Oauth"
-msgstr[2] "Autorisations Oauth"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: inc/authorization.class.php:128
 msgid "Create an authorization"
-msgstr "Créer une autorisation"
+msgstr ""
 
 #: inc/authorization.class.php:138
 msgid "No authorizations."
-msgstr "Aucune autorisation."
+msgstr ""
 
 #: inc/authorization.class.php:142 inc/authorization.class.php:201
 #: inc/authorization.class.php:258
 msgid "Email"
-msgstr "E-mail"
+msgstr ""
 
 #: inc/authorization.class.php:159
 msgid "Connection diagnostic"
-msgstr "Diagnostic de la connexion"
+msgstr ""
 
 #: inc/authorization.class.php:164
 msgid "Diagnose"
-msgstr "Diagnostiquer"
+msgstr ""
 
 #: inc/authorization.class.php:168
 msgid "Update"
-msgstr "Mettre à jour"
+msgstr ""
 
 #: inc/authorization.class.php:176
 msgid "Delete"
-msgstr "Supprimer"
+msgstr ""
 
 #: inc/authorization.class.php:273
 msgid "Server host"
-msgstr "Hôte du serveur"
+msgstr ""
 
 #: inc/authorization.class.php:285
 msgid "Server port"
-msgstr "Port du serveur"
+msgstr ""
 
 #: inc/authorization.class.php:303
 msgid "Security level"
-msgstr "Niveau de sécurité"
+msgstr ""
 
 #: inc/authorization.class.php:310
 msgid "SSL"
-msgstr "SSL"
+msgstr ""
 
 #: inc/authorization.class.php:311
 msgid "SSL + TLS"
-msgstr "SSL + TLS"
+msgstr ""
 
 #: inc/authorization.class.php:321
 msgid "Timeout"
-msgstr "Délai d'attente max."
+msgstr ""
 
 #: inc/authorization.class.php:340
 msgid "Refresh connection diagnostic"
-msgstr "Actualiser le diagnostic"
+msgstr ""
 
 #: inc/authorization.class.php:353
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
-"Le journal de diagnostic contient des informations sensibles, telles que le "
-"jeton d'accès."
 
 #: inc/authorization.class.php:374
 #, php-format
 msgid "Unexpected error: %s"
-msgstr "Erreur inattendue : %s"
+msgstr ""
 
 #: inc/authorization.class.php:461
 #, php-format
 msgid "Unable to obtain access token from provider: %s"
-msgstr "Impossible d'obtenir un jeton d'accès auprès du fournisseur : %s"
+msgstr ""
 
 #: inc/authorization.class.php:473
 msgid "The authenticated account does not expose an email address"
-msgstr "  Le compte authentifié ne retourne aucune adresse e-mail"
+msgstr ""
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
-msgstr "Créer une autorisation pour un autre utilisateur"
+msgstr ""
