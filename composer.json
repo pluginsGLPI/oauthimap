@@ -2,9 +2,6 @@
     "require": {
         "php": ">=8.2"
     },
-    "require-dev": {
-        "glpi-project/tools": "^0.8"
-    },
     "provide": {
         "guzzlehttp/guzzle": "*"
     },
@@ -13,7 +10,8 @@
         "platform": {
             "php": "8.2.99"
         },
-        "sort-packages": true
+        "sort-packages": true,
+        "autoloader-suffix": "PluginOauthimap"
     },
     "autoload-dev": {
         "psr-4": {
