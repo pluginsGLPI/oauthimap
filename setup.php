@@ -32,7 +32,7 @@ use Glpi\Http\SessionManager;
 
 use function Safe\define;
 
-define('PLUGIN_OAUTHIMAP_VERSION', '1.5.4');
+define('PLUGIN_OAUTHIMAP_VERSION', '1.5.5');
 
 // Minimal GLPI version, inclusive
 define('PLUGIN_OAUTHIMAP_MIN_GLPI', '11.0.0');
