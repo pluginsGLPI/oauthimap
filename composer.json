@@ -15,6 +15,7 @@
     },
     "config": {
         "optimize-autoloader": true,
+        "autoloader-suffix": "PluginOauthimap",
         "platform": {
             "php": "7.4.0"
         },
