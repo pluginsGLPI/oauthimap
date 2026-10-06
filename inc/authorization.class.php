@@ -41,15 +41,20 @@ use function Safe\json_encode;
 class PluginOauthimapAuthorization extends CommonDBChild
 {
     // From CommonGlpi
-    protected $displaylist = false;
+    protected bool $displaylist = false;
+
+    protected static function itemTypeRequiresReauthentication(): bool
+    {
+        return true;
+    }
 
     // From CommonDBTM
-    public $dohistory = true;
+    public bool $dohistory = true;
 
     // From CommonDBChild
-    public static $itemtype = 'PluginOauthimapApplication';
+    public static string $itemtype = 'PluginOauthimapApplication';
 
-    public static $items_id = 'plugin_oauthimap_applications_id';
+    public static string $items_id = 'plugin_oauthimap_applications_id';
 
     /**
      * Authorization owner details.
@@ -122,7 +127,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<div class="row">';
         echo '<div class="col text-end">';
-        echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
         echo Html::hidden('id', ['value' => $item->getID()]);
         echo '<button type="submit" class="btn btn-primary" name="request_authorization" value="1">';
         echo '<i class="fas fa-plus"></i> ' . __s('Create an authorization', 'oauthimap');
@@ -169,7 +173,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 echo '</a>';
                 echo ' ';
                 echo '<form method="POST" action="' . self::getFormURL() . '" style="display:inline-block;">';
-                echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
                 echo Html::hidden('id', ['value' => $row['id']]);
                 echo '<button type="submit" class="btn btn-primary btn-sm" name="delete" value="1">';
                 echo '<i class="fas fa-trash-alt"></i> ';
@@ -249,7 +252,6 @@ class PluginOauthimapAuthorization extends CommonDBChild
 
         echo '<input type="hidden" name="diagnose" value="1" />';
         echo '<input type="hidden" name="id" value="' . $this->fields['id'] . '" />';
-        echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
 
         echo '<table class="tab_cadre_fixe">';
 
@@ -492,9 +494,9 @@ class PluginOauthimapAuthorization extends CommonDBChild
         );
         if ($exists) {
             return $this->update(['id' => $this->fields['id']] + $input);
-        } else {
-            return $this->add($input);
         }
+
+        return $this->add($input);
     }
 
     /**

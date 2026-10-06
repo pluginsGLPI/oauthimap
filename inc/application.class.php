@@ -38,7 +38,7 @@ use function Safe\json_encode;
 
 class PluginOauthimapApplication extends CommonDropdown
 {
-    public static $rightname = 'config';
+    public static string $rightname = 'config';
 
     public static function getTypeName($nb = 0)
     {
@@ -64,6 +64,11 @@ class PluginOauthimapApplication extends CommonDropdown
     public static function getIcon()
     {
         return 'ti ti-login-2';
+    }
+
+    protected static function itemTypeRequiresReauthentication(): bool
+    {
+        return true;
     }
 
     public static function canCreate(): bool
@@ -104,7 +109,7 @@ class PluginOauthimapApplication extends CommonDropdown
             ],
             [
                 'name'     => 'tenant_id',
-                'label'    => __s('Tenant ID', 'oauthimap'),
+                'label'    => __('Tenant ID', 'oauthimap'),
                 'type'     => 'additionnal_param',
                 'list'     => false,
                 'provider' => Azure::class,
@@ -137,7 +142,7 @@ class PluginOauthimapApplication extends CommonDropdown
             'id'       => '7',
             'table'    => $this->getTable(),
             'field'    => 'tenant_id',
-            'name'     => __s('Tenant ID', 'oauthimap'),
+            'name'     => __('Tenant ID', 'oauthimap'),
             'datatype' => 'text',
         ];
 
@@ -553,8 +558,9 @@ JAVASCRIPT;
      */
     private static function getCallbackUrl(): string
     {
-        // @phpstan-ignore-next-line : getWebDir() is deprecated, but mandatory for this case
-        return @Plugin::getWebDir('oauthimap', true, true) . '/front/authorization.callback.php';
+        global $CFG_GLPI;
+
+        return $CFG_GLPI['url_base'] . '/plugins/oauthimap/front/authorization.callback.php';
     }
 
     public function cleanDBonPurge()
