@@ -66,6 +66,11 @@ class PluginOauthimapApplication extends CommonDropdown
         return 'ti ti-login-2';
     }
 
+    protected static function itemTypeRequiresReauthentication(): bool
+    {
+        return true;
+    }
+
     public static function canCreate(): bool
     {
         return static::canUpdate();
