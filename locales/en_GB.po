@@ -1,24 +1,20 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# English translations for PACKAGE package.
+# Copyright (C) 2026 THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-# Translators:
-# Cédric Anne, 2021
-# 
-#, fuzzy
+# Automatically generated, 2026.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 03:32+0000\n"
-"PO-Revision-Date: 2020-10-15 13:49+0000\n"
-"Last-Translator: Cédric Anne, 2021\n"
-"Language-Team: English (United Kingdom) (https://app.transifex.com/teclib/teams/28042/en_GB/)\n"
+"POT-Creation-Date: 2026-10-08 04:55+0000\n"
+"PO-Revision-Date: 2026-10-08 04:55+0000\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: en_GB\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: templates/application_form_extra.html.twig
@@ -45,149 +41,149 @@ msgstr "Unable to save authorization code"
 #: inc/application.class.php:45 setup.php:102
 msgid "OAuth IMAP"
 msgid_plural "OAuth IMAP"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "OAuth IMAP"
+msgstr[1] "OAuth IMAP"
 
-#: inc/application.class.php:89 inc/application.class.php:123
+#: inc/application.class.php:94 inc/application.class.php:128
 msgid "Oauth provider"
 msgstr "Oauth provider"
 
-#: inc/application.class.php:95 inc/application.class.php:132
+#: inc/application.class.php:100 inc/application.class.php:137
 msgid "Client ID"
 msgstr "Client ID"
 
-#: inc/application.class.php:101
+#: inc/application.class.php:106
 msgid "Client secret"
 msgstr "Client secret"
 
-#: inc/application.class.php:107 inc/application.class.php:140
+#: inc/application.class.php:112 inc/application.class.php:145
 msgid "Tenant ID"
 msgstr "Tenant ID"
 
-#: inc/application.class.php:184
+#: inc/application.class.php:189
 msgid "Developer help for this provider"
 msgstr "Developer help for this provider"
 
-#: inc/application.class.php:345
+#: inc/application.class.php:350
 msgid "Name cannot be empty"
 msgstr "Name cannot be empty"
 
-#: inc/application.class.php:354
+#: inc/application.class.php:359
 msgid "Invalid provider"
 msgstr "Invalid provider"
 
-#: inc/mailcollectorfeature.class.php:354
+#: inc/mailcollectorfeature.class.php:360
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
 msgstr "Mail receiver \"%s\" has been updated."
 
-#: inc/mailcollectorfeature.class.php:382
+#: inc/mailcollectorfeature.class.php:388
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
 msgstr "Mail receiver \"%s\" has been deactivated."
 
-#: inc/mailcollectorfeature.class.php:444
+#: inc/mailcollectorfeature.class.php:450
 msgid "No associated receivers."
 msgstr "No associated receivers."
 
-#: inc/mailcollectorfeature.class.php:447
+#: inc/mailcollectorfeature.class.php:453
 msgid "Name"
 msgstr "Name"
 
-#: inc/mailcollectorfeature.class.php:448
+#: inc/mailcollectorfeature.class.php:454
 msgid "Connection string"
 msgstr "Connection string"
 
-#: inc/mailcollectorfeature.class.php:449
+#: inc/mailcollectorfeature.class.php:455
 msgid "Login"
 msgstr "Login"
 
-#: inc/mailcollectorfeature.class.php:450
+#: inc/mailcollectorfeature.class.php:456
 msgid "Is active ?"
 msgstr "Is active ?"
 
-#: inc/authorization.class.php:76
+#: inc/authorization.class.php:81
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
 msgstr[0] "Oauth authorization"
 msgstr[1] "Oauth authorizations"
 
-#: inc/authorization.class.php:128
+#: inc/authorization.class.php:132
 msgid "Create an authorization"
 msgstr "Create an authorization"
 
-#: inc/authorization.class.php:138
+#: inc/authorization.class.php:142
 msgid "No authorizations."
 msgstr "No authorizations."
 
-#: inc/authorization.class.php:142 inc/authorization.class.php:201
-#: inc/authorization.class.php:258
+#: inc/authorization.class.php:146 inc/authorization.class.php:204
+#: inc/authorization.class.php:260
 msgid "Email"
 msgstr "Email"
 
-#: inc/authorization.class.php:159
+#: inc/authorization.class.php:163
 msgid "Connection diagnostic"
 msgstr "Connection diagnostic"
 
-#: inc/authorization.class.php:164
+#: inc/authorization.class.php:168
 msgid "Diagnose"
 msgstr "Diagnose"
 
-#: inc/authorization.class.php:168
+#: inc/authorization.class.php:172
 msgid "Update"
 msgstr "Update"
 
-#: inc/authorization.class.php:176
+#: inc/authorization.class.php:179
 msgid "Delete"
 msgstr "Delete"
 
-#: inc/authorization.class.php:273
+#: inc/authorization.class.php:275
 msgid "Server host"
 msgstr "Server host"
 
-#: inc/authorization.class.php:285
+#: inc/authorization.class.php:287
 msgid "Server port"
 msgstr "Server port"
 
-#: inc/authorization.class.php:303
+#: inc/authorization.class.php:305
 msgid "Security level"
 msgstr "Security level"
 
-#: inc/authorization.class.php:310
+#: inc/authorization.class.php:312
 msgid "SSL"
 msgstr "SSL"
 
-#: inc/authorization.class.php:311
+#: inc/authorization.class.php:313
 msgid "SSL + TLS"
 msgstr "SSL + TLS"
 
-#: inc/authorization.class.php:321
+#: inc/authorization.class.php:323
 msgid "Timeout"
 msgstr "Timeout"
 
-#: inc/authorization.class.php:340
+#: inc/authorization.class.php:342
 msgid "Refresh connection diagnostic"
 msgstr "Refresh connection diagnostic"
 
-#: inc/authorization.class.php:353
+#: inc/authorization.class.php:355
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
 "Diagnostic log contains sensitive information, such as the access token."
 
-#: inc/authorization.class.php:374
+#: inc/authorization.class.php:376
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Unexpected error: %s"
 
-#: inc/authorization.class.php:461
+#: inc/authorization.class.php:463
 #, php-format
 msgid "Unable to obtain access token from provider: %s"
-msgstr ""
+msgstr "Unable to obtain access token from provider: %s"
 
-#: inc/authorization.class.php:473
+#: inc/authorization.class.php:475
 msgid "The authenticated account does not expose an email address"
-msgstr ""
+msgstr "The authenticated account does not expose an email address"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
