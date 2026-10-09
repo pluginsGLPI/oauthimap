@@ -4,8 +4,6 @@
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 # 
 # Translators:
-# Carlos Moreno Rodríguez <carlosm.rodriguez@prodigy.net.mx>, 2023
-# Edwin Elias Alvarez <sistemas@cyalimentos.com>, 2026
 # Edwin Elias Alvarez <elias986@yahoo.com>, 2026
 # 
 #, fuzzy
@@ -13,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 03:32+0000\n"
+"POT-Creation-Date: 2026-10-08 04:55+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Edwin Elias Alvarez <elias986@yahoo.com>, 2026\n"
 "Language-Team: Spanish (Mexico) (https://app.transifex.com/teclib/teams/28042/es_MX/)\n"
@@ -25,24 +23,24 @@ msgstr ""
 
 #: templates/application_form_extra.html.twig
 msgid "Callback url"
-msgstr "URL de redirección"
+msgstr "URL de respuesta"
 
 #: front/authorization.process.php:43
 #, php-format
 msgid "Authorization failed with error: %s"
-msgstr "La autorización falló con error: %s"
+msgstr "La autorización falló con el error: %s"
 
 #: front/authorization.process.php:53
 msgid "Unable to verify authorization code"
-msgstr "No se puede verificar el código de autorización"
+msgstr "No se pudo verificar el código de autorización"
 
 #: front/authorization.process.php:55
 msgid "Unable to get authorization code"
-msgstr "No se puede obtener el código de autorización"
+msgstr "No se pudo obtener el código de autorización"
 
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
-msgstr "No se puede guardar el código de autorización"
+msgstr "No se pudo guardar el código de autorización"
 
 #: inc/application.class.php:45 setup.php:102
 msgid "OAuth IMAP"
@@ -51,149 +49,149 @@ msgstr[0] "OAuth IMAP"
 msgstr[1] "OAuth IMAP"
 msgstr[2] "OAuth IMAP"
 
-#: inc/application.class.php:89 inc/application.class.php:123
+#: inc/application.class.php:94 inc/application.class.php:128
 msgid "Oauth provider"
-msgstr "Proveedor"
+msgstr "Proveedor OAuth"
 
-#: inc/application.class.php:95 inc/application.class.php:132
+#: inc/application.class.php:100 inc/application.class.php:137
 msgid "Client ID"
-msgstr "Id. de aplicación - cliente"
+msgstr "ID de cliente"
 
-#: inc/application.class.php:101
+#: inc/application.class.php:106
 msgid "Client secret"
-msgstr "Frase secreta de cliente"
+msgstr "Secreto del cliente"
 
-#: inc/application.class.php:107 inc/application.class.php:140
+#: inc/application.class.php:112 inc/application.class.php:145
 msgid "Tenant ID"
-msgstr "Id. de directorio"
+msgstr "ID de inquilino"
 
-#: inc/application.class.php:184
+#: inc/application.class.php:189
 msgid "Developer help for this provider"
 msgstr "Ayuda para desarrolladores de este proveedor"
 
-#: inc/application.class.php:345
+#: inc/application.class.php:350
 msgid "Name cannot be empty"
-msgstr "El campo nombre no puede estar vacío"
+msgstr "El nombre no puede estar vacío"
 
-#: inc/application.class.php:354
+#: inc/application.class.php:359
 msgid "Invalid provider"
-msgstr "Proveedor no válido"
+msgstr "Proveedor inválido"
 
-#: inc/mailcollectorfeature.class.php:354
+#: inc/mailcollectorfeature.class.php:360
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
-msgstr "El receptor de correo electrónico \\\"%s\\\" se ha actualizado."
+msgstr "El receptor de correo \"%s\" ha sido actualizado."
 
-#: inc/mailcollectorfeature.class.php:382
+#: inc/mailcollectorfeature.class.php:388
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "Receptor de correo electrónico \\\"%s\\\" se ha desactivado."
+msgstr "El receptor de correo \"%s\" ha sido desactivado."
 
-#: inc/mailcollectorfeature.class.php:444
+#: inc/mailcollectorfeature.class.php:450
 msgid "No associated receivers."
-msgstr "Ningún receptor de correo electrónico asociado."
+msgstr "No hay receptores asociados."
 
-#: inc/mailcollectorfeature.class.php:447
+#: inc/mailcollectorfeature.class.php:453
 msgid "Name"
 msgstr "Nombre"
 
-#: inc/mailcollectorfeature.class.php:448
+#: inc/mailcollectorfeature.class.php:454
 msgid "Connection string"
 msgstr "Cadena de conexión"
 
-#: inc/mailcollectorfeature.class.php:449
+#: inc/mailcollectorfeature.class.php:455
 msgid "Login"
 msgstr "Usuario"
 
-#: inc/mailcollectorfeature.class.php:450
+#: inc/mailcollectorfeature.class.php:456
 msgid "Is active ?"
-msgstr "¿Está activo?"
+msgstr "¿Activo?"
 
-#: inc/authorization.class.php:76
+#: inc/authorization.class.php:81
 msgid "Oauth authorization"
 msgid_plural "Oauth authorizations"
-msgstr[0] "Permiso OAuth"
-msgstr[1] "Permisos OAuth"
-msgstr[2] "Permisos OAuth"
+msgstr[0] "Autorización OAuth"
+msgstr[1] "Autorizaciones OAuth"
+msgstr[2] "Autorizaciones OAuth"
 
-#: inc/authorization.class.php:128
+#: inc/authorization.class.php:132
 msgid "Create an authorization"
-msgstr "Autorizar cuenta"
+msgstr "Crear una autorización"
 
-#: inc/authorization.class.php:138
+#: inc/authorization.class.php:142
 msgid "No authorizations."
-msgstr "Sin autorizaciones."
+msgstr "No hay autorizaciones."
 
-#: inc/authorization.class.php:142 inc/authorization.class.php:201
-#: inc/authorization.class.php:258
+#: inc/authorization.class.php:146 inc/authorization.class.php:204
+#: inc/authorization.class.php:260
 msgid "Email"
-msgstr "Dirección de correo electrónico"
+msgstr "Correo electrónico"
 
-#: inc/authorization.class.php:159
+#: inc/authorization.class.php:163
 msgid "Connection diagnostic"
 msgstr "Diagnóstico de conexión"
 
-#: inc/authorization.class.php:164
+#: inc/authorization.class.php:168
 msgid "Diagnose"
 msgstr "Diagnosticar"
 
-#: inc/authorization.class.php:168
+#: inc/authorization.class.php:172
 msgid "Update"
 msgstr "Actualizar"
 
-#: inc/authorization.class.php:176
+#: inc/authorization.class.php:179
 msgid "Delete"
 msgstr "Eliminar"
 
-#: inc/authorization.class.php:273
+#: inc/authorization.class.php:275
 msgid "Server host"
 msgstr "Servidor"
 
-#: inc/authorization.class.php:285
+#: inc/authorization.class.php:287
 msgid "Server port"
-msgstr "Puerto"
+msgstr "Puerto del servidor"
 
-#: inc/authorization.class.php:303
+#: inc/authorization.class.php:305
 msgid "Security level"
 msgstr "Nivel de seguridad"
 
-#: inc/authorization.class.php:310
+#: inc/authorization.class.php:312
 msgid "SSL"
 msgstr "SSL"
 
-#: inc/authorization.class.php:311
+#: inc/authorization.class.php:313
 msgid "SSL + TLS"
 msgstr "SSL + TLS"
 
-#: inc/authorization.class.php:321
+#: inc/authorization.class.php:323
 msgid "Timeout"
-msgstr "Timeout"
+msgstr "Tiempo de espera"
 
-#: inc/authorization.class.php:340
+#: inc/authorization.class.php:342
 msgid "Refresh connection diagnostic"
 msgstr "Actualizar diagnóstico de conexión"
 
-#: inc/authorization.class.php:353
+#: inc/authorization.class.php:355
 msgid ""
 "Diagnostic log contains sensitive information, such as the access token."
 msgstr ""
-"El registro de diagnóstico contiene información confidencial, como el token "
-"de acceso."
+"El registro de diagnóstico contiene información sensible, como el token de "
+"acceso."
 
-#: inc/authorization.class.php:374
+#: inc/authorization.class.php:376
 #, php-format
 msgid "Unexpected error: %s"
 msgstr "Error inesperado: %s"
 
-#: inc/authorization.class.php:461
+#: inc/authorization.class.php:463
 #, php-format
 msgid "Unable to obtain access token from provider: %s"
-msgstr "No se pudo obtener el token de acceso del proveedor:  %s"
+msgstr "No se pudo obtener el token de acceso del proveedor: %s"
 
-#: inc/authorization.class.php:473
+#: inc/authorization.class.php:475
 msgid "The authenticated account does not expose an email address"
-msgstr "La cuenta autenticada no expone una dirección de correo electrónico."
+msgstr "La cuenta autenticada no expone una dirección de correo electrónico"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
-msgstr "Crear autorización para otra cuenta"
+msgstr "Crear autorización para otro usuario"
