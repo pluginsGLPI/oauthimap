@@ -11,6 +11,10 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Add Transifex translations link to README
 
+### Fixed
+
+- Fix `Serialization of 'Closure' is not allowed` error when authorizing a new mailbox from the mail collector form
+
 ## [1.6.0] - 2026-10-06
 
 ### Added

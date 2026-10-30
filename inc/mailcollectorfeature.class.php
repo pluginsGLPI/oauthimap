@@ -272,7 +272,8 @@ JAVASCRIPT;
         } else {
             // Create new authorization
             $application->redirectToAuthorizationUrl(
-                self::updateMailCollectorOnAuthorizationCallback(...),
+                // String callable, as a Closure stored in session cannot be serialized
+                self::class . '::updateMailCollectorOnAuthorizationCallback',
                 [
                     MailCollector::getForeignKeyField() => $item->getID(),
                 ],
