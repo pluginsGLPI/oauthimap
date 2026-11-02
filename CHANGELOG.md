@@ -5,6 +5,12 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## [Unreleased]
+
+### Fixed
+
+- Fix `Serialization of 'Closure' is not allowed` error when authorizing a new mailbox from the mail collector form
+
 ## [1.5.5] - 2026-10-06
 
 ### Fixed
