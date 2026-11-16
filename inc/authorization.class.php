@@ -106,12 +106,25 @@ class PluginOauthimapAuthorization extends CommonDBChild
         /** @var array $CFG_GLPI */
         global $DB, $CFG_GLPI;
 
+        $criteria = [
+            PluginOauthimapApplication::getForeignKeyField() => $item->getID(),
+        ];
+        $total = countElementsInTable(self::getTable(), $criteria);
+        $start = (int) ($_GET['start'] ?? 0);
+        $limit = max(1, (int) $_SESSION['glpilist_limit']);
+        if ($start < 0) {
+            $start = 0;
+        } elseif ($total > 0 && $start >= $total) {
+            $start = intdiv($total - 1, $limit) * $limit;
+        }
+
         $iterator = $DB->request(
             [
                 'FROM'  => self::getTable(),
-                'WHERE' => [
-                    PluginOauthimapApplication::getForeignKeyField() => $item->getID(),
-                ],
+                'WHERE' => $criteria,
+                'ORDER' => 'id',
+                'START' => $start,
+                'LIMIT' => $limit,
             ],
         );
 
@@ -133,8 +146,33 @@ class PluginOauthimapAuthorization extends CommonDBChild
         echo '</div>'; // #mainformtable
         echo '</form>';  // [name=asset_form]
 
+        if ($total > 0) {
+            Html::printAjaxPager('', $start, $total);
+
+            $title = json_encode(__s('Connection diagnostic', 'oauthimap'));
+            // One handler for all rows (rebound on each tab render), the modal is created and removed by core.
+            echo Html::scriptBlock(<<<JAVASCRIPT
+                $(document).off('click.oauthimap_diagnose').on('click.oauthimap_diagnose', '[data-oauthimap-diagnose-url]', function (event) {
+                    event.preventDefault();
+                    var id = 'plugin_oauthimap_authorization_diagnostic';
+                    glpi_html_dialog({
+                        id: id,
+                        title: {$title},
+                        dialogclass: 'modal-xl',
+                        body: '<iframe class="w-100 border-0" style="height: 650px" src="' + _.escape($(this).data('oauthimap-diagnose-url')) + '"></iframe>',
+                    });
+                    $('#' + id + ' iframe').on('load', function () {
+                        var doc = this.contentWindow.document;
+                        $(this).height(Math.min(doc.documentElement.scrollHeight, doc.body.scrollHeight) || 650);
+                    });
+                });
+JAVASCRIPT);
+        }
+
+        $csrf_token = Session::getNewCSRFToken();
+
         echo '<table class="table table-striped table-hover my-4">';
-        if ($iterator->count() === 0) {
+        if ($total === 0) {
             echo '<tbody><tr><th>' . __s('No authorizations.', 'oauthimap') . '</th></tr></tbody>';
         } else {
             echo '<thead>';
@@ -151,16 +189,9 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 echo '<td>' . htmlspecialchars($row['email'], ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '</td>';
 
                 echo '<td>';
-                $modal_id = 'plugin_oauthimap_authorization_diagnostic_' . mt_rand();
-                Ajax::createIframeModalWindow(
-                    $modal_id,
-                    self::getFormURLWithID($row['id']) . '&diagnose',
-                    [
-                        'title'  => __s('Connection diagnostic', 'oauthimap'),
-                        'height' => 650,
-                    ],
-                );
-                echo '<a class="btn btn-primary btn-sm" href="#" data-bs-toggle="modal" data-bs-target="#' . $modal_id . '">';
+                $diagnostic_url = self::getFormURLWithID($row['id']) . '&diagnose&_in_modal=1';
+                echo '<a class="btn btn-primary btn-sm" href="#"'
+                    . ' data-oauthimap-diagnose-url="' . htmlspecialchars($diagnostic_url, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8') . '">';
                 echo '<i class="fas fa-bug"></i> ' . __s('Diagnose', 'oauthimap');
                 echo '</a>';
                 echo ' ';
@@ -169,7 +200,7 @@ class PluginOauthimapAuthorization extends CommonDBChild
                 echo '</a>';
                 echo ' ';
                 echo '<form method="POST" action="' . self::getFormURL() . '" style="display:inline-block;">';
-                echo Html::hidden('_glpi_csrf_token', ['value' => Session::getNewCSRFToken()]);
+                echo Html::hidden('_glpi_csrf_token', ['value' => $csrf_token]);
                 echo Html::hidden('id', ['value' => $row['id']]);
                 echo '<button type="submit" class="btn btn-primary btn-sm" name="delete" value="1">';
                 echo '<i class="fas fa-trash-alt"></i> ';

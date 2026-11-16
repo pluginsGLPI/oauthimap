@@ -57,7 +57,8 @@ function plugin_init_oauthimap()
         Firewall::STRATEGY_NO_CHECK,
     );
 
-    if (Plugin::isPluginActive('oauthimap')) {
+    // Plugin::isPluginActive() would query the database here, plugins being not yet flagged as initialized.
+    if (in_array('oauthimap', Plugin::getPlugins(), true)) {
         // Config page: redirect to dropdown page
         $PLUGIN_HOOKS['config_page']['oauthimap'] = 'front/application.php';
 
