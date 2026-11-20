@@ -10,6 +10,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ### Fixed
 
 - Fix `Serialization of 'Closure' is not allowed` error when authorizing a new mailbox from the mail collector form
+- Fix issue with dropdown AJAX URL on subdirectory installations causing login field to disappear in the mail collector form
 
 ## [1.5.5] - 2026-10-06
 
