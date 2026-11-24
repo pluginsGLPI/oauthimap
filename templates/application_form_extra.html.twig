@@ -40,4 +40,4 @@
      data-oauthimap-rand="{{ rand }}"
      data-oauthimap-documentation-urls="{{ documentation_urls_json|e('html_attr') }}"></div>
 
-{{ call('Html::script', ['/plugins/oauthimap/js/application_form_extra.js', {}, false])|raw }}
+{{ call('Html::script', ['/plugins/oauthimap/js/application_form_extra.js', {'version': constant('PLUGIN_OAUTHIMAP_VERSION')}, false])|raw }}
