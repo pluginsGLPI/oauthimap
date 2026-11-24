@@ -36,29 +36,8 @@
     }
 ) }}
 
-<script>
-    (function($) {
-        var documentation_urls = {{ documentation_urls_json|raw }};
+<div hidden data-oauthimap-provider-config
+     data-oauthimap-rand="{{ rand }}"
+     data-oauthimap-documentation-urls="{{ documentation_urls_json|e('html_attr') }}"></div>
 
-        var updateDocumentationLink = function () {
-            var provider = $('#dropdown_provider{{ rand }}').val();
-
-            var url = documentation_urls.hasOwnProperty(provider)
-                ? documentation_urls[provider]
-                : null;
-
-            $('.help-link').attr('href', url).toggle(url !== null);
-        };
-
-        var onProviderChange = function () {
-            var provider = $.escapeSelector($(this).val()); // escape selector as il contient des slashes
-            $('[data-provider="' + provider + '"]').closest('.form-field').show();
-            $('[data-provider]:not([data-provider="' + provider + '"])').closest('.form-field').hide();
-
-            updateDocumentationLink();
-        };
-
-        $('#dropdown_provider{{ rand }}').change(onProviderChange);
-        onProviderChange.call($('#dropdown_provider{{ rand }}'));
-    })(jQuery);
-</script>
+{{ call('Html::script', ['/plugins/oauthimap/js/application_form_extra.js', {}, false])|raw }}
