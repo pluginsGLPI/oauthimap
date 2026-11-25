@@ -99,12 +99,13 @@ function plugin_oauthimap_boot()
 function plugin_version_oauthimap()
 {
     return [
-        'name'         => __s('OAuth IMAP', 'oauthimap'),
-        'version'      => PLUGIN_OAUTHIMAP_VERSION,
-        'author'       => "Teclib'",
-        'license'      => 'GPL v3+',
-        'homepage'     => 'https://www.teclib-edition.com',
-        'requirements' => [
+        'name'          => __s('OAuth IMAP', 'oauthimap'),
+        'version'       => PLUGIN_OAUTHIMAP_VERSION,
+        'author'        => "Teclib'",
+        'license'       => 'GPL v3+',
+        'homepage'      => 'https://www.teclib-edition.com',
+        'csp_compliant' => true,
+        'requirements'  => [
             'glpi' => [
                 'min' => PLUGIN_OAUTHIMAP_MIN_GLPI,
                 'max' => PLUGIN_OAUTHIMAP_MAX_GLPI,
