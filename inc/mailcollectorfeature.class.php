@@ -414,7 +414,15 @@ JAVASCRIPT;
             $criteria['login'] = $login;
         }
 
-        $data = getAllDataFromTable(MailCollector::getTable(), $criteria);
+        // SQL pre-filter on the protocol type (followed by "/" or "}"), the regex below does the exact check.
+        $criteria[] = [
+            'OR' => [
+                ['host' => ['LIKE', '%/' . $protocol_type . '/%']],
+                ['host' => ['LIKE', '%/' . $protocol_type . '}%']],
+            ],
+        ];
+
+        $data = getAllDataFromTable(MailCollector::getTable(), ['WHERE' => $criteria]);
 
         $result = [];
 
@@ -459,7 +467,7 @@ JAVASCRIPT;
 
             foreach ($collectors as $row) {
                 $mailcollector = new MailCollector();
-                $mailcollector->getFromDB($row['id']);
+                $mailcollector->getFromResultSet($row);
 
                 $name = $mailcollector->canViewItem() ? $mailcollector->getLink() : $mailcollector->getNameID();
 

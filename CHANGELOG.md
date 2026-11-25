@@ -11,6 +11,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 - Make the plugin compatible with the Content Security Policy
 
+### Fixed
+
+- Fix error 500 (PHP memory exhausted) on the "Oauth authorization" tab of an application with many authorizations: the list is now paginated
+- Speed up the mail collector form: the authorization dropdown now loads and searches authorizations page by page instead of loading them all
+- Speed up the "Mail collectors" tab of an application: only the matching mail collectors are read, without one extra query per mail collector
+- Remove a database query run by the plugin on every GLPI page and AJAX request
+
 ## [1.5.6] - 2026-11-05
 
 ### Fixed
