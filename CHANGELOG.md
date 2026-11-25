@@ -5,21 +5,17 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-<<<<<<< HEAD
-## [1.6.1] - 2026-11-05
-
-### Added
-
-- Add Transifex translations link to README
-=======
 ## [Unreleased]
 
 ### Changed
 
 - Make the plugin compatible with the Content Security Policy
 
-## [1.5.6] - 2026-11-05
->>>>>>> e9b13c6 (feat: make plugin CSP compliant (#183))
+## [1.6.1] - 2026-11-05
+
+### Added
+
+- Add Transifex translations link to README
 
 ### Fixed
 
