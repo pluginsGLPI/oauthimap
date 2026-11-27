@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-09-24 03:32+0000\n"
+"POT-Creation-Date: 2026-11-27 07:06+0000\n"
 "PO-Revision-Date: 2020-10-15 13:49+0000\n"
 "Last-Translator: Alan Lehoux, 2026\n"
 "Language-Team: Spanish (Argentina) (https://app.transifex.com/teclib/teams/28042/es_AR/)\n"
@@ -25,10 +25,160 @@ msgstr ""
 msgid "Callback url"
 msgstr "Url de callback"
 
+#: inc/mailcollectorfeature.class.php:361
+#, php-format
+msgid "Mail receiver \"%s\" has been updated."
+msgstr "Se actualizó el receptor de correo \"%s\"."
+
+#: inc/mailcollectorfeature.class.php:389
+#, php-format
+msgid "Mail receiver \"%s\" has been deactivated."
+msgstr "Se desactivó el receptor de correo \"%s\"."
+
+#: inc/mailcollectorfeature.class.php:451
+msgid "No associated receivers."
+msgstr "No hay receptores asociados."
+
+#: inc/mailcollectorfeature.class.php:454
+msgid "Name"
+msgstr "Nombre"
+
+#: inc/mailcollectorfeature.class.php:455
+msgid "Connection string"
+msgstr "Cadena de conexión"
+
+#: inc/mailcollectorfeature.class.php:456
+msgid "Login"
+msgstr "Iniciar sesión"
+
+#: inc/mailcollectorfeature.class.php:457
+msgid "Is active ?"
+msgstr "¿ Está activo ?"
+
+#: inc/authorization.class.php:81
+msgid "Oauth authorization"
+msgid_plural "Oauth authorizations"
+msgstr[0] "Autorización de Oauth"
+msgstr[1] "Autorizaciones de Oauth"
+msgstr[2] "Autorizaciones de Oauth"
+
+#: inc/authorization.class.php:132
+msgid "Create an authorization"
+msgstr "Crear una autorización"
+
+#: inc/authorization.class.php:142
+msgid "No authorizations."
+msgstr "No hay autorizaciones."
+
+#: inc/authorization.class.php:146 inc/authorization.class.php:204
+#: inc/authorization.class.php:260
+msgid "Email"
+msgstr "Correo electrónico"
+
+#: inc/authorization.class.php:163
+msgid "Connection diagnostic"
+msgstr "Diagnóstico de conexión"
+
+#: inc/authorization.class.php:168
+msgid "Diagnose"
+msgstr "Diagnosticar"
+
+#: inc/authorization.class.php:172
+msgid "Update"
+msgstr "Actualizar"
+
+#: inc/authorization.class.php:179
+msgid "Delete"
+msgstr "Eliminar"
+
+#: inc/authorization.class.php:275
+msgid "Server host"
+msgstr "Host del servidor"
+
+#: inc/authorization.class.php:287
+msgid "Server port"
+msgstr "Puerto del servidor"
+
+#: inc/authorization.class.php:305
+msgid "Security level"
+msgstr "Nivel de seguridad"
+
+#: inc/authorization.class.php:312
+msgid "SSL"
+msgstr "SSL"
+
+#: inc/authorization.class.php:313
+msgid "SSL + TLS"
+msgstr "SSL + TLS"
+
+#: inc/authorization.class.php:323
+msgid "Timeout"
+msgstr "Tiempo de espera"
+
+#: inc/authorization.class.php:342
+msgid "Refresh connection diagnostic"
+msgstr "Actualizar diagnóstico de conexión"
+
+#: inc/authorization.class.php:355
+msgid ""
+"Diagnostic log contains sensitive information, such as the access token."
+msgstr ""
+"El registro de diagnóstico contiene información sensible, como el token de "
+"acceso."
+
+#: inc/authorization.class.php:376
+#, php-format
+msgid "Unexpected error: %s"
+msgstr "Error inesperado: %s"
+
+#: inc/authorization.class.php:463
+#, php-format
+msgid "Unable to obtain access token from provider: %s"
+msgstr "No se puede obtener el token de acceso del proveedor: %s"
+
+#: inc/authorization.class.php:475
+msgid "The authenticated account does not expose an email address"
+msgstr "La cuenta autenticada no expone una dirección de correo electrónico"
+
+#: inc/application.class.php:45 setup.php:102
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] "OAuth IMAP"
+msgstr[1] "OAuth IMAP"
+msgstr[2] "OAuth IMAP"
+
+#: inc/application.class.php:94 inc/application.class.php:128
+msgid "Oauth provider"
+msgstr "Proveedor de Oauth"
+
+#: inc/application.class.php:100 inc/application.class.php:137
+msgid "Client ID"
+msgstr "ID de cliente"
+
+#: inc/application.class.php:106
+msgid "Client secret"
+msgstr "Secreto de cliente"
+
+#: inc/application.class.php:112 inc/application.class.php:145
+msgid "Tenant ID"
+msgstr "ID de inquilino"
+
+#: inc/application.class.php:189
+msgid "Developer help for this provider"
+msgstr "Ayuda para desarrolladores de este proveedor"
+
+#: inc/application.class.php:350
+msgid "Name cannot be empty"
+msgstr "El nombre no puede estar vacío"
+
+#: inc/application.class.php:359
+msgid "Invalid provider"
+msgstr "Proveedor no válido"
+
 #: front/authorization.process.php:43
 #, php-format
 msgid "Authorization failed with error: %s"
-msgstr "La autorización falló con el error: %s"
+msgstr "Error de autorización: %s"
 
 #: front/authorization.process.php:53
 msgid "Unable to verify authorization code"
@@ -41,156 +191,6 @@ msgstr "No se puede obtener el código de autorización"
 #: front/authorization.process.php:58
 msgid "Unable to save authorization code"
 msgstr "No se puede guardar el código de autorización"
-
-#: inc/application.class.php:45 setup.php:102
-msgid "OAuth IMAP"
-msgid_plural "OAuth IMAP"
-msgstr[0] "OAuth IMAP"
-msgstr[1] "OAuth IMAP"
-msgstr[2] "OAuth IMAP"
-
-#: inc/application.class.php:89 inc/application.class.php:123
-msgid "Oauth provider"
-msgstr "Proveedor de Oauth"
-
-#: inc/application.class.php:95 inc/application.class.php:132
-msgid "Client ID"
-msgstr "ID de cliente"
-
-#: inc/application.class.php:101
-msgid "Client secret"
-msgstr "Secreto de cliente"
-
-#: inc/application.class.php:107 inc/application.class.php:140
-msgid "Tenant ID"
-msgstr "ID de tenant"
-
-#: inc/application.class.php:184
-msgid "Developer help for this provider"
-msgstr "Ayuda para desarrolladores de este proveedor"
-
-#: inc/application.class.php:345
-msgid "Name cannot be empty"
-msgstr "El nombre no puede estar vacío"
-
-#: inc/application.class.php:354
-msgid "Invalid provider"
-msgstr "Proveedor inválido"
-
-#: inc/mailcollectorfeature.class.php:354
-#, php-format
-msgid "Mail receiver \"%s\" has been updated."
-msgstr "El receptor de correo \"%s\" fue actualizado."
-
-#: inc/mailcollectorfeature.class.php:382
-#, php-format
-msgid "Mail receiver \"%s\" has been deactivated."
-msgstr "El receptor de correo \"%s\" fue desactivado."
-
-#: inc/mailcollectorfeature.class.php:444
-msgid "No associated receivers."
-msgstr "No hay receptores asociados."
-
-#: inc/mailcollectorfeature.class.php:447
-msgid "Name"
-msgstr "Nombre"
-
-#: inc/mailcollectorfeature.class.php:448
-msgid "Connection string"
-msgstr "Cadena de conexión"
-
-#: inc/mailcollectorfeature.class.php:449
-msgid "Login"
-msgstr "Inicio de sesión"
-
-#: inc/mailcollectorfeature.class.php:450
-msgid "Is active ?"
-msgstr "¿ Está activo ?"
-
-#: inc/authorization.class.php:76
-msgid "Oauth authorization"
-msgid_plural "Oauth authorizations"
-msgstr[0] "Autorización de Oauth"
-msgstr[1] "Autorizaciones de Oauth"
-msgstr[2] "Autorizaciones de Oauth"
-
-#: inc/authorization.class.php:128
-msgid "Create an authorization"
-msgstr "Crear una autorización"
-
-#: inc/authorization.class.php:138
-msgid "No authorizations."
-msgstr "Sin autorizaciones."
-
-#: inc/authorization.class.php:142 inc/authorization.class.php:201
-#: inc/authorization.class.php:258
-msgid "Email"
-msgstr "Correo electrónico"
-
-#: inc/authorization.class.php:159
-msgid "Connection diagnostic"
-msgstr "Diagnóstico de conexión"
-
-#: inc/authorization.class.php:164
-msgid "Diagnose"
-msgstr "Diagnosticar"
-
-#: inc/authorization.class.php:168
-msgid "Update"
-msgstr "Actualizar"
-
-#: inc/authorization.class.php:176
-msgid "Delete"
-msgstr "Eliminar"
-
-#: inc/authorization.class.php:273
-msgid "Server host"
-msgstr "Host del servidor"
-
-#: inc/authorization.class.php:285
-msgid "Server port"
-msgstr "Puerto del servidor"
-
-#: inc/authorization.class.php:303
-msgid "Security level"
-msgstr "Nivel de seguridad"
-
-#: inc/authorization.class.php:310
-msgid "SSL"
-msgstr "SSL"
-
-#: inc/authorization.class.php:311
-msgid "SSL + TLS"
-msgstr "SSL + TLS"
-
-#: inc/authorization.class.php:321
-msgid "Timeout"
-msgstr "Tiempo de espera"
-
-#: inc/authorization.class.php:340
-msgid "Refresh connection diagnostic"
-msgstr "Actualizar diagnóstico de conexión"
-
-#: inc/authorization.class.php:353
-msgid ""
-"Diagnostic log contains sensitive information, such as the access token."
-msgstr ""
-"El registro de diagnóstico contiene información sensible, como el token de "
-"acceso."
-
-#: inc/authorization.class.php:374
-#, php-format
-msgid "Unexpected error: %s"
-msgstr "Error inesperado: %s"
-
-#: inc/authorization.class.php:461
-#, php-format
-msgid "Unable to obtain access token from provider: %s"
-msgstr "No se pudo obtener el token de acceso del proveedor: %s"
-
-#: inc/authorization.class.php:473
-msgid "The authenticated account does not expose an email address"
-msgstr "La cuenta autenticada no expone una dirección de correo electrónico"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"

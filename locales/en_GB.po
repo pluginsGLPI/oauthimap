@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-10-09 04:58+0000\n"
-"PO-Revision-Date: 2026-10-09 04:58+0000\n"
+"POT-Creation-Date: 2026-11-27 07:06+0000\n"
+"PO-Revision-Date: 2026-11-27 07:06+0000\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: en_GB\n"
@@ -21,84 +21,33 @@ msgstr ""
 msgid "Callback url"
 msgstr "Callback url"
 
-#: front/authorization.process.php:43
-#, php-format
-msgid "Authorization failed with error: %s"
-msgstr "Authorization failed with error: %s"
-
-#: front/authorization.process.php:53
-msgid "Unable to verify authorization code"
-msgstr "Unable to verify authorization code"
-
-#: front/authorization.process.php:55
-msgid "Unable to get authorization code"
-msgstr "Unable to get authorization code"
-
-#: front/authorization.process.php:58
-msgid "Unable to save authorization code"
-msgstr "Unable to save authorization code"
-
-#: inc/application.class.php:45 setup.php:102
-msgid "OAuth IMAP"
-msgid_plural "OAuth IMAP"
-msgstr[0] "OAuth IMAP"
-msgstr[1] "OAuth IMAP"
-
-#: inc/application.class.php:94 inc/application.class.php:128
-msgid "Oauth provider"
-msgstr "Oauth provider"
-
-#: inc/application.class.php:100 inc/application.class.php:137
-msgid "Client ID"
-msgstr "Client ID"
-
-#: inc/application.class.php:106
-msgid "Client secret"
-msgstr "Client secret"
-
-#: inc/application.class.php:112 inc/application.class.php:145
-msgid "Tenant ID"
-msgstr "Tenant ID"
-
-#: inc/application.class.php:189
-msgid "Developer help for this provider"
-msgstr "Developer help for this provider"
-
-#: inc/application.class.php:350
-msgid "Name cannot be empty"
-msgstr "Name cannot be empty"
-
-#: inc/application.class.php:359
-msgid "Invalid provider"
-msgstr "Invalid provider"
-
-#: inc/mailcollectorfeature.class.php:360
+#: inc/mailcollectorfeature.class.php:361
 #, php-format
 msgid "Mail receiver \"%s\" has been updated."
 msgstr "Mail receiver \"%s\" has been updated."
 
-#: inc/mailcollectorfeature.class.php:388
+#: inc/mailcollectorfeature.class.php:389
 #, php-format
 msgid "Mail receiver \"%s\" has been deactivated."
 msgstr "Mail receiver \"%s\" has been deactivated."
 
-#: inc/mailcollectorfeature.class.php:450
+#: inc/mailcollectorfeature.class.php:451
 msgid "No associated receivers."
 msgstr "No associated receivers."
 
-#: inc/mailcollectorfeature.class.php:453
+#: inc/mailcollectorfeature.class.php:454
 msgid "Name"
 msgstr "Name"
 
-#: inc/mailcollectorfeature.class.php:454
+#: inc/mailcollectorfeature.class.php:455
 msgid "Connection string"
 msgstr "Connection string"
 
-#: inc/mailcollectorfeature.class.php:455
+#: inc/mailcollectorfeature.class.php:456
 msgid "Login"
 msgstr "Login"
 
-#: inc/mailcollectorfeature.class.php:456
+#: inc/mailcollectorfeature.class.php:457
 msgid "Is active ?"
 msgstr "Is active ?"
 
@@ -184,6 +133,57 @@ msgstr "Unable to obtain access token from provider: %s"
 #: inc/authorization.class.php:475
 msgid "The authenticated account does not expose an email address"
 msgstr "The authenticated account does not expose an email address"
+
+#: inc/application.class.php:45 setup.php:102
+msgid "OAuth IMAP"
+msgid_plural "OAuth IMAP"
+msgstr[0] "OAuth IMAP"
+msgstr[1] "OAuth IMAP"
+
+#: inc/application.class.php:94 inc/application.class.php:128
+msgid "Oauth provider"
+msgstr "Oauth provider"
+
+#: inc/application.class.php:100 inc/application.class.php:137
+msgid "Client ID"
+msgstr "Client ID"
+
+#: inc/application.class.php:106
+msgid "Client secret"
+msgstr "Client secret"
+
+#: inc/application.class.php:112 inc/application.class.php:145
+msgid "Tenant ID"
+msgstr "Tenant ID"
+
+#: inc/application.class.php:189
+msgid "Developer help for this provider"
+msgstr "Developer help for this provider"
+
+#: inc/application.class.php:350
+msgid "Name cannot be empty"
+msgstr "Name cannot be empty"
+
+#: inc/application.class.php:359
+msgid "Invalid provider"
+msgstr "Invalid provider"
+
+#: front/authorization.process.php:43
+#, php-format
+msgid "Authorization failed with error: %s"
+msgstr "Authorization failed with error: %s"
+
+#: front/authorization.process.php:53
+msgid "Unable to verify authorization code"
+msgstr "Unable to verify authorization code"
+
+#: front/authorization.process.php:55
+msgid "Unable to get authorization code"
+msgstr "Unable to get authorization code"
+
+#: front/authorization.process.php:58
+msgid "Unable to save authorization code"
+msgstr "Unable to save authorization code"
 
 #: ajax/dropdownAuthorization.php:49
 msgid "Create authorization for another user"
